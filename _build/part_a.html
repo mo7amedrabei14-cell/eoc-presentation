@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EOC Command Deck</title>
+<meta name="description" content="عرض تقديمي لمركز عمليات الطوارئ — الهلال الأحمر المصري">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ EOC DESIGN TOKENS — extracted verbatim from src/index.css ============ */
+:root{
+  /* surfaces */
+  --bg:#050505; --bg-deep:#020202;
+  --surface:#0b0b0c; --surface-2:#101012; --surface-3:#16171a; --surface-4:#202126;
+  --surface-hover:rgba(255,255,255,.045); --glass:rgba(10,10,12,.72);
+  /* ink */
+  --ink:#f6f6f7; --ink-2:#d7d9de; --muted:#a2a6b0; --muted-2:#82868f; --faint:#62666e;
+  /* brand red = decision moments */
+  --accent:#c70000; --accent-hover:#e00000; --accent-deep:#8f0000;
+  --accent-soft:rgba(199,0,0,.14); --accent-glow:rgba(199,0,0,.35);
+  /* semantic */
+  --ok:#16a86b; --ok-soft:rgba(22,168,107,.12);
+  --warn:#d99a1b; --warn-soft:rgba(217,154,27,.12);
+  --info:#5aa2ff; --info-soft:rgba(90,162,255,.12);
+  --data:#d9a441; --data-soft:rgba(217,164,65,.13);
+  --ai:#b17af8; --ai-soft:rgba(177,122,248,.14);
+  /* borders + focus */
+  --border:rgba(255,255,255,.07); --border-strong:rgba(255,255,255,.13);
+  /* radius */
+  --r-xs:8px; --r:14px; --r-lg:20px; --r-xl:28px;
+  /* shadows */
+  --shadow-1:0 1px 2px rgba(0,0,0,.5),0 6px 20px rgba(0,0,0,.32);
+  --shadow-2:0 10px 40px rgba(0,0,0,.5);
+  --shadow-accent:0 8px 28px -6px rgba(199,0,0,.5);
+  /* motion */
+  --ease-out:cubic-bezier(.16,1,.3,1); --ease-spring:cubic-bezier(.34,1.45,.64,1);
+  --d-fast:.15s; --d:.26s; --d-slow:.48s;
+  /* type */
+  --sans:"IBM Plex Sans Arabic","Segoe UI Variable","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono","JetBrains Mono","Segoe UI",monospace;
+}
+:root[data-theme="light"]{
+  --bg:#f5f5f7; --bg-deep:#eeeef1;
+  --surface:#ffffff; --surface-2:#fafafb; --surface-3:#f1f1f4; --surface-4:#e5e5ea;
+  --surface-hover:rgba(18,22,34,.04); --glass:rgba(250,250,252,.78);
+  --ink:#10151f; --ink-2:#2a3447; --muted:#4d5666; --muted-2:#6a7284; --faint:#8b92a2;
+  --accent:#ae0000; --accent-hover:#cf0000; --accent-deep:#7a0000;
+  --accent-soft:rgba(174,0,0,.1); --accent-glow:rgba(174,0,0,.24);
+  --ok:#0d8a55; --ok-soft:rgba(13,138,85,.1);
+  --warn:#b57f08; --warn-soft:rgba(181,127,8,.1);
+  --info:#2f7be0; --info-soft:rgba(47,123,224,.1);
+  --data:#a6781f; --data-soft:rgba(166,120,31,.11);
+  --ai:#7c3aed; --ai-soft:rgba(124,58,237,.1);
+  --border:rgba(18,22,34,.09); --border-strong:rgba(18,22,34,.16);
+  --shadow-1:0 1px 2px rgba(20,24,40,.06),0 6px 18px rgba(20,24,40,.07);
+  --shadow-2:0 10px 36px rgba(20,24,40,.12);
+  --shadow-accent:0 8px 28px -6px rgba(174,0,0,.3);
+}
+/* ============ BASE ============ */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-weight:400;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow:hidden; color-scheme:dark;
+  background-image:
+    radial-gradient(1100px 520px at 88% -10%, var(--accent-glow), transparent 62%),
+    radial-gradient(900px 500px at -12% 108%, rgba(90,162,255,.05), transparent 60%);
+}
+:root[data-theme="light"] body{color-scheme:light}
+button{font-family:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+::selection{background:var(--accent);color:#fff}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.dirc{unicode-bidi:isolate;direction:ltr;display:inline-block}
+
+/* ============ CHROME ============ */
+#topbar{position:fixed;top:0;inset-inline:0;height:56px;z-index:50;display:flex;align-items:center;justify-content:space-between;padding-inline:22px;pointer-events:none}
+#topbar > *{pointer-events:auto}
+.tb-eyebrow{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.5px;color:var(--muted)}
+.tb-tick{width:18px;height:2px;background:var(--accent);border-radius:2px}
+.tb-tick.grow{width:26px}
+.tb-controls{display:flex;align-items:center;gap:8px}
+.pill-btn{display:flex;align-items:center;gap:7px;height:34px;padding:0 12px;border:1px solid var(--border);border-radius:999px;background:var(--surface);font-size:12px;font-weight:500;color:var(--muted);transition:color .2s,border-color .2s,transform .15s}
+.pill-btn:hover{color:var(--ink);border-color:var(--border-strong)}
+.pill-btn:active{transform:scale(.96)}
+.pill-btn .ico{width:15px;height:15px}
+.counter{font-family:var(--mono);font-size:12px;color:var(--muted);min-width:52px;text-align:center}
+.counter b{color:var(--ink)}
+#prog{position:fixed;top:0;inset-inline:0;height:2px;background:var(--surface-3);z-index:60}
+#progfill{height:100%;width:0;background:linear-gradient(90deg,var(--accent-deep),var(--accent));transition:width var(--autodur,12s) linear}
+#rail{position:fixed;inset-inline-start:14px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:9px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--surface-4);border:1px solid var(--border);transition:all .25s var(--ease-out)}
+.dot:hover{background:var(--muted-2)}
+.dot.on{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft),0 0 12px var(--accent-glow);height:9px;width:9px}
+#arrows{position:fixed;bottom:18px;inset-inline-start:50%;transform:translateX(50%);z-index:50;display:flex;gap:10px}
+:root[dir="rtl"] #arrows{transform:translateX(-50%)}
+.nav-arr{width:40px;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s}
+.nav-arr:hover{color:var(--ink);border-color:var(--border-strong);transform:translateY(-1px)}
+.nav-arr:active{transform:scale(.94)}
+.nav-arr .ico{width:17px;height:17px}
+#watermark{position:fixed;bottom:14px;inset-inline-start:20px;z-index:50;display:flex;align-items:center;gap:8px;font-size:10px;color:var(--faint);letter-spacing:.4px}
+#watermark svg{width:13px;height:13px;opacity:.7}
+.ico{width:1em;height:1em;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ============ DECK ============ */
+#deck{position:fixed;inset:0;overflow:hidden}
+#stage{height:100%;transition:transform .72s var(--ease-out);will-change:transform}
+.s{height:100%;position:relative;display:flex;align-items:center}
+.in{width:min(1180px,92vw);margin-inline:auto;margin-block:64px}
+
+/* slide head + body grid */
+.s-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.s-no{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--accent);border:1px solid var(--accent-soft);background:var(--accent-soft);padding:3px 10px;border-radius:999px}
+.s-eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.2px;color:var(--muted)}
+.s-body{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.s-body.mono-intro{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}
+h1.title{font-size:clamp(30px,4.2vw,52px);font-weight:700;line-height:1.22;text-wrap:balance;margin-bottom:18px}
+h1.title b{position:relative;color:var(--ink);font-weight:700;white-space:nowrap}
+h1.title b::after{content:"";position:absolute;inset-inline:0;bottom:4px;height:14px;background:var(--accent-soft);z-index:-1;border-radius:4px;transform:skewX(-8deg)}
+p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);font-weight:400;max-width:46ch}
+.sub-note{margin-top:14px;font-size:11.5px;color:var(--faint)}
+
+/* chips / pills */
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:1px solid var(--border);border-radius:999px;font-size:12.5px;font-weight:500;color:var(--ink-2);background:var(--surface)}
+.pill .dot-l{width:6px;height:6px;border-radius:50%}
+.pill.gok{color:var(--ok);border-color:var(--ok-soft);background:var(--ok-soft)}
+.pill.gok .dot-l{background:var(--ok)}
+.pill.gac{color:var(--accent);border-color:var(--accent-soft);background:var(--accent-soft)}
+.pill.gac .dot-l{background:var(--accent)}
+.pill.gai{color:var(--ai);border-color:var(--ai-soft);background:var(--ai-soft)}
+.pill.gai .dot-l{background:var(--ai)}
+.pill.ginfo{color:var(--info);border-color:var(--info-soft);background:var(--info-soft)}
+.pill.ginfo .dot-l{background:var(--info)}
+.pill.gdata{color:var(--data);border-color:var(--data-soft);background:var(--data-soft)}
+.pill.gdata .dot-l{background:var(--data)}
+.pill.gwarn{color:var(--warn);border-color:var(--warn-soft);background:var(--warn-soft)}
+.pill.gwarn .dot-l{background:var(--warn)}
+
+/* panels */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-1);position:relative;overflow:hidden}
+.panel::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.09),transparent)}
+.panel-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 20px;border-bottom:1px solid var(--border)}
+.panel-tt{font-size:13px;font-weight:600;display:flex;align-items:center;gap:9px}
+.panel-b{padding:20px}
+
+/* KPI tiles */
+.kpi-tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px 22px;position:relative;overflow:hidden;box-shadow:var(--shadow-1)}
+.kpi::before{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,var(--data-soft),transparent 70%);top:-80px;inset-inline-start:-60px}
+.kpi .kval{font-family:var(--mono);font-size:clamp(34px,4vw,46px);font-weight:600;color:var(--data);line-height:1;font-variant-numeric:tabular-nums;position:relative}
+.kpi .klab{position:relative;font-size:13.5px;color:var(--muted);margin-top:10px;font-weight:500}
+.kpi.kred{--use:var(--accent);--use-soft:var(--accent-soft)}
+.kpi.kred::before{background:radial-gradient(circle,var(--accent-soft),transparent 70%)}
+.kpi.kred .kval{color:var(--accent)}
+.kpi.kinfo{--use:var(--info);--use-soft:var(--info-soft)}
+.kpi.kinfo::before{background:radial-gradient(circle,var(--info-soft),transparent 70%)}
+.kpi.kinfo .kval{color:var(--info)}
+.kpi.kok{--use:var(--ok);--use-soft:var(--ok-soft)}
+.kpi.kok::before{background:radial-gradient(circle,var(--ok-soft),transparent 70%)}
+.kpi.kok .kval{color:var(--ok)}
+
+/* live dots */
+.live-dot{position:relative;width:8px;height:8px;border-radius:50%;background:var(--ok);flex:none}
+.live-dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--ok);animation:dot-pulse 2s var(--ease-out) infinite}
+@keyframes dot-pulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.live-dot.ac{background:var(--accent)}
+.live-dot.ac::after{border-color:var(--accent)}
+.live-tag{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;letter-spacing:.5px;color:var(--ok)}
+.live-tag .blink{animation:live-blink 1.6s steps(1) infinite}
+.acc-live{color:var(--accent)}
+@keyframes live-blink{50%{opacity:.25}}
+
+/* detail notice */
+.demo-note{display:flex;align-items:center;gap:8px;font-size:10.5px;color:var(--faint);background:var(--surface);border:1px dashed var(--border-strong);border-radius:10px;padding:7px 12px;margin-top:16px}
+.demo-note svg{width:13px;height:13px;flex:none;opacity:.75}
+
+/* ============ S1 cover ============ */
+#s01{background:radial-gradient(760px 480px at 50% 34%, rgba(199,0,0,.16), transparent 68%)}
+.cover{position:relative;text-align:center}
+.cover .logos{display:flex;justify-content:center;align-items:center;gap:26px;margin-bottom:34px}
+.cover .logos img{height:72px;width:auto;object-fit:contain;filter:drop-shadow(0 10px 30px rgba(0,0,0,.5))}
+.cover-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.4px;color:var(--muted);margin-bottom:22px}
+.cover-eyebrow::after,.cover-eyebrow::before{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--accent));opacity:.8}
+.cover-eyebrow::after{background:linear-gradient(270deg,transparent,var(--accent))}
+.cover h1{font-size:clamp(38px,6vw,74px);font-weight:700;line-height:1.22;text-wrap:balance}
+.cover h1 .red{color:var(--accent)}
+.cover h1 .gold{color:var(--data)}
+.cover-sub{font-size:clamp(15px,2vw,19px);color:var(--muted);margin-top:20px;line-height:2;max-width:52ch;margin-inline:auto}
+.cover-foot{display:flex;justify-content:center;gap:12px;margin-top:38px;flex-wrap:wrap}
+.cover-start{margin-top:34px;display:inline-flex;align-items:center;gap:9px;padding:12px 26px;border-radius:999px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;box-shadow:var(--shadow-accent);transition:transform .2s var(--ease-spring)}
+.cover-start:hover{transform:translateY(-2px) scale(1.02)}
+.radar-veil{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hint{position:absolute;bottom:26px;inset-inline:0;text-align:center;font-size:11px;color:var(--faint);letter-spacing:.5px;display:flex;justify-content:center;gap:6px;align-items:center}
+.hint kbd{font-family:var(--mono);font-size:10px;border:1px solid var(--border);border-radius:5px;padding:2px 6px;background:var(--surface)}
+
+/* ============ RADAR (shared) ============ */
+.radar{position:relative;width:170px;height:170px;border-radius:50%;overflow:hidden;border:1px solid var(--border-strong);background:
+  radial-gradient(circle,rgba(199,0,0,.06) 0,transparent 55%),
+  repeating-radial-gradient(circle,transparent 0 27px,rgba(255,255,255,.05) 27px 28px)}
+.radar::before,.radar::after{content:"";position:absolute;background:rgba(255,255,255,.05)}
+.radar::before{width:100%;height:1px;top:50%}
+.radar::after{width:1px;height:100%;inset-inline-start:50%}
+.radar-sweep{position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,rgba(199,0,0,.0) 0deg,rgba(199,0,0,.0) 62deg,rgba(199,0,0,.14) 88deg,transparent 120deg);
+  animation:radar-sweep 4.5s linear infinite}
+@keyframes radar-sweep{to{transform:rotate(360deg)}}
+.radar-pings{position:absolute;inset:0}
+.rp{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent-glow);animation:rp-pulse 2.4s var(--ease-out) infinite}
+.rp.r1{top:24%;inset-inline-start:60%}
+.rp.r2{top:66%;inset-inline-start:26%;animation-delay:.6s;background:var(--data);box-shadow:0 0 10px rgba(217,164,65,.6)}
+.rp.r3{top:48%;inset-inline-start:74%;animation-delay:1.1s;width:4px;height:4px}
+@keyframes rp-pulse{0%,100%{transform:scale(1);opacity:.95}50%{transform:scale(1.7);opacity:.55}}
+.radar-rings{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(199,0,0,.18);animation:ring-grow 5s var(--ease-out) infinite}
+.radar-rings.rA{box-shadow:inset 0 0 0 0 rgba(199,0,0,0)}
+@keyframes ring-grow{0%{transform:scale(.25);opacity:0}45%{opacity:.9}100%{transform:scale(1.4);opacity:0}}
+/* featured radar (transposed toward visual's pale bg) */
+.radar-lg{width:230px;height:230px}
+
+/* ============ S2 challenge ============ */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pair-col{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow-1)}
+.pair-col .pc-tt{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;margin-bottom:16px}
+.pair-col .pc-tt .stamp{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:none}
+.pair-col.bad .stamp{background:var(--surface-3);color:var(--muted-2)}
+.pair-col.good .stamp{background:var(--ok-soft);color:var(--ok)}
+.pair-col.good{border-color:rgba(22,168,107,.22);box-shadow:0 0 0 1px rgba(22,168,107,.08)}
+.gap-item{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px dashed var(--border);font-size:14px;color:var(--ink-2);font-weight:500}
+.gap-item:last-child{border-bottom:0}
+.gap-item .x{width:7px;height:7px;border-radius:50%;flex:none}
+.gap-item .gt{color:var(--muted);font-size:12px}
+
+/* ============ S3 solution ============ */
+.sol-emblem{display:flex;align-items:center;justify-content:center;margin-bottom:26px}
+.sol-emblem .radar{transform:scale(1.15)}
+.sol-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+
+/* ============ S4 modules grid ============ */
+.mod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.mod{display:flex;gap:14px;padding:15px 17px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);align-items:flex-start;transition:border-color .2s,transform .2s var(--ease-out)}
+.mod:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+.mod-ico{width:38px;height:38px;border-radius:11px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--surface-3);color:var(--muted-2);transition:color .2s,background .2s}
+.mod:hover .mod-ico{background:var(--accent-soft);color:var(--accent)}
+.mod.v-ai .mod-ico{color:var(--ai)}
+.mod.v-ai:hover .mod-ico{background:var(--ai-soft);color:var(--ai)}
+.mod.v-g .mod-ico{color:var(--ok)}
+.mod.v-g:hover .mod-ico{background:var(--ok-soft);color:var(--ok)}
+.mod-t{font-size:13.5px;font-weight:700;margin-bottom:3px}
+.mod-d{font-size:12px;color:var(--muted);line-height:1.7}
+
+/* ============ S5 dashboard replica ============ */
+.dash{max-width:720px}
+.dash-top{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;background:var(--glass);backdrop-filter:blur(16px) saturate(140%);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-1);position:relative}
+.dash-clock{font-family:var(--mono);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+.dash-clock .sp{font-size:9px;color:var(--faint);display:block;letter-spacing:1px}
+.dash-top .live-tag{font-size:11px}
+.dash-emerg{padding:13px 18px;display:flex;align-items:center;gap:13px;border-radius:var(--r-lg);margin-top:12px;border:1px solid var(--border)}
+.dash-emerg.ok{background:var(--ok-soft);border-color:rgba(22,168,107,.25)}
+.dash-emerg.amber{background:var(--warn-soft);border-color:rgba(217,154,27,.25)}
+.dash-emerg .em-tt{font-size:12.5px;font-weight:700}
+.dash-emerg .em-d{font-size:11.5px;color:var(--muted);margin-top:2px}
+.dash-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.dk{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 15px;position:relative;overflow:hidden}
+.dk::before{content:"";position:absolute;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,var(--accent-soft),transparent 70%);top:-38px;inset-inline-start:-30px}
+.dk:nth-child(2)::before{background:radial-gradient(circle,var(--ok-soft),transparent 70%)}
+.dk:nth-child(3)::before{background:radial-gradient(circle,var(--data-soft),transparent 70%)}
+.dk:nth-child(4)::before{background:radial-gradient(circle,var(--info-soft),transparent 70%)}
+.dk .dn{font-family:var(--mono);font-size:25px;font-weight:600;font-variant-numeric:tabular-nums;position:relative;line-height:1}
+.dk:nth-child(1) .dn{color:var(--accent)}.dk:nth-child(2) .dn{color:var(--ok)}.dk:nth-child(3) .dn{color:var(--data)}.dk:nth-child(4) .dn{color:var(--info)}
+.dk .dl{font-size:11px;color:var(--muted);margin-top:7px;position:relative}
+.dash-below{display:grid;grid-template-columns:1.15fr .85fr;gap:10px;margin-top:10px}
+.dfeed{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 18px}
+.dfeed-h{display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:12px}
+.feed-item{display:flex;gap:10px;align-items:baseline;padding:7px 0;font-size:12.5px;color:var(--muted);border-bottom:1px dashed var(--border)}
+.feed-item:last-child{border:0}
+.feed-item .ft{font-family:var(--mono);font-size:10px;color:var(--faint)}
+.feed-item .fx{color:var(--ink-2);font-weight:500}
+.dops{display:flex;flex-direction:column;gap:10px}
+.ops-chip{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 15px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);font-size:12.5px;color:var(--muted)}
+.ops-chip b{color:var(--ink-asist)}.ops-chip .bval{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--ink-2)}
+
+/* ============ S6 mission ============ */
+.mcard{overflow:hidden}
+.m-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 20px;border-bottom:1px solid var(--border);background:linear-gradient(270deg,var(--accent-soft),transparent 60%)}
+.m-code{font-family:var(--mono);font-size:14px;font-weight:600;letter-spacing:.5px;color:var(--ink);background:var(--surface-3);border:1px solid var(--border-strong);padding:6px 12px;border-radius:8px}
+.m-states{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;padding:16px 20px;border-bottom:1px solid var(--border)}
+.mst{text-align:center;position:relative}
+.mst .d{counter-increment:none}
+.mst .ma,.mst .md{width:14px;height:14px;margin:0 auto;border-radius:50%;border:1px dashed var(--border-strong);background:var(--surface)}
+.mst.on .ma{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.mst.done .ma{background:var(--ok);border-color:var(--ok)}
+.mst .ml{font-size:9.5px;color:var(--faint);margin-top:6px;font-weight:500;line-height:1.5}
+.mst.on .ml{color:var(--ink-2)}
+.mst::before{content:"";position:absolute;top:6px;inset-inline-start:-50%;width:100%;height:1px;background:var(--border);z-index:-1}
+.mst:first-child::before{display:none}
+.m-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0 20px}
+.mg-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px dashed var(--border);font-size:12.5px}
+.mg-row:nth-child(odd){border-inline-end:0}
+.mg-k{color:var(--muted);font-weight:500}
+.mg-v{color:var(--ink-2);font-weight:600;text-align:end}
+.lifecycle{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px;box-shadow:var(--shadow-1)}
+.lc-tt{font-size:13px;font-weight:700;display:flex;gap:9px;align-items:center;margin-bottom:18px}
+.lc-item{display:flex;gap:14px;position:relative;padding-bottom:22px}
+.lc-item:last-child{padding-bottom:0}
+.lc-item:not(:last-child)::before{content:"";position:absolute;inset-inline-start:7px;top:18px;bottom:2px;width:1px;background:var(--border)}
+.lc-item .lc-dot{width:15px;height:15px;border-radius:50%;border:1px solid var(--border-strong);background:var(--surface-2);flex:none;position:relative;z-index:1}
+.lc-item.on .lc-dot{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.lc-item.done .lc-dot{background:var(--ok);border-color:var(--ok)}
+.lc-item .lc-tf{font-size:13px;font-weight:700;color:var(--ink-2)}
+.lc-item .lc-sb{font-size:11.5px;color:var(--muted);margin-top:2px;line-height:1.7}
+
+/* ============ S7 workflow ============ */
+.wf{position:relative;padding-inline-start:26px}
+.wf::before{content:"";position:absolute;inset-inline-start:8px;top:6px;bottom:6px;width:1px;background:var(--border-strong)}
+.wf-node{position:relative;margin-bottom:16px;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);display:flex;align-items:center;gap:12px;transition:border-color .2s}
+.wf-node::before{content:"";position:absolute;inset-inline-start:-22px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:var(--surface-3);border:1px solid var(--border-strong)}
+.wf-node.flow::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.wf-node.flow{border-color:rgba(199,0,0,.22)}
+.wf-node .wf-n{font-size:13px;font-weight:700;color:var(--ink-2);flex:1}
+.wf-node .wf-r{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.5px}
+.wf-fork{display:flex;gap:9px;margin:-6px 0 14px 0}
+.wf-fork .pill{font-size:11.5px}
+.wf-tag{font-family:var(--mono);font-size:10px;color:var(--accent);border:1px solid var(--accent-soft);background:var(--accent-soft);border-radius:6px;padding:2px 8px}
+
+/* ============ S8 roster ============ */
+.vol-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.roster{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-1)}
+.rt-head{display:grid;grid-template-columns:1.3fr .8fr 1fr .9fr;gap:8px;padding:11px 16px;background:var(--surface-3);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.3px}
+.rt-row{display:grid;grid-template-columns:1.3fr .8fr 1fr .9fr;gap:8px;padding:11px 16px;border-top:1px solid var(--border);align-items:center;font-size:12.5px;color:var(--ink-2);transition:background .2s}
+.rt-row:hover{background:var(--accent-soft)}
+.rt-row .rt-name{font-weight:600}
+.rt-row .rt-sub{font-size:10.5px;color:var(--faint);margin-top:2px}
+.b-status{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;font-size:11px;font-weight:600}
+.b-status.in-field{color:var(--accent);background:var(--accent-soft)}
+.b-status.free{color:var(--ok);background:var(--ok-soft)}
+.b-status.done{color:var(--data);background:var(--data-soft)}
+
+/* ============ S9 radar AI ============ */
+.radar-wrap{display:flex;align-items:center;justify-content:center;padding:34px 0;position:relative}
+.ai-card{background:linear-gradient(180deg,var(--surface-2),var(--surface));border:1px solid rgba(177,122,248,.25);border-radius:var(--r-lg);padding:18px;box-shadow:0 10px 40px rgba(0,0,0,.3);position:relative;overflow:hidden}
+.ai-card::before{content:"";position:absolute;top:-60px;inset-inline-end:-50px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,var(--ai-soft),transparent 70%)}
+.ai-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.ai-tt{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--ai)}
+.sev-bar{height:6px;border-radius:999px;background:var(--surface-3);overflow:hidden;margin-top:10px}
+.sev-fill{height:100%;width:70%;border-radius:999px;background:linear-gradient(90deg,var(--warn),var(--accent))}
+.ai-lines{margin-top:12px;display:flex;flex-direction:column;gap:7px}
+.ai-line{display:flex;gap:8px;align-items:baseline;font-size:11.5px;color:var(--muted)}
+.ai-line b{color:var(--ink-2)}
+.s-ledger{display:flex;flex-direction:column;gap:12px}
+.led-row{display:flex;align-items:center;gap:14px;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r)}
+.led-row .ln{width:34px;height:34px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;flex:none}
+.led-row.v2 .ln{background:var(--ai-soft);color:var(--ai)}
+.led-row.v3 .ln{background:var(--info-soft);color:var(--info)}
+.led-t{font-size:13px;font-weight:700}
+.led-d{font-size:11.5px;color:var(--muted);line-height:1.6;margin-top:2px}
+
+/* ============ entrance choreography ============ */
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.s.on .rv{animation:rise .7s var(--ease-out) both;animation-delay:var(--d,0s)}
+
+/* ============ S2 data tiles ============ */
+.dkk{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow-1);position:relative;overflow:hidden}
+.dkk::before{content:"";position:absolute;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,var(--info-soft),transparent 70%);top:-44px;inset-inline-start:-40px}
+.dh{font-size:30px;font-weight:600;color:var(--info);position:relative}
+.dl2{font-size:12px;color:var(--muted);margin-top:6px;position:relative;line-height:1.6}
+.dkk:nth-child(2)::before{background:radial-gradient(circle,var(--data-soft),transparent 70%)}
+.dkk:nth-child(2) .dh{color:var(--data)}
+
+/* ============ S11 map ============ */
+.mapbox{position:relative;overflow:hidden;background:var(--bg-deep)}
+.mapbox svg{display:block;width:100%;height:auto}
+.mapbox pattern path{stroke:var(--border)}
+.mp-pulse{animation:mp-pulse 2.2s var(--ease-out) infinite}
+@keyframes mp-pulse{0%,100%{opacity:.9}50%{opacity:.25}}
+
+/* ============ S12 inventory ============ */
+.inv{display:flex;flex-direction:column;gap:13px}
+.inv-row{display:grid;grid-template-columns:170px 1fr 44px;gap:14px;align-items:center}
+.inv-k{font-size:12.5px;color:var(--muted);font-weight:500}
+.inv-bar{height:8px;border-radius:999px;background:var(--surface-3);overflow:hidden}
+.inv-f{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--data),var(--info));transition:width 1.1s var(--ease-out)}
+.inv-v{font-size:13px;color:var(--data);text-align:end}
+
+/* ============ S13 notifications ============ */
+.notif{padding:6px 18px 16px}
+.nt{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px dashed var(--border)}
+.nt:last-child{border:0}
+.nt:first-child{animation:update-glow 1.9s var(--ease-out) infinite}
+@keyframes update-glow{0%,100%{background:transparent}50%{background:var(--accent-soft)}}
+.nt-ic{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none}
+.nt-t{font-size:13px;font-weight:600;color:var(--ink-2)}
+.nt-s{font-size:11px;color:var(--faint);margin-top:3px}
+
+/* ============ S14 RBAC ============ */
+.rbac{display:flex;flex-direction:column}
+.rb-node{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 20px;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--shadow-1)}
+.rb-node.own{border-color:rgba(199,0,0,.35);background:linear-gradient(270deg,var(--accent-soft),var(--surface) 55%)}
+.rb-name{font-family:var(--mono);font-weight:600;font-size:15px;letter-spacing:.5px}
+.rb-node.own .rb-name{color:var(--accent)}
+.rb-sub{font-size:12px;color:var(--muted)}
+.rb-link{height:26px;position:relative;margin-inline:20px}
+.rb-link::before{content:"";position:absolute;inset-inline:0;top:0;height:1px;background:var(--border-strong)}
+.rb-link::after{content:"";position:absolute;inset-inline-start:50%;top:0;width:8px;height:8px;border-radius:50%;background:var(--accent);transform:translate(-50%,-50%);opacity:.55}
+
+/* ============ S15 mono detail ============ */
+.mono-mini{font-family:var(--mono);font-size:10px;color:var(--faint);background:var(--surface-3);border-radius:6px;padding:3px 8px;letter-spacing:.2px;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+
+/* ============ S16 architecture ============ */
+.arch{display:flex;flex-direction:column}
+.layer{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow-1)}
+.ly-tt{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:700;margin-bottom:12px}
+.ly-ico{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none}
+.ly-en{font-family:var(--mono);font-size:9.5px;color:var(--faint);letter-spacing:.8px;margin-inline-start:auto}
+.ly-chips{display:flex;flex-wrap:wrap;gap:7px}
+.ly-chips span{font-size:11.5px;font-weight:500;color:var(--ink-2);background:var(--surface-3);border:1px solid var(--border);border-radius:999px;padding:5px 12px}
+.arch-flow{height:12px;position:relative}
+.arch-flow::before{content:"";position:absolute;inset-inline:24px;top:50%;height:1px;background:var(--border-strong)}
+.arch-flow::after{content:"";position:absolute;top:50%;inset-inline-end:24px;width:7px;height:7px;border-inline-end:1px solid var(--muted-2);border-bottom:1px solid var(--muted-2);transform:translateY(-50%) rotate(-45deg)}
+
+/* ============ S17 future ============ */
+.fut{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.fut-c{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px;box-shadow:var(--shadow-1);text-align:center}
+.fut-ico{width:44px;height:44px;border-radius:13px;background:var(--surface-3);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.fut-t{font-size:14.5px;font-weight:700;margin-bottom:6px}
+.fut-d{font-size:12.5px;color:var(--muted);line-height:1.8}
+
+/* ============ reduced motion + small screens ============ */
+.no-motion .rv{animation:none!important}
+.no-motion .radar-sweep,.no-motion .rp,.no-motion .radar-rings,.no-motion .live-dot::after,.no-motion .blink,.no-motion .mp-pulse,.no-motion .nt:first-child{animation:none!important}
+@media (max-width:960px){
+  .s-body{grid-template-columns:1fr!important;gap:22px}
+  .s{overflow-y:auto!important;overflow-x:hidden}
+  .in{margin-block:70px 40px}
+  .cover-logos img{height:56px}
+  .dash-kpis{grid-template-columns:repeat(2,1fr)}
+  .mod-grid,.fut{grid-template-columns:1fr 1fr}
+  #rail{display:none}
+}
+@media (max-height:760px){
+  .s{overflow-y:auto!important}
+  h1.title{font-size:clamp(24px,3vw,34px)}
+  .in{margin-block:60px 40px}
+  .cover h1{font-size:clamp(28px,4vw,44px)}
+}
+</style>
+</head>
+<body>
+<div id="prog"><div id="progfill"></div></div>
+<header id="topbar">
+  <div class="tb-eyebrow"><span class="tb-tick"></span><span id="activeEyebrow">مركز عمليات الطوارئ · EOC</span></div>
+  <div class="tb-controls">
+    <button class="pill-btn" id="themeBtn" aria-label="تبديل المظهر">
+      <svg class="ico" id="themeIco" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/></svg>
+      <span id="themeLabel">المظهر</span>
+    </button>
+    <button class="pill-btn" id="playBtn" aria-label="تشغيل تلقائي">
+      <svg class="ico" id="playIco" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg>
+      <span id="playLabel">تشغيل تلقائي</span>
+    </button>
+    <div class="counter"><b id="cNow">01</b> / <span id="cTotal">18</span></div>
+  </div>
+</header>
+<aside id="rail" aria-label="التنقل بين الشرائح"></aside>
+<nav id="arrows">
+  <button class="nav-arr" id="prevBtn" aria-label="السابق"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  <button class="nav-arr" id="nextBtn" aria-label="التالي"><svg class="ico" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+</nav>
+<div id="watermark"><svg class="ico" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 2v10l7 7"/></svg>EOC · SECURE · LIVE</div>
+
+<main id="deck"><div id="stage">
+
+<!-- ================= S1 COVER ================= -->
+<section class="s" id="s01">
+  <div class="in" style="width:min(1120px,94vw)">
+    <div class="cover">
+      <div class="radar-veil"></div>
+      <div class="logos rv" style="--d:.05s">
+        <img src="__LOGO_ERC__" alt="الهلال الأحمر المصري" style="height:64px">
+        <img src="__LOGO_EOC__" alt="مركز عمليات الطوارئ" style="height:78px">
+      </div>
+      <div class="cover-eyebrow rv" style="--d:.15s">مركز القيادة الرقمي للهلال الأحمر المصري</div>
+      <h1 class="rv" style="--d:.25s">نقرأ <span class="red">المشهد</span> قبل<br>أن يصل <span class="gold">البلاغ</span>.</h1>
+      <p class="cover-sub rv" style="--d:.35s">منظومة موحّدة لإدارة عمليات الطوارئ <b>— من أول إشارة إلى القرار الموثّق.</b><br>المهام، الفرق، المخزون، الرصد، والتدقيق في فضاء تشغيلي واحد.</p>
+      <div class="cover-foot rv" style="--d:.45s">
+        <span class="pill"><span class="dot-l" style="background:var(--accent)"></span><b class="num">59</b> واجهة تشغيل</span>
+        <span class="pill"><span class="dot-l" style="background:var(--data)"></span><b class="num">29</b> جدول بيانات</span>
+        <span class="pill"><span class="dot-l" style="background:var(--ok)"></span><b class="num">27</b> فرعاً</span>
+        <span class="pill"><span class="dot-l" style="background:var(--info)"></span><b class="num">5</b> أدوار قيادة</span>
+      </div>
+      <div class="cover-start rv" id="coverPlay" style="--d:.55s">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg>
+        ابدأ الجولة
+      </div>
+      <div class="hint rv" style="--d:.65s">
+        تنقّل بالأسهم <kbd>→</kbd> <kbd>←</kbd> أو الضغط على الأسفل · <span id="hintEnter2">التكرار</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S2 CHALLENGE ================= -->
+<section class="s" id="s02">
+  <div class="in">
+    <div class="s-head rv"><span class="s-no">01</span><span class="s-eyebrow">لماذا بُنيت المنظومة · قبل أن تجتمع في مكان واحد</span></div>
+    <div class="s-body">
+      <div class="tx">
+        <h1 class="title rv" style="--d:.1s">عندما تتوزّع <b>المعلومة</b>، يتأخّر <b>الإنسان</b>.</h1>
+        <p class="lead rv" style="--d:.2s">الحلقة الأولى للاستجابة كانت تعتمد على اتصالات متفرقة، وقوائم منفصلة، ومتابعة يدوية. لا مصدر واحد للحقيقة — ولا سجلّ يعيد بناء ما حدث بعد انتهاء اليوم.</p>
+        <div class="pair" style="margin-top:22px">
+          <div class="pair-col bad">
+            <div class="pc-tt"><span class="stamp"><svg class="ico" style="width:15px;height:15px" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></span>التحديات المعالَجة</div>
+            <div class="gap-item"><span class="x" style="background:var(--muted-2)"></span>تنسيق يعتمد على النداء والمكالمات بين 27 فرعاً</div>
+            <div class="gap-item"><span class="x" style="background:var(--muted-2)"></span>متابعة يدوية لكل حالة — بلا ضابط زمني</div>
+            <div class="gap-item"><span class="x" style="background:var(--muted-2)"></span>رصد يصل بعد الحدث، لا قبله</div>
+            <div class="gap-item"><span class="x" style="background:var(--muted-2)"></span>أثر القرار لا يُستعاد لاحقاً<span class="gt">من؟ متى؟ لماذا؟</span></div>
+          </div>
+          <div class="pair-col good">
+            <div class="pc-tt"><span class="stamp"><svg class="ico" style="width:15px;height:15px" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>ما جاءت به المنظومة</div>
+            <div class="gap-item" style="color:var(--ok)"><span class="x" style="background:var(--ok)"></span>فضاء تشغيلي واحد لكل الفروع</div>
+            <div class="gap-item" style="color:var(--ok)"><span class="x" style="background:var(--ok)"></span>تتبّع لحظي بالمعايير والزمن</div>
+            <div class="gap-item" style="color:var(--ok)"><span class="x" style="background:var(--ok)"></span>رصد استباقي — الرادار الذكي</div>
+            <div class="gap-item" style="color:var(--ok)"><span class="x" style="background:var(--ok)"></span>سجلّ تدقيق كامل لكل إجراء</div>
+          </div>
+        </div>
+      </div>
+      <div class="tx">
+        <div class="panel rv" style="--d:.3s">
+          <div class="panel-h"><span class="panel-tt"><span class="live-dot"></span>المعطيات الثابتة في الأرض</span><span class="s-eyebrow">GEOGRAPHY · PEOPLE</span></div>
+          <div class="panel-b" style="display:flex;flex-wrap:wrap;gap:10px">
+            <div class="dkk" style="flex:1;min-width:130px"><div class="dh num">27</div><div class="dl2">فرعاً ميدانياً بإحداثيات دقيقة</div></div>
+            <div class="dkk" style="flex:1;min-width:130px"><div class="dh num">27</div><div class="dl2">محافظة على امتداد الجمهورية</div></div>
+            <div class="dkk" style="flex:1;min-width:130px"><div class="dh num">3</div><div class="dl2">أقاليم: القنال · الدلتا · الصعيد</div></div>
+          </div>
+          <p style="font-size:12.5px;color:var(--muted);line-height:1.9;margin-top:14px">حين تتوزّع الجهود على <b class="num">27</b> نقطة بينها محافظة واحدة، يكون المتغيّر الحاسم هو <b style="color:var(--accent)">زمن توحيد الصورة</b> — وهذا ما بُنيت المنظومة لتقليصه.</p>
+          <div class="sub-note">الأرقام تعكس بنية المنظومة الملاحظة في التطوير.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S3 SOLUTION ================= -->
+<section class="s" id="s03">
+  <div class="in">
+    <div class="s-head rv"><span class="s-no">02</span><span class="s-eyebrow">المكوّن الأساس · من الإشارة إلى الأثر</span></div>
+    <div class="s-body">
+      <div class="tx">
+        <h1 class="title rv" style="--d:.1s">فضاء تشغيلي <b>واحد</b>، لكل دورة <b>حياة</b>.</h1>
+        <p class="lead rv" style="--d:.2s">منذ لحظة الإنشاء حتى الأرشفة، تمرّ المهمة عبر طبقات معلنة من الصلاحيات والتدقيق. كل خطوة لها سبب موثّق، وكل منتسب يعرف حدود صلاحيته — لأن القرار في الطوارئ يحتاج قاعدة بلا ارتجالية.</p>
+        <div class="pill-row rv" style="--d:.3s">
+          <span class="pill gac"><span class="dot-l"></span>منظومة موحّدة، لا أدوات متفرقة</span>
+          <span class="pill gdata"><span class="dot-l"></span>قرار قابل للتتبّع</span>
+          <span class="pill gok"><span class="dot-l"></span>8 مستخدمي تشغيل أساسيين</span>
+        </div>
+      </div>
+      <div>
+        <div class="sol-emblem rv" style="--d:.25s">
+          <div class="radar"><div class="radar-sweep"></div><div class="radar-pings"><i class="rp r1"></i><i class="rp r2"></i><i class="rp r3"></i></div><div class="radar-rings rA"></div></div>
+        </div>
+        <div class="sol-stats rv" style="--d:.35s">
+          <div class="kpi kred"><div class="kval num">59</div><div class="klab">واجهة برمجية مترابطة</div></div>
+          <div class="kpi kinfo"><div class="kval num">29</div><div class="klab">جدول بيانات منظّم</div></div>
+          <div class="kpi"><div class="kval num">5</div><div class="klab">أدوار مسؤولية متوارثة</div></div>
+          <div class="kpi kok"><div class="kval num">24</div><div class="klab">صلاحية تفصيلية مفعّلة</div></div>
+        </div>
+        <div class="demo-note rv" style="--d:.45s">
+          <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>
+          أعداد موثّقة من بنية المنظومة الفعلية — واجهاتها وجداولها وأدوارها.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S4 MODULES ================= -->
+<section class="s" id="s04">
+  <div class="in">
+    <div class="s-head rv"><span class="s-no">03</span><span class="s-eyebrow">وحدات الغرفة · ثماني زوايا لصورة واحدة</span></div>
+    <div class="s-body" style="grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr)">
+      <div class="tx">
+        <h1 class="title rv" style="--d:.1s">ثماني وحدات، <b>وصورة تشغيل واحدة</b>.</h1>
+        <p class="lead rv" style="--d:.2s">كل وحدة تمثّل عيناً من عيون الغرفة: ترصد، تُسجّل، وتمنح قرارها. مجتمعةً، تشكّل خريطة كاملة للاستجابة — من المهمة الميدانية إلى سجلّ التدقيق.</p>
+        <div class="pill-row rv" style="--d:.3s">
+          <span class="pill ginfo"><span class="dot-l"></span>منظومة داخلية — تشغيلية بالأساس</span>
+          <span class="pill gai"><span class="dot-l"></span>واجهة تفاعلية واحدة للفريق كله</span>
+        </div>
+      </div>
+      <div class="mod-grid rv" style="--d:.3s">
+        <div class="mod"><span class="mod-ico"><svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M3 4h18M3 4v13a1 1 0 0 0 1 1h7"/><path d="M14 18 20 12h-9M14 18q0 2 6 2"/></svg></span><div><div class="mod-t">المهام الميدانية</div><div class="mod-d">نواة الاستجابة: إنشاء، مشاركون، خطوط سير، مركبات، ومستفيدون.</div></div></div>
+        <div class="mod v-ai"><span class="mod-ico"><svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></svg></span><div><div class="mod-t">الرادار الذكي</div><div class="mod-d">مسح آلي للمصادر الإخبارية، تحليل، تصنيف، وتقييم شدة.</div></div></div>
+        <div class="mod"><span class="mod-ico"><svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M12 2v10M12 12l7 7"/><circle cx="12" cy="12" r="9"/></svg></span><div><div class="mod-t">الأخبار المحلية</div><div class="mod-d">رصد بلاغات الفروع ومتابعة الاستجابة بمعايير زمنية موثّقة.</div></div></div>
+        <div class="mod"><span class="mod-ico"><svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="5"/></svg></span><div><div class="mod-t">رصد الزلازل</div><div class="mod-d">محلي وعالمي: الشدّة، العمق، والتوقيت.</div></div></div>
+        <div class="mod"><span class="mod-ico"><svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 4 5.6 4 9s-1.4 6.4-4 9c-2.6-2.6-4-5.6-4-9s1.4-6.4 4-9z"/></svg></span><div><div class="mod-t">الكوارث العالمية</div><div class="mod-d">قائمة متابعة عالمية تهيئ الغرفة لما قد يطال المحافظات.</div></div></div>
+        <div class="mod v-g"><span class="mod-ico"><svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></span><div><div class="mod-t">المتطوعون</div><div class="mod-d">الحضور اللحظي، الجلسات المسجّلة، والساعات الميدانية.</div></div></div>
+        <div class="mod"><span class="mod-ico"><svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8"/></svg></span><div><div class="mod-t">الفروع والمخزون</div><div class="mod-d">27 فرعاً ومخزونه التفصيلي — على الخريطة وبالعدد.</div></div></div>
+        <div class="mod v-g"><span class="mod-ico"><svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M2.1 12a10 10 0 0 1 19.8 0 10 10 0 0 1-19.8 0z"/></svg></span><div><div class="mod-t">التدقيق والمراجعة</div><div class="mod-d">سجلّ شامل يحفظ لكل إجراء فاعله وتوقيته وتفاصيله.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S5 DASHBOARD ================= -->
+<section class="s" id="s05">
+  <div class="in">
+    <div class="s-head rv"><span class="s-no">04</span><span class="s-eyebrow">وجه الغرفة · الشاشة التي تضمّ كل شيء</span></div>
+    <div class="s-body" style="grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)">
+      <div class="tx">
+        <h1 class="title rv" style="--d:.1s">الغرفة كلها، <b>أمام عين واحدة</b>.</h1>
+        <p class="lead rv" style="--d:.2s">لوحة قيادة واحدة تجمع مؤشرات الغرفة، حالة الطوارئ، سجل آخر الأعمال، والإشعارات اللحظية. مراقبٌ واحد يستطيع قراءة الصورة كاملة دون فتح أي ملف.</p>
+        <div class="led-row rv" style="--d:.3s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="m9 11 2 2 4-4"/></svg></span><div><div class="led-t">حالة الطوارئ محسوبة تلقائياً</div><div class="led-d">مستقر · تأهّب · حالة قصوى — من عدد المهام النشطة في اللحظة نفسها.</div></div></div>
+        <div class="led-row v2 rv" style="--d:.4s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span><div><div class="led-t">مؤشرات الغرفة</div><div class="led-d">إجمالي المهام، النشطة الآن، المتاحون للمهمة، وأقوى هزّة مرصودة.</div></div></div>
+      </div>
+      <div class="dash rv" style="--d:.3s">
+        <div class="dash-top">
+          <div>
+            <div class="dash-clock num dirc"><span class="sp">الساعة التشغيلية</span>14:30:45</div>
+          </div>
+          <span class="live-tag"><span class="live-dot"></span><span class="blink">مباشر</span></span>
+        </div>
+        <div class="dash-emerg ok">
+          <span class="live-dot"></span>
+          <div style="flex:1"><div class="em-tt">حالة الغرفة: مستقر</div><div class="em-d">مهام نشطة أقل من عتبة التأهّب · فحص دوري كل ثوانٍ</div></div>
+          <span class="pill gok" style="border:0;background:none">تلقائي</span>
+        </div>
+        <div class="dash-kpis">
+          <div class="dk"><div class="dn num">128</div><div class="dl">إجمالي المهام</div></div>
+          <div class="dk"><div class="dn num">6</div><div class="dl">نشطة الآن</div></div>
+          <div class="dk"><div class="dn num">214</div><div class="dl">متاح للمهمة</div></div>
+          <div class="dk"><div class="dn num">4.2</div><div class="dl">أقوى هزّة (M)</div></div>
+        </div>
+        <div class="dash-below">
+          <div class="dfeed">
+            <div class="dfeed-h"><span>آخر الأعمال</span><span class="live-tag acc-live" style="font-size:9.5px"><span class="live-dot ac"></span><span class="blink">محدث</span></span></div>
+            <div class="feed-item"><span class="ft num">14:28</span><span class="fx">اعتماد مهمة — فرع القاهرة الجديدة</span></div>
+            <div class="feed-item"><span class="ft num">14:21</span><span class="fx">بلاغ محلي — عين شمس · استجابة ميدانية</span></div>
+            <div class="feed-item"><span class="ft num">14:09</span><span class="fx">رصد آلي جديد — شدّة 7/10</span></div>
+            <div class="feed-item"><span class="ft num">13:55</span><span class="fx">تحديث مخزون — إقليم القنال</span></div>
+          </div>
+          <div class="dops">
+            <div class="ops-chip"><span>متصل بشبكة الأفرع</span><span class="live-dot"></span></div>
+            <div class="ops-chip"><span>آخر فحص للرادار</span><b class="bval num">منذ 3 د</b></div>
+            <div class="ops-chip"><span>إشعارات بانتظار القراءة</span><b class="bval num" style="color:var(--accent)">4</b></div>
+          </div>
+        </div>
+        <div class="demo-note">
+          <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>
+          مؤشرات توضيحية للعرض — ليست بيانات تشغيلية واقعية.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S6 MISSION ================= -->
+<section class="s" id="s06">
+  <div class="in">
+    <div class="s-head rv"><span class="s-no">05</span><span class="s-eyebrow">نواة الاستجابة · دورة حياة المهمة</span></div>
+    <div class="s-body" style="grid-template-columns:minmax(0,1.1fr) minmax(0,.85fr)">
+      <div class="tx">
+        <h1 class="title rv" style="--d:.1s">مهمة واحدة، <b>مسارها كاملٌ أمامك</b>.</h1>
+        <p class="lead rv" style="--d:.2s">لكل مهمة معرّف لحظي فريد، وتصنيف، وفريق مسؤول — ثم تتفرّع بياناتها: مشاركون، مستفيدون، خط سير، مركبات، وسجلّ تغييرات لا يُمسح.</p>
+        <div class="pill-row rv" style="--d:.3s">
+          <span class="pill gac"><span class="dot-l"></span>معرّف فريد: #MSN-250905-143045</span>
+          <span class="pill gdata"><span class="dot-l"></span>منع التكليف المزدوج</span>
+          <span class="pill gok"><span class="dot-l"></span>سجلّ تغيير كامل</span>
+        </div>
+        <div class="lifecycle rv" style="--d:.35s">
+          <div class="lc-tt"><svg class="ico" style="width:16px;height:16px;color:var(--accent)" viewBox="0 0 24 24"><path d="M3 4h18M3 4v13a1 1 0 0 0 1 1h7"/><path d="M14 18 20 12h-9M14 18q0 2 6 2"/></svg>مسار الحياة</div>
+          <div class="lc-item done"><span class="lc-dot"></span><div><div class="lc-tf">مسودة</div><div class="lc-sb">ينشئها المتطوع بنفسه</div></div></div>
+          <div class="lc-item done"><span class="lc-dot"></span><div><div class="lc-tf">مقدّمة · قيد المراجعة</div><div class="lc-sb">تُرسل للجوكر لمراجعتها</div></div></div>
+          <div class="lc-item on"><span class="lc-dot"></span><div><div class="lc-tf">معتمدة — جارية</div><div class="lc-sb">الفرق في الميدان</div></div></div>
+          <div class="lc-item"><span class="lc-dot"></span><div><div class="lc-tf">مكتملة · مراجعة نهائية · أرشيف</div><div class="lc-sb">إغلاق التقرير بعد الأرشفة</div></div></div>
+        </div>
+      </div>
+      <div class="mcard panel rv" style="--d:.3s">
+        <div class="m-head">
+          <span class="m-code num dirc">#MSN-250905-143045</span>
+          <span class="pill gok" style="border:0"><span class="live-dot"></span>معتمدة</span>
+        </div>
+        <div class="m-states">
+          <div class="mst done"><div class="ma"></div><div class="ml">مسودة</div></div>
+          <div class="mst done"><div class="ma"></div><div class="ml">تقديم</div></div>
+          <div class="mst on"><div class="ma"></div><div class="ml">اعتماد</div></div>
+          <div class="mst"><div class="ma"></div><div class="ml">تنفيذ</div></div>
+          <div class="mst"><div class="ma"></div><div class="ml">إكمال</div></div>
+          <div class="mst"><div class="ma"></div><div class="ml">نهائية</div></div>
+          <div class="mst"><div class="ma"></div><div class="ml">أرشيف</div></div>
+        </div>
+        <div class="m-grid">
+          <div class="mg-row"><span class="mg-k">التصنيف</span><span class="mg-v">إنساني — إغاثي</span></div>
+          <div class="mg-row"><span class="mg-k">الفرع المنسق</span><span class="mg-v">القاهرة الجديدة</span></div>
+          <div class="mg-row"><span class="mg-k">الفريق</span><span class="mg-v">فريق-A · الميدان</span></div>
+          <div class="mg-row"><span class="mg-k">المشاركون</span><span class="mg-v num">6</span></div>
+          <div class="mg-row"><span class="mg-k">المستفيدون</span><span class="mg-v num">42</span></div>
+          <div class="mg-row"><span class="mg-k">مركبات · خط سير</span><span class="mg-v num">2 · مسجل</span></div>
+          <div class="mg-row"><span class="mg-k">طاقم الغرفة</span><span class="mg-v num">3</span></div>
+          <div class="mg-row"><span class="mg-k">سجلّ التغييرات</span><span class="mg-v" style="color:var(--ok)">محفوظ</span></div>
+        </div>
+        <div class="demo-note" style="margin:14px 20px 16px">
+          <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>
+          محتوى بطاقة توضيحي — يعكس بنية حقل المهمة الفعلية.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S7 WORKFLOW ================= -->
+<section class="s" id="s07">
+  <div class="in">
+    <div class="s-head rv"><span class="s-no">06</span><span class="s-eyebrow">سلطة موزّعة · انتقال كل دور مدوّن</span></div>
+    <div class="s-body" style="grid-template-columns:minmax(0,.9fr) minmax(0,1.15fr)">
+      <div class="tx">
+        <h1 class="title rv" style="--d:.1s">من المسودة إلى الأرشيف، <b>لا انتقال بلا سبب</b>.</h1>
+        <p class="lead rv" style="--d:.2s">ثمانية إجراءات حالة منصوصة: تقديم، مراجعة، اعتماد، إكمال، مراجعة نهائية، أرشفة، إرجاع، إلغاء. والأهم — <b>أن الإرجاع والإلغاء يتطلبان سبباً موثّقاً</b>.</p>
+        <div class="pill-row rv" style="--d:.3s">
+          <span class="pill gac"><span class="dot-l"></span>صلاحيات مثبّتة لكل دور</span>
+          <span class="pill gdata"><span class="dot-l"></span>كل تغيير حالة يُسجّل</span>
+        </div>
+      </div>
+      <div class="rv" style="--d:.3s">
+        <div class="s-head" style="margin-bottom:8px"><span class="s-no" style="border-color:transparent">سير</span><span class="s-eyebrow">مسار الاعتماد — كما تعمل به الغرفة</span></div>
+        <div class="wf">
+          <div class="wf-fork" style="margin-top:-6px"><span class="wf-tag num">DRAFT</span></div>
+          <div class="wf-node"><span class="wf-n">ينشئ المتطوع المهمة</span><span class="wf-r num">creator</span></div>
+          <div class="wf-fork"><span class="pill">يملأ الفريق، المشاركين، والخط</span></div>
+          <div class="wf-node flow"><span class="wf-n">إرسال للجوكر</span><span class="wf-r num">submit</span></div>
+          <div class="wf-fork"><span class="pill gwarn gac" style="--x:1">إرجاع للتعديل</span><span class="pill" style="font-size:10.5px">سبب مطلوب</span></div>
+          <div class="wf-node flow"><span class="wf-n">قيد المراجعة — اعتماد المشرف</span><span class="wf-r num">approve</span></div>
+          <div class="wf-fork"><span class="pill">التنفيذ في الميدان</span></div>
+          <div class="wf-node flow"><span class="wf-n">اكتمال الفريق — إغلاق التقرير</span><span class="wf-r num">complete</span></div>
+          <div class="wf-node"><span class="wf-n">مراجعة نهائية ثم أرشفة</span><span class="wf-r num">final · archive</span></div>
+        </div>
+        <div class="demo-note">
+          <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>
+          ثمّة قيدٌ يضمن ألا ترتدّ المهمة دون تبرير مكتوب.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div></div>
