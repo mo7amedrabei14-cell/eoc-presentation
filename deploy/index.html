@@ -166,12 +166,13 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 
 /* live dots */
 .live-dot{position:relative;width:8px;height:8px;border-radius:50%;background:var(--ok);flex:none}
-.live-dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--ok);animation:dot-pulse 2s var(--ease-out) infinite}
+.live-dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--ok)}
+.s.on .live-dot::after{animation:dot-pulse 2s var(--ease-out) infinite}
 @keyframes dot-pulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.5);opacity:0}}
 .live-dot.ac{background:var(--accent)}
 .live-dot.ac::after{border-color:var(--accent)}
 .live-tag{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;letter-spacing:.5px;color:var(--ok)}
-.live-tag .blink{animation:live-blink 1.6s steps(1) infinite}
+.s.on .live-tag .blink{animation:live-blink 1.6s steps(1) infinite}
 .acc-live{color:var(--accent)}
 @keyframes live-blink{50%{opacity:.25}}
 
@@ -206,16 +207,18 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .radar::before{width:100%;height:1px;top:50%}
 .radar::after{width:1px;height:100%;inset-inline-start:50%}
 .radar-sweep{position:absolute;inset:0;border-radius:50%;
-  background:conic-gradient(from 0deg,rgba(199,0,0,.0) 0deg,rgba(199,0,0,.0) 62deg,rgba(199,0,0,.14) 88deg,transparent 120deg);
-  animation:radar-sweep 4.5s linear infinite}
+  background:conic-gradient(from 0deg,rgba(199,0,0,.0) 0deg,rgba(199,0,0,.0) 62deg,rgba(199,0,0,.14) 88deg,transparent 120deg)}
+.s.on .radar-sweep{animation:radar-sweep 4.5s linear infinite}
 @keyframes radar-sweep{to{transform:rotate(360deg)}}
 .radar-pings{position:absolute;inset:0}
-.rp{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent-glow);animation:rp-pulse 2.4s var(--ease-out) infinite}
+.rp{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent-glow)}
+.s.on .rp{animation:rp-pulse 2.4s var(--ease-out) infinite}
 .rp.r1{top:24%;inset-inline-start:60%}
 .rp.r2{top:66%;inset-inline-start:26%;animation-delay:.6s;background:var(--data);box-shadow:0 0 10px rgba(217,164,65,.6)}
 .rp.r3{top:48%;inset-inline-start:74%;animation-delay:1.1s;width:4px;height:4px}
 @keyframes rp-pulse{0%,100%{transform:scale(1);opacity:.95}50%{transform:scale(1.7);opacity:.55}}
-.radar-rings{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(199,0,0,.18);animation:ring-grow 5s var(--ease-out) infinite}
+.radar-rings{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(199,0,0,.18)}
+.s.on .radar-rings{animation:ring-grow 5s var(--ease-out) infinite}
 .radar-rings.rA{box-shadow:inset 0 0 0 0 rgba(199,0,0,0)}
 @keyframes ring-grow{0%{transform:scale(.25);opacity:0}45%{opacity:.9}100%{transform:scale(1.4);opacity:0}}
 /* featured radar (transposed toward visual's pale bg) */
@@ -281,7 +284,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .feed-item .fx{color:var(--ink-2);font-weight:500}
 .dops{display:flex;flex-direction:column;gap:10px}
 .ops-chip{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 15px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);font-size:12.5px;color:var(--muted)}
-.ops-chip b{color:var(--ink-asist)}.ops-chip .bval{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.ops-chip b{color:var(--ink-2)}.ops-chip .bval{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--ink-2)}
 
 /* ============ S6 mission ============ */
 .mcard{overflow:hidden}
@@ -358,9 +361,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .led-t{font-size:13px;font-weight:700}
 .led-d{font-size:11.5px;color:var(--muted);line-height:1.6;margin-top:2px}
 
-/* ============ entrance choreography ============ */
+/* ============ entrance choreography · staged reveal ============ */
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.s.on .rv{animation:rise .7s var(--ease-out) both;animation-delay:var(--d,0s)}
+.s.on .rv{opacity:0;transform:translateY(18px)}
+.s.on.rv1 .rv.rb1,.s.on.rv2 .rv.rb1,.s.on.rv2 .rv.rb2,.s.on.rv3 .rv{animation:rise .7s var(--ease-out) both;animation-delay:var(--d,0s)}
 
 /* ============ S2 data tiles ============ */
 .dkk{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow-1);position:relative;overflow:hidden}
@@ -374,7 +378,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .mapbox{position:relative;overflow:hidden;background:var(--bg-deep)}
 .mapbox svg{display:block;width:100%;height:auto}
 .mapbox pattern path{stroke:var(--border)}
-.mp-pulse{animation:mp-pulse 2.2s var(--ease-out) infinite}
+.s.on .mp-pulse{animation:mp-pulse 2.2s var(--ease-out) infinite}
 @keyframes mp-pulse{0%,100%{opacity:.9}50%{opacity:.25}}
 
 /* ============ S12 inventory ============ */
@@ -389,7 +393,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .notif{padding:6px 18px 16px}
 .nt{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px dashed var(--border)}
 .nt:last-child{border:0}
-.nt:first-child{animation:update-glow 1.9s var(--ease-out) infinite}
+.s.on .nt:first-child{animation:update-glow 1.9s var(--ease-out) infinite}
 @keyframes update-glow{0%,100%{background:transparent}50%{background:var(--accent-soft)}}
 .nt-ic{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none}
 .nt-t{font-size:13px;font-weight:600;color:var(--ink-2)}
@@ -431,11 +435,12 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 /* ============ reduced motion + small screens ============ */
 .no-motion .rv{animation:none!important}
 .no-motion .radar-sweep,.no-motion .rp,.no-motion .radar-rings,.no-motion .live-dot::after,.no-motion .blink,.no-motion .mp-pulse,.no-motion .nt:first-child{animation:none!important}
+.no-motion .s.on .rv{opacity:1;transform:none}
 @media (max-width:960px){
   .s-body{grid-template-columns:1fr!important;gap:22px}
   .s{overflow-y:auto!important;overflow-x:hidden}
   .in{margin-block:70px 40px}
-  .cover-logos img{height:56px}
+  .cover .logos img{height:56px}
   .dash-kpis{grid-template-columns:repeat(2,1fr)}
   .mod-grid,.fut{grid-template-columns:1fr 1fr}
   #rail{display:none}
@@ -533,7 +538,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
           <div class="panel-b" style="display:flex;flex-wrap:wrap;gap:10px">
             <div class="dkk" style="flex:1;min-width:130px"><div class="dh num">27</div><div class="dl2">فرعاً ميدانياً بإحداثيات دقيقة</div></div>
             <div class="dkk" style="flex:1;min-width:130px"><div class="dh num">27</div><div class="dl2">محافظة على امتداد الجمهورية</div></div>
-            <div class="dkk" style="flex:1;min-width:130px"><div class="dh num">3</div><div class="dl2">أقاليم: القنال · الدلتا · الصعيد</div></div>
+            <div class="dkk" style="flex:1 1 100%;min-width:130px"><div class="dh num">7</div><div class="dl2">أقاليم: القاهرة الكبرى · الإسكندرية · القنال · الدلتا · شمال الصعيد · وسط الصعيد · جنوب الصعيد</div></div>
           </div>
           <p style="font-size:12.5px;color:var(--muted);line-height:1.9;margin-top:14px">حين تتوزّع الجهود على <b class="num">27</b> نقطة بينها محافظة واحدة، يكون المتغيّر الحاسم هو <b style="color:var(--accent)">زمن توحيد الصورة</b> — وهذا ما بُنيت المنظومة لتقليصه.</p>
           <div class="sub-note">الأرقام تعكس بنية المنظومة الملاحظة في التطوير.</div>
@@ -743,7 +748,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     </div>
   </div>
 </section>
-</div></div><section class="s" id="s08">
+<section class="s" id="s08">
   <div class="in">
     <div class="s-head rv"><span class="s-no">07</span><span class="s-eyebrow">الحضور الميداني · من في الميدان، ومن جاهز</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)">
@@ -1155,7 +1160,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   var stage = document.getElementById('stage');
   var rail = document.getElementById('rail');
   var progFill = document.getElementById('progfill');
-  var themeBtn = document.getElementById('themeBtn'), themeLabel = document.getElementById('themeLabel');
+  var themeBtn = document.getElementById('themeBtn'), themeLabel = document.getElementById('themeLabel'), themeIco = document.getElementById('themeIco');
   var playBtn = document.getElementById('playBtn'), playIco = document.getElementById('playIco'), playLabel = document.getElementById('playLabel');
 
   /* rail dots */
@@ -1166,6 +1171,11 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     rail.appendChild(b);
   });
   var dots = Array.prototype.slice.call(rail.children);
+
+  /* staged progressive reveal */
+  function curBucket(s){ if(s.classList.contains('rv3')) return 3; if(s.classList.contains('rv2')) return 2; if(s.classList.contains('rv1')) return 1; return 0; }
+  function nextBucketOf(s, cur){ for(var b=cur+1;b<=3;b++){ if(s.querySelector('.rb'+b)) return b; } return null; }
+  function setStage(s, n){ s.classList.remove('rv1','rv2','rv3'); if(n>0) s.classList.add('rv'+(n>3?3:n)); }
 
   var activeEyebrow = document.getElementById('activeEyebrow');
   var eyebrowMap = [
@@ -1213,13 +1223,20 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     document.querySelectorAll('.review').length; /* noop */
     document.getElementById('cNow').textContent = String(idx+1).padStart(2,'0');
     activeEyebrow.textContent = eyebrowMap[idx] || '';
+    setStage(slides[idx], (!manual && playing) ? 3 : 1);
     if(manual && playing) stopAuto();
   }
 
-  function next(){ go(idx+1,true); }
-  function prev(){ go(idx-1,true); }
+  function next(){ if(idx < total-1) go(idx+1,true); }
+  function prev(){ if(idx > 0) go(idx-1,true); }
+  function advance(wrap){
+    if(playing) stopAuto();
+    var nb = nextBucketOf(slides[idx], curBucket(slides[idx]));
+    if(nb){ setStage(slides[idx], nb); return; }
+    if(wrap && idx === total-1){ go(0,true); } else { next(); }
+  }
 
-  document.getElementById('nextBtn').addEventListener('click', next);
+  document.getElementById('nextBtn').addEventListener('click', function(){ advance(false); });
   document.getElementById('prevBtn').addEventListener('click', prev);
   document.getElementById('coverPlay').addEventListener('click', function(){ if(idx!==0) go(0,true); startAuto(); });
   document.getElementById('hintEnter2').addEventListener('click', function(){ startAuto(); });
@@ -1228,10 +1245,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 
   document.addEventListener('keydown', function(e){
     var k = e.key;
-    if(k === 'ArrowRight' || k === 'ArrowDown' || k === 'PageDown' || k === ' ' || k === 'Enter'){ e.preventDefault(); e.key==='Enter'&&idx===total-1 ? go(0,true) : next(); }
+    if(k === 'ArrowRight' || k === 'ArrowDown' || k === 'PageDown' || k === ' ' || k === 'Enter'){ e.preventDefault(); advance(e.key === 'Enter'); }
     else if(k === 'ArrowLeft' || k === 'ArrowUp' || k === 'PageUp'){ e.preventDefault(); prev(); }
-    else if(k === 'Home'){ e.preventDefault(); go(0,true); }
-    else if(k === 'End'){ e.preventDefault(); go(total-1,true); }
+    else if(k === 'Home'){ e.preventDefault(); if(idx !== 0) go(0,true); }
+    else if(k === 'End'){ e.preventDefault(); if(idx !== total-1) go(total-1,true); }
     else if(k === 'p' || k === 'P'){ playing ? stopAuto() : startAuto(); }
   });
 
@@ -1242,7 +1259,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     var d = e.deltaY;
     if(Math.abs(d) < 18) return;
     wheelWait = true;
-    if(d > 0) next(); else prev();
+    if(d > 0) advance(false); else prev();
     setTimeout(function(){ wheelWait = false; }, 850);
   }, {passive:true});
 
@@ -1252,7 +1269,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   document.addEventListener('touchend', function(e){
     if(ty === null) return;
     var dy = ty - e.changedTouches[0].clientY;
-    if(Math.abs(dy) > 60){ dy>0 ? next() : prev(); }
+    if(Math.abs(dy) > 60){ dy>0 ? advance(false) : prev(); }
     ty = null;
   }, {passive:true});
 
@@ -1273,11 +1290,13 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
       : '<circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/>';
   }
 
-  /* entrance animations for active slide */
+  /* bucket each .rv element — 1 main idea · 2 support · 3 details — by its --d */
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   slides.forEach(function(s){
     Array.prototype.slice.call(s.querySelectorAll('.rv')).forEach(function(el){
-      el.style.animationDelay = el.style.getPropertyValue('--d') || '0s';
+      var d = parseFloat(el.style.getPropertyValue('--d'));
+      var b = (!d || d <= 0.25) ? 1 : (d <= 0.3 ? 2 : 3);
+      el.classList.add('rb' + b);
     });
   });
 
@@ -1287,6 +1306,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   }
 
   go(0,false);
+  setStage(slides[0], 3); /* cover opens complete */
   /* auto-start cover */
   setTimeout(function(){ if(!reduced.matches) startAuto(); }, 500);
 })();
