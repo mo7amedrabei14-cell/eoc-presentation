@@ -98,6 +98,12 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-r
 .dot.on{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft),0 0 12px var(--accent-glow);height:9px;width:9px}
 #arrows{position:fixed;bottom:18px;inset-inline-start:50%;transform:translateX(50%);z-index:50;display:flex;gap:10px}
 :root[dir="rtl"] #arrows{transform:translateX(-50%)}
+/* ============ step indicator ============ */
+#steps{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:8px;align-items:center;transition:opacity .3s var(--ease-out);pointer-events:none}
+:root[dir="rtl"] #steps{transform:translateX(-50%)}
+#steps.hidden{opacity:0}
+#steps .sd{width:6px;height:6px;border-radius:999px;background:var(--surface-4);border:1px solid var(--border);transition:background .25s,width .25s}
+#steps .sd.on{background:var(--accent);border-color:var(--accent);width:16px;box-shadow:0 0 8px var(--accent-glow)}
 .nav-arr{width:40px;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s}
 .nav-arr:hover{color:var(--ink);border-color:var(--border-strong);transform:translateY(-1px)}
 .nav-arr:active{transform:scale(.94)}
@@ -360,7 +366,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 
 /* ============ entrance choreography ============ */
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.s.on .rv{animation:rise .7s var(--ease-out) both;animation-delay:var(--d,0s)}
+.s.on .rv:not([data-step]){animation:rise .7s var(--ease-out) both;animation-delay:var(--d,0s)}
+/* ============ step fragments ============ */
+.s .rv[data-step]{opacity:0;transform:translateY(18px)}
+.s .rv[data-step].r-show{opacity:1;transform:none;animation:rise .7s var(--ease-out) both;animation-delay:var(--d,0s)}
 
 /* ============ S2 data tiles ============ */
 .dkk{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow-1);position:relative;overflow:hidden}
@@ -430,6 +439,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 
 /* ============ reduced motion + small screens ============ */
 .no-motion .rv{animation:none!important}
+.no-motion .rv[data-step]{transition:none}
 .no-motion .radar-sweep,.no-motion .rp,.no-motion .radar-rings,.no-motion .live-dot::after,.no-motion .blink,.no-motion .mp-pulse,.no-motion .nt:first-child{animation:none!important}
 @media (max-width:960px){
   .s-body{grid-template-columns:1fr!important;gap:22px}
@@ -473,6 +483,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   <button class="nav-arr" id="prevBtn" aria-label="السابق"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   <button class="nav-arr" id="nextBtn" aria-label="التالي"><svg class="ico" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
 </nav>
+<div id="steps" class="hidden"></div>
 <div id="watermark"><svg class="ico" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 2v10l7 7"/></svg>EOC · SECURE · LIVE</div>
 
 <main id="deck"><div id="stage">
@@ -511,8 +522,8 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     <div class="s-body">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-ar="عندما تتوزّع <b>المعلومة</b>، يتأخّر <b>الإنسان</b>." data-en="When information is <b>scattered</b>, people react <b>late</b>.">عندما تتوزّع <b>المعلومة</b>، يتأخّر <b>الإنسان</b>.</h1>
-        <p class="lead rv" style="--d:.2s" data-ar="الحلقة الأولى للاستجابة كانت تعتمد على اتصالات متفرقة، وقوائم منفصلة، ومتابعة يدوية. لا مصدر واحد للحقيقة — ولا سجلّ يعيد بناء ما حدث بعد انتهاء اليوم." data-en="The first link of response relied on scattered calls, separate lists, and manual follow-up. No single source of truth — and no record that reconstructs what happened once the day ended.">الحلقة الأولى للاستجابة كانت تعتمد على اتصالات متفرقة، وقوائم منفصلة، ومتابعة يدوية. لا مصدر واحد للحقيقة — ولا سجلّ يعيد بناء ما حدث بعد انتهاء اليوم.</p>
-        <div class="pair" style="margin-top:22px">
+        <p class="lead rv" data-step="1" style="--d:.2s" data-ar="الحلقة الأولى للاستجابة كانت تعتمد على اتصالات متفرقة، وقوائم منفصلة، ومتابعة يدوية. لا مصدر واحد للحقيقة — ولا سجلّ يعيد بناء ما حدث بعد انتهاء اليوم." data-en="The first link of response relied on scattered calls, separate lists, and manual follow-up. No single source of truth — and no record that reconstructs what happened once the day ended.">الحلقة الأولى للاستجابة كانت تعتمد على اتصالات متفرقة، وقوائم منفصلة، ومتابعة يدوية. لا مصدر واحد للحقيقة — ولا سجلّ يعيد بناء ما حدث بعد انتهاء اليوم.</p>
+        <div class="pair rv" data-step="2" style="margin-top:22px">
           <div class="pair-col bad">
             <div class="pc-tt"><span class="stamp"><svg class="ico" style="width:15px;height:15px" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></span><span data-ar="التحديات المعالَجة" data-en="The challenges addressed">التحديات المعالَجة</span></div>
             <div class="gap-item"><span class="x" style="background:var(--muted-2)"></span><span data-ar="تنسيق بالنداء والمكالمات بين 27 فرعاً" data-en="Calls and calls — coordination across 27 branches">تنسيق بالنداء والمكالمات بين 27 فرعاً</span></div>
@@ -532,7 +543,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
         </div>
       </div>
       <div class="tx">
-        <div class="panel rv" style="--d:.3s">
+        <div class="panel rv" data-step="3" style="--d:.3s">
           <div class="panel-h"><span class="panel-tt"><span class="live-dot"></span><span data-ar="المعطيات الثابتة في الأرض" data-en="The stable ground facts">المعطيات الثابتة في الأرض</span></span><span class="s-eyebrow">GEOGRAPHY · PEOPLE</span></div>
           <div class="panel-b" style="display:flex;flex-wrap:wrap;gap:10px">
             <div class="dkk" style="flex:1;min-width:130px"><div class="dh num">27</div><div class="dl2" data-ar="فرعاً ميدانياً بإحداثيات دقيقة" data-en="field branches, geolocated">فرعاً ميدانياً بإحداثيات دقيقة</div></div>
@@ -555,24 +566,24 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     <div class="s-body">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-ar="فضاء تشغيلي <b>واحد</b>، لكل دورة <b>حياة</b>." data-en="One <b>space</b>, for every <b>lifecycle</b>.">فضاء تشغيلي <b>واحد</b>، لكل دورة <b>حياة</b>.</h1>
-        <p class="lead rv" style="--d:.2s" data-ar="منذ لحظة الإنشاء حتى الأرشفة، تمرّ المهمة عبر طبقات معلنة من الصلاحيات والتدقيق. كل خطوة لها سبب موثّق، وكل منتسب يعرف حدود صلاحيته — لأن القرار في الطوارئ يحتاج قاعدة بلا ارتجالية." data-en="From the moment a mission is created to its archiving, it passes through declared layers of permissions and audit. Every step carries a documented reason, and every operator knows their limits — because a crisis decision needs a foundation, not improvisation.">منذ لحظة الإنشاء حتى الأرشفة، تمرّ المهمة عبر طبقات معلنة من الصلاحيات والتدقيق. كل خطوة لها سبب موثّق، وكل منتسب يعرف حدود صلاحيته — لأن القرار في الطوارئ يحتاج قاعدة بلا ارتجالية.</p>
-        <div class="pill-row rv" style="--d:.3s">
+        <p class="lead rv" data-step="1" style="--d:.2s" data-ar="منذ لحظة الإنشاء حتى الأرشفة، تمرّ المهمة عبر طبقات معلنة من الصلاحيات والتدقيق. كل خطوة لها سبب موثّق، وكل منتسب يعرف حدود صلاحيته — لأن القرار في الطوارئ يحتاج قاعدة بلا ارتجالية." data-en="From the moment a mission is created to its archiving, it passes through declared layers of permissions and audit. Every step carries a documented reason, and every operator knows their limits — because a crisis decision needs a foundation, not improvisation.">منذ لحظة الإنشاء حتى الأرشفة، تمرّ المهمة عبر طبقات معلنة من الصلاحيات والتدقيق. كل خطوة لها سبب موثّق، وكل منتسب يعرف حدود صلاحيته — لأن القرار في الطوارئ يحتاج قاعدة بلا ارتجالية.</p>
+        <div class="pill-row rv" data-step="1" style="--d:.3s">
           <span class="pill gac"><span class="dot-l"></span><span data-ar="منظومة موحّدة، لا أدوات متفرقة" data-en="one platform, not scattered tools">منظومة موحّدة، لا أدوات متفرقة</span></span>
           <span class="pill gdata"><span class="dot-l"></span><span data-ar="قرار قابل للتتبّع" data-en="every decision traceable">قرار قابل للتتبّع</span></span>
           <span class="pill gok"><span class="dot-l"></span><span data-ar="8 مستخدمي تشغيل أساسيين" data-en="8 core operators">8 مستخدمي تشغيل أساسيين</span></span>
         </div>
       </div>
       <div>
-        <div class="sol-emblem rv" style="--d:.25s">
+        <div class="sol-emblem rv" data-step="2" style="--d:.25s">
           <div class="radar"><div class="radar-sweep"></div><div class="radar-pings"><i class="rp r1"></i><i class="rp r2"></i><i class="rp r3"></i></div><div class="radar-rings rA"></div></div>
         </div>
-        <div class="sol-stats rv" style="--d:.35s">
+        <div class="sol-stats rv" data-step="3" style="--d:.35s">
           <div class="kpi kred"><div class="kval num">27</div><div class="klab" data-ar="جدول بيانات منظّم" data-en="structured data tables">جدول بيانات منظّم</div></div>
           <div class="kpi kinfo"><div class="kval num">24</div><div class="klab" data-ar="صلاحية تفصيلية مفعّلة" data-en="granular permissions live">صلاحية تفصيلية مفعّلة</div></div>
           <div class="kpi"><div class="kval num">5</div><div class="klab" data-ar="أدوار مسؤولية متوارثة" data-en="inherited responsibility roles">أدوار مسؤولية متوارثة</div></div>
           <div class="kpi kok"><div class="kval num">4</div><div class="klab" data-ar="أقاليم تنسيق تشغيلية" data-en="operational coordination regions">أقاليم تنسيق تشغيلية</div></div>
         </div>
-        <div class="demo-note rv" style="--d:.45s">
+        <div class="demo-note rv" data-step="3" style="--d:.45s">
           <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>
           <span data-ar="أعداد موثّقة من بنية المنظومة الفعلية — جداولها وأقاليمها وأدوارها." data-en="Numbers verified from the real platform — its tables, regions, and roles.">أعداد موثّقة من بنية المنظومة الفعلية — جداولها وأقاليمها وأدوارها.</span>
         </div>
@@ -588,13 +599,13 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     <div class="s-body" style="grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-ar="ثماني وحدات، <b>وصورة تشغيل واحدة</b>." data-en="Eight units, <b>one picture</b>.">ثماني وحدات، <b>وصورة تشغيل واحدة</b>.</h1>
-        <p class="lead rv" style="--d:.2s" data-ar="كل وحدة تمثّل عيناً من عيون الغرفة: ترصد، تُسجّل، وتمنح قرارها. مجتمعةً، وبلوحة قيادة واحدة تقرأها كلها، تشكّل خريطة كاملة للاستجابة — من المهمة الميدانية إلى سجلّ التدقيق." data-en="Each unit is one eye on the room: it watches, records, and informs decisions. Together — read by a single command board — they form the full response map, from the field mission to the audit trail.">كل وحدة تمثّل عيناً من عيون الغرفة: ترصد، تُسجّل، وتمنح قرارها. مجتمعةً، وبلوحة قيادة واحدة تقرأها كلها، تشكّل خريطة كاملة للاستجابة — من المهمة الميدانية إلى سجلّ التدقيق.</p>
-        <div class="pill-row rv" style="--d:.3s">
+        <p class="lead rv" data-step="1" style="--d:.2s" data-ar="كل وحدة تمثّل عيناً من عيون الغرفة: ترصد، تُسجّل، وتمنح قرارها. مجتمعةً، وبلوحة قيادة واحدة تقرأها كلها، تشكّل خريطة كاملة للاستجابة — من المهمة الميدانية إلى سجلّ التدقيق." data-en="Each unit is one eye on the room: it watches, records, and informs decisions. Together — read by a single command board — they form the full response map, from the field mission to the audit trail.">كل وحدة تمثّل عيناً من عيون الغرفة: ترصد، تُسجّل، وتمنح قرارها. مجتمعةً، وبلوحة قيادة واحدة تقرأها كلها، تشكّل خريطة كاملة للاستجابة — من المهمة الميدانية إلى سجلّ التدقيق.</p>
+        <div class="pill-row rv" data-step="1" style="--d:.3s">
           <span class="pill ginfo"><span class="dot-l"></span><span data-ar="منظومة داخلية — تشغيلية بالأساس" data-en="in-house platform — built for operations">منظومة داخلية — تشغيلية بالأساس</span></span>
           <span class="pill gai"><span class="dot-l"></span><span data-ar="لوحة قيادة واحدة لكل الوحدات" data-en="one dashboard for every unit">لوحة قيادة واحدة لكل الوحدات</span></span>
         </div>
       </div>
-      <div class="mod-grid rv" style="--d:.3s">
+      <div class="mod-grid rv" data-step="2" style="--d:.3s">
         <div class="mod"><span class="mod-ico"><svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M3 4h18M3 4v13a1 1 0 0 0 1 1h7"/><path d="M14 18 20 12h-9M14 18q0 2 6 2"/></svg></span><div><div class="mod-t" data-ar="المهام الميدانية" data-en="Field missions">المهام الميدانية</div><div class="mod-d" data-ar="نواة الاستجابة: مشاركون، خطوط سير، مركبات، ومستفيدون — مع سجلّ تغييرات لا يُمسح." data-en="The core of response: participants, itineraries, vehicles, beneficiaries — with an unerasable change log.">نواة الاستجابة: مشاركون، خطوط سير، مركبات، ومستفيدون — مع سجلّ تغييرات لا يُمسح.</div></div></div>
         <div class="mod v-ai"><span class="mod-ico"><svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></svg></span><div><div class="mod-t" data-ar="الرادار الذكي" data-en="AI Radar">الرادار الذكي</div><div class="mod-d" data-ar="مسح آلي للمصادر الإخبارية، تحليل ذكي، تصنيف، وتقييم شدة من 1 إلى 10." data-en="Automated scan of news feeds, AI analysis, classification, 1–10 severity scoring.">مسح آلي للمصادر الإخبارية، تحليل ذكي، تصنيف، وتقييم شدة من 1 إلى 10.</div></div></div>
         <div class="mod"><span class="mod-ico"><svg class="ico" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M12 2v10M12 12l7 7"/><circle cx="12" cy="12" r="9"/></svg></span><div><div class="mod-t" data-ar="الأخبار المحلية" data-en="Local news">الأخبار المحلية</div><div class="mod-d" data-ar="رصد بلاغات الف branches ومتابعة الاستجابة بمعايير زمنية ونقاط موثّقة لكل مرحلة." data-en="Tracks branch reports and the response with timed, point-scored stages.">رصد بلاغات الفروع ومتابعة الاستجابة بمعايير زمنية ونقاط موثّقة لكل مرحلة.</div></div></div>
@@ -615,11 +626,11 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     <div class="s-body" style="grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-ar="الغرفة كلها، <b>أمام عين واحدة</b>." data-en="The whole room, <b>one glance</b>.">الغرفة كلها، <b>أمام عين واحدة</b>.</h1>
-        <p class="lead rv" style="--d:.2s" data-ar="لوحة قيادة واحدة تجمع مؤشرات الغرفة، حالة الطوارئ، سجل آخر الأعمال، والإشعارات اللحظية. مراقبٌ واحد يستطيع قراءة الصورة كاملة دون فتح أي ملف." data-en="A single command board: room KPIs, emergency state, recent activity, and realtime alerts. One operator reads the whole picture — no files to open.">لوحة قيادة واحدة تجمع مؤشرات الغرفة، حالة الطوارئ، سجل آخر الأعمال، والإشعارات اللحظية. مراقبٌ واحد يستطيع قراءة الصورة كاملة دون فتح أي ملف.</p>
-        <div class="led-row rv" style="--d:.3s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="m9 11 2 2 4-4"/></svg></span><div><div class="led-t" data-ar="حالة الطوارئ محسوبة تلقائياً" data-en="Emergency state, computed automatically">حالة الطوارئ محسوبة تلقائياً</div><div class="led-d" data-ar="مستقر · تأهّب · حالة قصوى — تُستنتج من المهام النشطة في اللحظة نفسها بعتبات 20 و50." data-en="Stable · alert · critical — derived from active missions right now, at 20 / 50 thresholds.">مستقر · تأهّب · حالة قصوى — تُستنتج من المهام النشطة في اللحظة نفسها بعتبات 20 و50.</div></div></div>
-        <div class="led-row v2 rv" style="--d:.4s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span><div><div class="led-t" data-ar="مؤشرات الغرفة" data-en="Room indicators">مؤشرات الغرفة</div><div class="led-d" data-ar="إجمالي المهام، النشطة الآن، القوّة المتاحة، والساعات الميدانية." data-en="Total missions, active now, force available, field hours.">إجمالي المهام، النشطة الآن، القوّة المتاحة، والساعات الميدانية.</div></div></div>
+        <p class="lead rv" data-step="1" style="--d:.2s" data-ar="لوحة قيادة واحدة تجمع مؤشرات الغرفة، حالة الطوارئ، سجل آخر الأعمال، والإشعارات اللحظية. مراقبٌ واحد يستطيع قراءة الصورة كاملة دون فتح أي ملف." data-en="A single command board: room KPIs, emergency state, recent activity, and realtime alerts. One operator reads the whole picture — no files to open.">لوحة قيادة واحدة تجمع مؤشرات الغرفة، حالة الطوارئ، سجل آخر الأعمال، والإشعارات اللحظية. مراقبٌ واحد يستطيع قراءة الصورة كاملة دون فتح أي ملف.</p>
+        <div class="led-row rv" data-step="1" style="--d:.3s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="m9 11 2 2 4-4"/></svg></span><div><div class="led-t" data-ar="حالة الطوارئ محسوبة تلقائياً" data-en="Emergency state, computed automatically">حالة الطوارئ محسوبة تلقائياً</div><div class="led-d" data-ar="مستقر · تأهّب · حالة قصوى — تُستنتج من المهام النشطة في اللحظة نفسها بعتبات 20 و50." data-en="Stable · alert · critical — derived from active missions right now, at 20 / 50 thresholds.">مستقر · تأهّب · حالة قصوى — تُستنتج من المهام النشطة في اللحظة نفسها بعتبات 20 و50.</div></div></div>
+        <div class="led-row v2 rv" data-step="1" style="--d:.4s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span><div><div class="led-t" data-ar="مؤشرات الغرفة" data-en="Room indicators">مؤشرات الغرفة</div><div class="led-d" data-ar="إجمالي المهام، النشطة الآن، القوّة المتاحة، والساعات الميدانية." data-en="Total missions, active now, force available, field hours.">إجمالي المهام، النشطة الآن، القوّة المتاحة، والساعات الميدانية.</div></div></div>
       </div>
-      <div class="dash rv" style="--d:.3s">
+      <div class="dash rv" data-step="2" style="--d:.3s">
         <div class="dash-top">
           <div>
             <div class="dash-clock num dirc"><span class="sp" data-ar="الساعة التشغيلية" data-en="OPERATIONAL CLOCK">الساعة التشغيلية</span>14:30:45</div>
@@ -667,13 +678,13 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     <div class="s-body" style="grid-template-columns:minmax(0,1.1fr) minmax(0,.85fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-ar="مهمة واحدة، <b>مسارها كاملٌ أمامك</b>." data-en="One mission, its path <b>fully traced</b>.">مهمة واحدة، <b>مسارها كاملٌ أمامك</b>.</h1>
-        <p class="lead rv" style="--d:.2s" data-ar="لكل مهمة معرّف لحظي فريد، وتصنيف، وفريق مسؤول — ثم تتفرّع بياناتها: مشاركون، مستفيدون، خط سير، مركبات، وسجلّ تغييرات لا يُمسح." data-en="Every mission carries a unique time-stamped ID, a classification, and a responsible team — branching into participants, beneficiaries, itinerary, vehicles, and a change log that can never be erased.">لكل مهمة معرّف لحظي فريد، وتصنيف، وفريق مسؤول — ثم تتفرّع بياناتها: مشاركون، مستفيدون، خط سير، مركبات، وسجلّ تغييرات لا يُمسح.</p>
-        <div class="pill-row rv" style="--d:.3s">
+        <p class="lead rv" data-step="1" style="--d:.2s" data-ar="لكل مهمة معرّف لحظي فريد، وتصنيف، وفريق مسؤول — ثم تتفرّع بياناتها: مشاركون، مستفيدون، خط سير، مركبات، وسجلّ تغييرات لا يُمسح." data-en="Every mission carries a unique time-stamped ID, a classification, and a responsible team — branching into participants, beneficiaries, itinerary, vehicles, and a change log that can never be erased.">لكل مهمة معرّف لحظي فريد، وتصنيف، وفريق مسؤول — ثم تتفرّع بياناتها: مشاركون، مستفيدون، خط سير، مركبات، وسجلّ تغييرات لا يُمسح.</p>
+        <div class="pill-row rv" data-step="1" style="--d:.3s">
           <span class="pill gac"><span class="dot-l"></span><span data-ar="معرّف فريد: #MSN-250905-143045" data-en="unique ID: #MSN-250905-143045">معرّف فريد: #MSN-250905-143045</span></span>
           <span class="pill gdata"><span class="dot-l"></span><span data-ar="منع الازدواج بمفتاح تكليف" data-en="no double commitment — idempotency key">منع الازدواج بمفتاح تكليف</span></span>
           <span class="pill gok"><span class="dot-l"></span><span data-ar="سجلّ تغيير كامل" data-en="full change history">سجلّ تغيير كامل</span></span>
         </div>
-        <div class="lifecycle rv" style="--d:.35s">
+        <div class="lifecycle rv" data-step="2" style="--d:.35s">
           <div class="lc-tt"><svg class="ico" style="width:16px;height:16px;color:var(--accent)" viewBox="0 0 24 24"><path d="M3 4h18M3 4v13a1 1 0 0 0 1 1h7"/><path d="M14 18 20 12h-9M14 18q0 2 6 2"/></svg><span data-ar="مسار الحياة" data-en="The lifecycle">مسار الحياة</span></div>
           <div class="lc-item done"><span class="lc-dot"></span><div><div class="lc-tf" data-ar="مسودة" data-en="Draft">مسودة</div><div class="lc-sb" data-ar="ينشئها المتطوع بنفسه" data-en="created by the volunteer">ينشئها المتطوع بنفسه</div></div></div>
           <div class="lc-item done"><span class="lc-dot"></span><div><div class="lc-tf" data-ar="مقدّمة · قيد المراجعة" data-en="Submitted · under review">مقدّمة · قيد المراجعة</div><div class="lc-sb" data-ar="تُرسل إلى مراجعة المعتمد" data-en="sent for review and approval">تُرسل إلى مراجعة المعتمد</div></div></div>
@@ -681,7 +692,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
           <div class="lc-item"><span class="lc-dot"></span><div><div class="lc-tf" data-ar="مكتملة · مراجعة نهائية · أرشيف" data-en="Completed · final review · archived">مكتملة · مراجعة نهائية · أرشيف</div><div class="lc-sb" data-ar="إغلاق التقرير بعد الأرشفة" data-en="report closed after archiving">إغلاق التقرير بعد الأرشفة</div></div></div>
         </div>
       </div>
-      <div class="mcard panel rv" style="--d:.3s">
+      <div class="mcard panel rv" data-step="3" style="--d:.3s">
         <div class="m-head">
           <span class="m-code num dirc">#MSN-250905-143045</span>
           <span class="pill gok" style="border:0"><span class="live-dot"></span><span data-ar="معتمدة" data-en="Approved">معتمدة</span></span>
@@ -721,13 +732,13 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     <div class="s-body" style="grid-template-columns:minmax(0,.9fr) minmax(0,1.15fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-ar="من المسودة إلى الأرشيف، <b>لا انتقال بلا سبب</b>." data-en="From draft to archive, <b>every move</b> documented.">من المسودة إلى الأرشيف، <b>لا انتقال بلا سبب</b>.</h1>
-        <p class="lead rv" style="--d:.2s" data-ar="ثمانية إجراءات حالة منصوصة: تقديم، مراجعة، اعتماد، إكمال، مراجعة نهائية، أرشفة، إرجاع، إلغاء. والأهم — <b>أن الإرجاع والإلغاء يتطلبان سبباً موثّقاً</b>." data-en="Eight state transitions are coded: submit, review, approve, complete, final review, archive, return, cancel. Decisively — <b>a return or a cancel requires a documented reason</b>.">ثمانية إجراءات حالة منصوصة: تقديم، مراجعة، اعتماد، إكمال، مراجعة نهائية، أرشفة، إرجاع، إلغاء. والأهم — <b>أن الإرجاع والإلغاء يتطلبان سبباً موثّقاً</b>.</p>
-        <div class="pill-row rv" style="--d:.3s">
+        <p class="lead rv" data-step="1" style="--d:.2s" data-ar="ثمانية إجراءات حالة منصوصة: تقديم، مراجعة، اعتماد، إكمال، مراجعة نهائية، أرشفة، إرجاع، إلغاء. والأهم — <b>أن الإرجاع والإلغاء يتطلبان سبباً موثّقاً</b>." data-en="Eight state transitions are coded: submit, review, approve, complete, final review, archive, return, cancel. Decisively — <b>a return or a cancel requires a documented reason</b>.">ثمانية إجراءات حالة منصوصة: تقديم، مراجعة، اعتماد، إكمال، مراجعة نهائية، أرشفة، إرجاع، إلغاء. والأهم — <b>أن الإرجاع والإلغاء يتطلبان سبباً موثّقاً</b>.</p>
+        <div class="pill-row rv" data-step="1" style="--d:.3s">
           <span class="pill gac"><span class="dot-l"></span><span data-ar="صلاحيات مثبّتة لكل دور" data-en="role-bound permissions">صلاحيات مثبّتة لكل دور</span></span>
           <span class="pill gdata"><span class="dot-l"></span><span data-ar="كل تغيير حالة يُسجّل" data-en="every state change is logged">كل تغيير حالة يُسجّل</span></span>
         </div>
       </div>
-      <div class="rv" style="--d:.3s">
+      <div class="rv" data-step="2" style="--d:.3s">
         <div class="s-head" style="margin-bottom:8px"><span class="s-no" style="border-color:transparent"><span data-ar="سير" data-en="Flow">سير</span></span><span class="s-eyebrow" data-ar="مسار الاعتماد — كما تعمل به الغرفة" data-en="The approval path, as the room runs it">مسار الاعتماد — كما تعمل به الغرفة</span></div>
         <div class="wf">
           <div class="wf-fork" style="margin-top:-6px"><span class="wf-tag num">DRAFT</span></div>
