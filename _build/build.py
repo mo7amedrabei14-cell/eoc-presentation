@@ -25,7 +25,8 @@ with open(r"C:\Users\mo7am\OneDrive\Work\Eoc System Show\_build\part_b.html", en
 html = a + b
 assert '__LOGO_EOC__' in html and '__LOGO_ERC__' in html, 'placeholders missing'
 n1 = html.count('__LOGO_EOC__'); n2 = html.count('__LOGO_ERC__')
-html = html.replace('__LOGO_EOC__', eoc).replace('__LOGO_ERC__', erc)
+assert '__FAVICON__' in html, 'favicon placeholder missing'
+html = html.replace('__LOGO_EOC__', eoc).replace('__LOGO_ERC__', erc).replace('__FAVICON__', eoc)
 
 token_open = html.count('data:image')
 # quick integrity check: balanced script/style + section count
