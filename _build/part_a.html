@@ -195,7 +195,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .cover-start{margin-top:34px;display:inline-flex;align-items:center;gap:9px;padding:12px 26px;border-radius:999px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;box-shadow:var(--shadow-accent);transition:transform .2s var(--ease-spring)}
 .cover-start:hover{transform:translateY(-2px) scale(1.02)}
 .radar-veil{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.hint{position:absolute;bottom:26px;inset-inline:0;text-align:center;font-size:11px;color:var(--faint);letter-spacing:.5px;display:flex;justify-content:center;gap:6px;align-items:center}
+.hint{position:relative;margin-top:24px;text-align:center;font-size:11px;color:var(--faint);letter-spacing:.5px;display:flex;justify-content:center;gap:6px;align-items:center}
 .hint kbd{font-family:var(--mono);font-size:10px;border:1px solid var(--border);border-radius:5px;padding:2px 6px;background:var(--surface)}
 
 /* ============ RADAR (shared) ============ */
@@ -435,7 +435,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   .s-body{grid-template-columns:1fr!important;gap:22px}
   .s{overflow-y:auto!important;overflow-x:hidden}
   .in{margin-block:70px 40px}
-  .cover-logos img{height:56px}
+  .cover .logos img{height:56px}
   .dash-kpis{grid-template-columns:repeat(2,1fr)}
   .mod-grid,.fut{grid-template-columns:1fr 1fr}
   #rail{display:none}
@@ -479,8 +479,8 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     <div class="cover">
       <div class="radar-veil"></div>
       <div class="logos rv" style="--d:.05s">
-        <img src="__LOGO_ERC__" alt="الهلال الأحمر المصري" style="height:64px">
-        <img src="__LOGO_EOC__" alt="مركز عمليات الطوارئ" style="height:78px">
+        <img src="__LOGO_ERC__" alt="الهلال الأحمر المصري">
+        <img src="__LOGO_EOC__" alt="مركز عمليات الطوارئ">
       </div>
       <div class="cover-eyebrow rv" style="--d:.15s">مركز القيادة الرقمي للهلال الأحمر المصري</div>
       <h1 class="rv" style="--d:.25s">نقرأ <span class="red">المشهد</span> قبل<br>أن يصل <span class="gold">البلاغ</span>.</h1>
