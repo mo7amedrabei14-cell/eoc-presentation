@@ -299,7 +299,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .flw.fa .frx{background:var(--accent)} .flw.fg .frx{background:var(--ok)} .flw.fy .frx{background:var(--data)}
 .flw.fi .frx{background:var(--info)} .flw.fp .frx{background:var(--ai)}
 .mob-stage{position:relative;display:grid;place-items:center;padding:26px 0 4px;min-height:492px}
-.mob-aura{position:absolute;top:50%;left:50%;width:min(440px,100%);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none}
+.mob-aura{position:absolute;top:50%;left:50%;width:min(380px,100%);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none}
 .mob-aura .ar-base{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(199,0,0,.13);background:radial-gradient(circle,rgba(199,0,0,.05) 0,transparent 58%)}
 .mob-aura .ar-ring{position:absolute;border-radius:50%;border:1px solid rgba(199,0,0,.16)}
 .mob-aura .ar-ring.o1{inset:10%}.mob-aura .ar-ring.o2{inset:24%}.mob-aura .ar-ring.o3{inset:38%;border-color:rgba(199,0,0,.1)}
@@ -316,14 +316,15 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .fl-base{stroke:rgba(199,0,0,.18);stroke-width:1.3}
 .fl-sync{stroke:var(--ok);stroke-width:1.5;stroke-dasharray:2.5 10;animation:flow-dash 1.5s linear infinite}
 .fl-sync.r2{stroke:var(--accent);stroke-dasharray:2.5 12;animation-delay:-.75s}
+.fl-dir{stroke:var(--accent);stroke-width:1.8;stroke-dasharray:4 7;animation:flow-dash 1.4s linear infinite}
 @keyframes flow-dash{to{stroke-dashoffset:-25}}
 .mob-flow .pl{position:absolute}
 .pl1{top:36%;inset-inline-start:23%}.pl2{top:40%;inset-inline-end:20%}
-.pl-dot{position:relative;width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px rgba(22,168,107,.7);animation:rp-pulse 1.8s var(--ease-out) infinite}
-.pl2 .pl-dot{background:var(--accent);box-shadow:0 0 10px var(--accent-glow)}
+.pl-dot{position:relative;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent-glow);animation:rp-pulse 1.8s var(--ease-out) infinite}
+.pl2 .pl-dot{background:var(--ok);box-shadow:0 0 10px rgba(22,168,107,.7)}
 .ph-holder{position:relative;z-index:2;animation:mob-float 7s ease-in-out infinite}
 @keyframes mob-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-.phone{width:226px;aspect-ratio:9/18.6;border-radius:34px;padding:9px;position:relative;background:linear-gradient(160deg,#2a2b31,#141518 30%,#08080a 84%);border:1px solid rgba(255,255,255,.16);box-shadow:0 34px 80px rgba(0,0,0,.6),0 0 0 1px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.14)}
+.phone{width:200px;aspect-ratio:9/18.6;border-radius:30px;padding:8px;position:relative;background:linear-gradient(160deg,#2a2b31,#141518 30%,#08080a 84%);border:1px solid rgba(255,255,255,.16);box-shadow:0 34px 80px rgba(0,0,0,.6),0 0 0 1px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.14)}
 .phone .isle{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:86px;height:21px;border-radius:999px;background:#000;border:1px solid rgba(255,255,255,.05);z-index:6}
 .phone-scr{position:relative;width:100%;height:100%;border-radius:27px;overflow:hidden;background:#0a0a0d;border:1px solid rgba(0,0,0,.55);display:flex;flex-direction:column}
 .ph-status{display:flex;justify-content:space-between;align-items:center;padding:9px 14px 1px;font-family:var(--mono);font-size:9.5px;color:var(--ink-2);z-index:5}
@@ -385,6 +386,28 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .phone-scr .live-dot{background:#3ecf8e}
 .phone-scr .live-dot::after{border-color:#3ecf8e}
 .phone-scr .ph-head .eoc-mini{box-shadow:0 0 0 2px rgba(199,0,0,.18)}
+/* continuity story: disrupted office + migration energy */
+.off-ws{position:absolute;z-index:2;inset-inline-start:1%;top:13%;width:138px;display:flex;flex-direction:column;gap:5px;filter:saturate(.12) brightness(.72);opacity:.94}
+.off-ws .ow-mon{position:relative;height:88px;border-radius:12px;background:linear-gradient(180deg,#141519,#0b0c0f);border:1px solid var(--border-strong);padding:9px 10px;overflow:hidden;box-shadow:inset 0 0 26px rgba(0,0,0,.65)}
+.ow-rows{position:relative;display:flex;flex-direction:column;gap:6px}
+.ow-r{height:5px;border-radius:3px;background:rgba(255,255,255,.09)}
+.ow-r.w1{width:82%}.ow-r.w2{width:60%}.ow-r.w3{width:72%}.ow-r.w4{width:46%;background:rgba(199,0,0,.28)}
+.off-ws .ow-slash{position:absolute;inset:0;z-index:2;background:repeating-linear-gradient(45deg,transparent 0 9px,rgba(199,0,0,.32) 9px 10px)}
+.off-ws .ow-x{position:absolute;top:50%;left:50%;transform:translate(-50%,-52%) rotate(-9deg);z-index:3;width:36px;height:36px;border-radius:50%;background:rgba(20,20,22,.86);border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;color:var(--accent);box-shadow:0 0 14px rgba(199,0,0,.25)}
+.off-ws .ow-x svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round}
+.off-ws .ow-foot{display:flex;align-items:center;justify-content:space-between;padding:0 2px}
+.ow-tag{font-size:8.5px;font-weight:700;color:var(--muted)}
+.ow-off{font-family:var(--mono);font-size:7.5px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:3px}
+.ow-off::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 7px var(--accent-glow)}
+.gone-bolt{position:absolute;z-index:3;inset-inline-start:27%;top:24%;width:24px;height:60px;color:var(--accent);filter:drop-shadow(0 0 8px var(--accent-glow));animation:bolt-flick 2.4s steps(1) infinite}
+.gone-bolt svg{width:24px;height:60px;display:block;stroke:var(--accent);fill:rgba(199,0,0,.16);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+@keyframes bolt-flick{0%,84%,100%{opacity:1}88%,90%{opacity:.2}92%{opacity:1}94%,96%{opacity:.45}}
+.cont-tag{position:absolute;z-index:3;bottom:0;left:50%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:999px;background:var(--ok-soft);border:1px solid rgba(22,168,107,.35);color:var(--ok);font-size:12px;font-weight:700;letter-spacing:.3px;white-space:nowrap;box-shadow:0 0 26px rgba(22,168,107,.18),inset 0 1px 0 rgba(255,255,255,.06)}
+:root[dir="rtl"] .cont-tag{transform:translateX(-50%)}
+.cont-tag .live-dot{width:8px;height:8px}
+.mob-flow .rtl{display:none}
+:root[dir="rtl"] .mob-flow .rtl{display:block}
+:root[dir="rtl"] .mob-flow .ltr{display:none}
 /* ============ S6 mission ============ */
 .mcard{overflow:hidden}
 .m-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 20px;border-bottom:1px solid var(--border);background:linear-gradient(270deg,var(--accent-soft),transparent 60%)}
@@ -770,16 +793,16 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 <!-- ================= S6 MOBILE FIELD ================= -->
 <section class="s" id="s06">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">05</span><span class="s-eyebrow" data-ar="قيادة الميدان · المنظومة في جيب القائد" data-en="Field command · the system in the responder's pocket">قيادة الميدان · المنظومة في جيب القائد</span></div>
+    <div class="s-head rv"><span class="s-no">05</span><span class="s-eyebrow" data-ar="استمرارية العمليات · عندما يتعطّل المركز" data-en="Operational continuity · when the room goes dark">استمرارية العمليات · عندما يتعطّل المركز</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,1.02fr) minmax(0,1fr)">
       <div class="tx">
-        <h1 class="title rv" style="--d:.1s" data-ar="الغرفة كلها، <b>في جيب الميدان</b>." data-en="The whole room, <b>in the field's pocket</b>.">الغرفة كلها، <b>في جيب الميدان</b>.</h1>
-        <p class="lead rv" data-step="1" style="--d:.2s" data-ar="عند الطوارئ، تتحوّل المنظومة إلى تجربة ميدانية متخصصة على الموبايل: الفرق تدخل فوراً من أي هاتف ذكي، كتطبيق احترافي حقيقي — بلا حاجة لجهاز كمبيوتر ولا حضورٍ في المركز." data-en="In an emergency, the platform becomes a dedicated field experience on mobile: teams get straight in from any smartphone, like a real pro app — no laptop, no desk, no trip to the room.">عند الطوارئ، تتحوّل المنظومة إلى تجربة ميدانية متخصصة على الموبايل: الفرق تدخل فوراً من أي هاتف ذكي، كتطبيق احترافي حقيقي — بلا حاجة لجهاز كمبيوتر ولا حضورٍ في المركز.</p>
-        <div class="led-row rv" data-step="1" style="--d:.3s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.4"/><path d="M11 18h2"/></svg></span><div><div class="led-t" data-ar="مصمّمة للميدان أولاً" data-en="Designed field-first">مصمّمة للميدان أولاً</div><div class="led-d" data-ar="واجهة مخصصة للشاشات الصغيرة — ليست موقعاً يتقلّص: أزرار كبيرة وترتيب مشتقّ من واقع العمل." data-en="A purpose-built small-screen interface — not a shrinking site: large targets, sequenced for real ops.">واجهة مخصصة للشاشات الصغيرة — ليست موقعاً يتقلّص: أزرار كبيرة وترتيب مشتقّ من واقع العمل.</div></div></div>
-        <div class="led-row v2 rv" data-step="1" style="--d:.4s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M4 14a10 10 0 0 1 16 0"/><path d="M8 17.5a6 6 0 0 1 8 0"/><circle cx="12" cy="20" r=".8"/></svg></span><div><div class="led-t" data-ar="متصل لحظياً بمركز العمليات" data-en="Live-linked to the command center">متصل لحظياً بمركز العمليات</div><div class="led-d" data-ar="تحديثات لحظية وتزامن مستمر: ما يحدث في الميدان تراه الغرفة — والعكس." data-en="Realtime updates, continuous sync: what happens in the field is seen in the room — and back.">تحديثات لحظية وتزامن مستمر: ما يحدث في الميدان تراه الغرفة — والعكس.</div></div></div>
-        <div class="led-row v3 rv" data-step="1" style="--d:.5s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M8 8a5.6 5.6 0 0 1 8 0"/><path d="M5.5 5.5a9 9 0 0 1 13 0"/></svg></span><div><div class="led-t" data-ar="قراءة واتخاذ قرار تحت الضغط" data-en="Read & decide under pressure">قراءة واتخاذ قرار تحت الضغط</div><div class="led-d" data-ar="خط واضح، أهداف لمس كبيرة، والقرار الحاسم يظهر أمامك في ثوانٍ." data-en="Crisp type, large touch targets — the decisive move in front of you in seconds.">خط واضح، أهداف لمس كبيرة، والقرار الحاسم يظهر أمامك في ثوانٍ.</div></div></div>
+        <h1 class="title rv" style="--d:.1s" data-ar="حتى عند تعطّل بيئة التشغيل — <b>تستمر العمليات من الهاتف</b>." data-en="Even when the ops environment fails, <b>operations keep going — from the phone</b>.">حتى عند تعطّل بيئة التشغيل — <b>تستمر العمليات من الهاتف</b>.</h1>
+        <p class="lead rv" data-step="1" style="--d:.2s" data-ar="انقطع الكهرباء، أو تعطّلت الشبكة، أو غاب المكتب؟ المنظومة لا تقف: فهي مستضافة خارجياً، وأي هاتف يصل إليها بشبكته الخاصة. يتحوّل الهاتف إلى واجهة القيادة، وتستمر المهام والرصد والتحديثات حتى تستقر بيئة التشغيل." data-en="Power cut, network down, desks unreachable? The platform keeps running — it's hosted, and any phone reaches it on its own connection. The phone becomes the command surface, and missions, monitoring and updates keep flowing until the room is back.">انقطع الكهرباء، أو تعطّلت الشبكة، أو غاب المكتب؟ المنظومة لا تقف: فهي مستضافة خارجياً، وأي هاتف يصل إليها بشبكته الخاصة. يتحوّل الهاتف إلى واجهة القيادة، وتستمر المهام والرصد والتحديثات حتى تستقر بيئة التشغيل.</p>
+        <div class="led-row rv" data-step="1" style="--d:.3s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.2"/><path d="M16.5 5.5a8.4 8.4 0 0 1 0 13"/><path d="M19.6 3a13 13 0 0 1 0 18"/><path d="M7.5 5.5a8.4 8.4 0 0 0 0 13"/><path d="M4.4 3a13 13 0 0 0 0 18"/></svg></span><div><div class="led-t" data-ar="المنظومة ليست حبيسة للمركز" data-en="The platform isn't bound to the room">المنظومة ليست حبيسة للمركز</div><div class="led-d" data-ar="مستضافة خارجياً: تعطّل بيئة المركز لا يُطفئها، والهاتف يصل إليها بشبكته الخاصة." data-en="Hosted off-site: a broken room doesn't switch it off — the phone reaches it on its own network.">مستضافة خارجياً: تعطّل بيئة المركز لا يُطفئها، والهاتف يصل إليها بشبكته الخاصة.</div></div></div>
+        <div class="led-row v2 rv" data-step="1" style="--d:.4s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.4L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.4L3 16"/><path d="M3 21v-5h5"/></svg></span><div><div class="led-t" data-ar="إعادة اتصال تلقائية واستئناف المزامنة" data-en="Auto-reconnect, resume the sync">إعادة اتصال تلقائية واستئناف المزامنة</div><div class="led-d" data-ar="ينقطع الاتصال؟ يعاود النظام المحاولة تلقائياً، وبعد عودته يستأنف من آخر حدثٍ وصل إليه." data-en="Connection lost? It retries automatically and, on return, resumes from the last event it received.">ينقطع الاتصال؟ يعاود النظام المحاولة تلقائياً، وبعد عودته يستأنف من آخر حدثٍ وصل إليه.</div></div></div>
+        <div class="led-row v3 rv" data-step="1" style="--d:.5s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.4"/><path d="M11 18h2"/><path d="M12 6v3.5"/></svg></span><div><div class="led-t" data-ar="الهاتف = واجهة القيادة في الميدان" data-en="The phone is the field's command interface">الهاتف = واجهة القيادة في الميدان</div><div class="led-d" data-ar="مهام، قوة، رصد، إشعارات، اتصال، تتبّع، إجراءات — كلها من الشاشة الصغيرة، بنفس الأدوار والصلاحيات." data-en="Missions, roster, monitoring, alerts, comms, tracking, actions — all from the small screen, same roles and permissions.">مهام، قوة، رصد، إشعارات، اتصال، تتبّع، إجراءات — كلها من الشاشة الصغيرة، بنفس الأدوار والصلاحيات.</div></div></div>
         <div class="rv" data-step="3">
-          <div class="flows-cap"><span class="live-dot"></span><span data-ar="كل سير عمل الغرفة مستمر على الموبايل — بنفس الأدوار والصلاحيات." data-en="Every room workflow keeps running on the phone — same roles, same permissions.">كل سير عمل الغرفة مستمر على الموبايل — بنفس الأدوار والصلاحيات.</span></div>
+          <div class="flows-cap"><span class="live-dot"></span><span data-ar="كل سير عمل الغرفة ينتقل إلى الموبايل — لا تتوقف مهمة، ولا يغيب بلاغ." data-en="Every room workflow moves to the phone — no mission pauses, no report waits.">كل سير عمل الغرفة ينتقل إلى الموبايل — لا تتوقف مهمة، ولا يغيب بلاغ.</span></div>
           <div class="flw-row">
             <span class="flw fa"><span class="frx"></span><span data-ar="المهام الميدانية" data-en="Field missions">المهام الميدانية</span></span>
             <span class="flw fg"><span class="frx"></span><span data-ar="القوة البشرية" data-en="Field roster">القوة البشرية</span></span>
@@ -791,7 +814,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
           </div>
           <div class="demo-note">
             <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>
-            <span data-ar="الواجهة هنا تجسيد صادق لمنظومة EOC الفعلية — تعمل من الهاتف بالطريقة نفسها التي تعمل بها من الشاشة الكبيرة." data-en="This mockup is a faithful rendering of the real EOC interface — it runs on the phone exactly as it runs on the big screen.">الواجهة هنا تجسيد صادق لمنظومة EOC الفعلية — تعمل من الهاتف بالطريقة نفسها التي تعمل بها من الشاشة الكبيرة.</span>
+            <span data-ar="تجسيد صادق لواجهة المنظومة على الهاتف. الاستمرارية تعني وصولاً مستقلاً عبر شبكة الهاتف — لا تخزيناً دون اتصال." data-en="A faithful rendering of the real phone interface. Continuity means independent access over the phone's connection — not offline storage.">تجسيد صادق لواجهة المنظومة على الهاتف. الاستمرارية تعني وصولاً مستقلاً عبر شبكة الهاتف — لا تخزيناً دون اتصال.</span>
           </div>
         </div>
       </div>
@@ -806,21 +829,33 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
         </div>
         <div class="mob-hub">
           <span class="eoc-mini"></span>
-          <span class="hub-t" data-ar="المركز · متصل لحظياً" data-en="CENTER · LIVE">المركز · متصل لحظياً</span>
+          <span class="hub-t" data-ar="المنظومة · متاحة" data-en="PLATFORM · LIVE">المنظومة · متاحة</span>
           <span class="live-tag"><span class="live-dot"></span><span data-ar="متصل" data-en="ONLINE">متصل</span></span>
         </div>
         <div class="mob-flow">
           <svg viewBox="0 0 460 460" preserveAspectRatio="none">
-            <path class="fl-base" d="M205 50 C 140 90 118 170 126 250"/>
             <path class="fl-base" d="M255 50 C 320 90 342 170 334 250"/>
-            <path class="fl-sync" d="M205 50 C 140 90 118 170 126 250"/>
-            <path class="fl-sync r2" d="M255 50 C 320 90 342 170 334 250"/>
+            <path class="fl-sync" d="M255 50 C 320 90 342 170 334 250"/>
+            <path class="fl-base ltr" d="M112 108 C 122 150 140 180 158 236"/>
+            <path class="fl-base rtl" d="M348 108 C 338 150 320 180 302 236"/>
+            <path class="fl-dir ltr" d="M112 108 C 122 150 140 180 158 236"/>
+            <path class="fl-dir rtl" d="M348 108 C 338 150 320 180 302 236"/>
           </svg>
           <span class="pl pl1"><i class="pl-dot"></i></span>
           <span class="pl pl2"><i class="pl-dot"></i></span>
         </div>
-        <div class="mob-chip c1"><span class="dot-l"></span><span data-ar="6 مهام نشطة الآن" data-en="6 missions active now">6 مهام نشطة الآن</span></div>
-        <div class="mob-chip c2"><span class="dot-l"></span><span data-ar="تتبّع الموقع مفعّل" data-en="live location on">تتبّع الموقع مفعّل</span></div>
+        <div class="mob-chip c1"><span class="dot-l"></span><span data-ar="كهرباء · شبكة · مكتب" data-en="Power · Net · Desk">كهرباء · شبكة · مكتب</span></div>
+        <div class="off-ws">
+          <div class="ow-mon">
+            <div class="ow-rows"><span class="ow-r w1"></span><span class="ow-r w2"></span><span class="ow-r w3"></span><span class="ow-r w4"></span></div>
+            <div class="ow-slash"></div>
+            <span class="ow-x"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+          </div>
+          <div class="ow-foot"><span class="ow-tag" data-ar="بيئة التشغيل" data-en="OPS ENV">بيئة التشغيل</span><span class="ow-off" data-ar="معطّلة" data-en="OFF">معطّلة</span></div>
+        </div>
+        <div class="gone-bolt"><svg viewBox="0 0 24 60"><path d="M13 2 L7 30 h8 L11 58 L20 24 h-8 L16 2 Z"/></svg></div>
+        <div class="mob-chip c2"><span class="dot-l"></span><span data-ar="إعادة اتصال تلقائية" data-en="Auto-reconnect">إعادة اتصال تلقائية</span></div>
+        <div class="cont-tag"><span class="live-dot"></span><span data-ar="العمليات مستمرة" data-en="OPS CONTINUE">العمليات مستمرة</span></div>
         <div class="ph-holder">
           <div class="phone">
             <span class="isle"></span>
