@@ -290,6 +290,101 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .ops-chip{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 15px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);font-size:12.5px;color:var(--muted)}
 .ops-chip b{color:var(--ink-asist)}.ops-chip .bval{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--ink-2)}
 
+/* ============ S6 mobile field command ============ */
+.flows-cap{margin-top:20px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--ink-2)}
+.flows-cap .live-dot{width:7px;height:7px}
+.flw-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.flw{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border:1px solid var(--border);border-radius:999px;font-size:11px;font-weight:500;color:var(--ink-2);background:var(--surface)}
+.flw .frx{width:5px;height:5px;border-radius:50%;background:var(--muted-2)}
+.flw.fa .frx{background:var(--accent)} .flw.fg .frx{background:var(--ok)} .flw.fy .frx{background:var(--data)}
+.flw.fi .frx{background:var(--info)} .flw.fp .frx{background:var(--ai)}
+.mob-stage{position:relative;display:grid;place-items:center;padding:26px 0 4px;min-height:492px}
+.mob-aura{position:absolute;top:50%;left:50%;width:min(440px,100%);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none}
+.mob-aura .ar-base{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(199,0,0,.13);background:radial-gradient(circle,rgba(199,0,0,.05) 0,transparent 58%)}
+.mob-aura .ar-ring{position:absolute;border-radius:50%;border:1px solid rgba(199,0,0,.16)}
+.mob-aura .ar-ring.o1{inset:10%}.mob-aura .ar-ring.o2{inset:24%}.mob-aura .ar-ring.o3{inset:38%;border-color:rgba(199,0,0,.1)}
+.mob-aura .ar-sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 15deg,rgba(199,0,0,0) 0deg,rgba(199,0,0,.12) 80deg,transparent 114deg);animation:radar-sweep 6.5s linear infinite}
+.mob-aura .ar-grid{position:absolute;inset:0;border-radius:50%;background:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/32px 32px,linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px) 0 0/32px 32px;-webkit-mask:radial-gradient(circle,transparent 32%,#000 72%);mask:radial-gradient(circle,transparent 32%,#000 72%)}
+.mob-hub{position:absolute;z-index:3;top:0;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:var(--surface);border:1px solid var(--border-strong);box-shadow:var(--shadow-2);font-size:11px;font-weight:600;white-space:nowrap}
+.eoc-mini{width:18px;height:18px;border-radius:50%;flex:none;position:relative;background:radial-gradient(circle at 34% 32%,rgba(255,120,120,.5),transparent 44%),radial-gradient(circle,var(--accent-deep) 0 44%,transparent 44%);border:1px solid rgba(255,255,255,.2)}
+.eoc-mini::after{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--accent)}
+.mob-hub .hub-t{color:var(--ink-2)}
+.mob-hub .live-tag{font-size:10px}
+.mob-flow{position:absolute;inset:0;z-index:1;width:100%;height:100%;pointer-events:none;overflow:visible}
+.mob-flow svg{position:absolute;inset:0;width:100%;height:100%}
+.mob-flow path{fill:none;stroke-linecap:round}
+.fl-base{stroke:rgba(199,0,0,.18);stroke-width:1.3}
+.fl-sync{stroke:var(--ok);stroke-width:1.5;stroke-dasharray:2.5 10;animation:flow-dash 1.5s linear infinite}
+.fl-sync.r2{stroke:var(--accent);stroke-dasharray:2.5 12;animation-delay:-.75s}
+@keyframes flow-dash{to{stroke-dashoffset:-25}}
+.mob-flow .pl{position:absolute}
+.pl1{top:36%;inset-inline-start:23%}.pl2{top:40%;inset-inline-end:20%}
+.pl-dot{position:relative;width:6px;height:6px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px rgba(22,168,107,.7);animation:rp-pulse 1.8s var(--ease-out) infinite}
+.pl2 .pl-dot{background:var(--accent);box-shadow:0 0 10px var(--accent-glow)}
+.ph-holder{position:relative;z-index:2;animation:mob-float 7s ease-in-out infinite}
+@keyframes mob-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.phone{width:226px;aspect-ratio:9/18.6;border-radius:34px;padding:9px;position:relative;background:linear-gradient(160deg,#2a2b31,#141518 30%,#08080a 84%);border:1px solid rgba(255,255,255,.16);box-shadow:0 34px 80px rgba(0,0,0,.6),0 0 0 1px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.14)}
+.phone .isle{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:86px;height:21px;border-radius:999px;background:#000;border:1px solid rgba(255,255,255,.05);z-index:6}
+.phone-scr{position:relative;width:100%;height:100%;border-radius:27px;overflow:hidden;background:#0a0a0d;border:1px solid rgba(0,0,0,.55);display:flex;flex-direction:column}
+.ph-status{display:flex;justify-content:space-between;align-items:center;padding:9px 14px 1px;font-family:var(--mono);font-size:9.5px;color:var(--ink-2);z-index:5}
+.ph-st-ic{display:flex;gap:5px}
+.ph-st-ic svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round}
+.ph-head{display:flex;align-items:center;gap:7px;padding:8px 12px 6px}
+.ph-head .eoc-mini{width:15px;height:15px;border:none;box-shadow:0 0 0 2px var(--accent-soft)}
+.ph-title{font-size:10px;font-weight:700;flex:1;white-space:nowrap;overflow:hidden}
+.ph-live{display:inline-flex;align-items:center;gap:5px;font-size:8px;font-weight:700;letter-spacing:.4px;color:var(--ok)}
+.ph-ticker{display:flex;align-items:center;gap:8px;padding:5px 10px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface-2)}
+.ph-tk-label{flex:none;display:inline-flex;align-items:center;gap:4px;font-size:7.5px;font-weight:700;letter-spacing:1.2px;color:var(--accent)}
+.ph-tk-label .live-dot{width:5px;height:5px}
+.ph-tk{overflow:hidden;flex:1}
+.ph-tk-track{display:flex;gap:18px;width:max-content;animation:ticker-x 15s linear infinite}
+.ph-tk-item{font-size:8.5px;color:var(--muted);white-space:nowrap}
+.ph-tk-item b{color:var(--ink-2);font-weight:600}
+@keyframes ticker-x{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ph-card{background:linear-gradient(180deg,var(--surface-3),var(--surface));border:1px solid var(--border-strong);border-radius:14px;margin:8px 12px;padding:10px 12px;box-shadow:var(--shadow-1)}
+.ph-card .pc-top{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.ph-code{font-family:var(--mono);font-size:9px;color:var(--faint);letter-spacing:.5px}
+.ph-tt{font-size:11px;font-weight:700;margin-top:4px}
+.ph-badges{display:flex;gap:5px;margin-top:7px}
+.ph-badge{font-size:7.5px;font-weight:700;padding:3px 7px;border-radius:999px;letter-spacing:.3px}
+.ph-badge.bact{color:var(--accent);background:var(--accent-soft)}
+.ph-badge.bfield{color:var(--info);background:var(--info-soft)}
+.ph-meta{display:flex;justify-content:space-between;gap:8px;margin-top:9px;padding-top:8px;border-top:1px dashed var(--border);font-size:8.5px;color:var(--muted)}
+.ph-meta b{color:var(--ink-2);font-weight:600}
+.ph-card .pc-gap{height:1px;background:var(--border);margin:9px 0}
+.ph-pers{display:flex;align-items:center;gap:7px;padding:4px 0;font-size:9px}
+.ph-pers .pdot{width:5px;height:5px;border-radius:50%;flex:none}
+.ph-pers .pname{flex:1;color:var(--ink-2);font-weight:600}
+.ph-pers .pst{font-size:7.5px;color:var(--faint)}
+.ph-nav{margin-top:auto;display:flex;border-top:1px solid var(--border-strong);background:linear-gradient(180deg,var(--surface-3),var(--surface-2))}
+.ph-nav .n{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0 9px;font-size:7.5px;color:var(--muted);position:relative}
+.ph-nav .n.on{color:var(--accent)}
+.ph-nav .n .ic{width:15px;height:15px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ph-nav .n .bdg{position:absolute;top:5px;inset-inline-end:24%;width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent-glow)}
+.mob-chip{position:absolute;z-index:3;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;font-size:10.5px;font-weight:600;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-1)}
+.mob-chip .dot-l{width:6px;height:6px;border-radius:50%}
+.mob-chip.c1{top:6%;inset-inline-start:2%;color:var(--accent)}
+.mob-chip.c1 .dot-l{background:var(--accent)}
+.mob-chip.c2{bottom:7%;inset-inline-end:3%;color:var(--ok)}
+.mob-chip.c2 .dot-l{background:var(--ok)}
+/* phone screen = self-contained dark UI, stays crisp in the deck's light theme too */
+.phone-scr{color:#d7d9de}
+.phone-scr .ph-title,.phone-scr .ph-tt{color:#f2f3f5}
+.phone-scr .ph-tk-item b,.phone-scr .ph-meta b,.phone-scr .ph-pers .pname{color:#e8eaed}
+.phone-scr .ph-status{color:#9aa2ad}
+.phone-scr .ph-code,.phone-scr .ph-pers .pst{color:#8d94a0}
+.phone-scr .ph-tk-item{color:#9aa2ad}
+.phone-scr .ph-nav .n{color:#8d94a0}
+.phone-scr .ph-nav .n.on{color:#ff6a5e}
+.phone-scr .ph-card{background:linear-gradient(180deg,#1a1b1f,#121315);border-color:#2a2c32}
+.phone-scr .ph-ticker{background:#101114;border-top-color:#232529;border-bottom-color:#232529}
+.phone-scr .ph-nav{background:linear-gradient(180deg,#16171b,#131417);border-top-color:#232529}
+.phone-scr .ph-badge.bact{color:#ff9c9c;background:rgba(199,0,0,.16)}
+.phone-scr .ph-badge.bfield{color:#8fbfff;background:rgba(90,162,255,.14)}
+.phone-scr .ph-live{color:#3ecf8e}
+.phone-scr .live-dot{background:#3ecf8e}
+.phone-scr .live-dot::after{border-color:#3ecf8e}
+.phone-scr .ph-head .eoc-mini{box-shadow:0 0 0 2px rgba(199,0,0,.18)}
 /* ============ S6 mission ============ */
 .mcard{overflow:hidden}
 .m-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 20px;border-bottom:1px solid var(--border);background:linear-gradient(270deg,var(--accent-soft),transparent 60%)}
@@ -672,10 +767,128 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S6 MISSION ================= -->
+<!-- ================= S6 MOBILE FIELD ================= -->
 <section class="s" id="s06">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">05</span><span class="s-eyebrow" data-ar="نواة الاستجابة · دورة حياة المهمة" data-en="The core of response · a mission's lifecycle">نواة الاستجابة · دورة حياة المهمة</span></div>
+    <div class="s-head rv"><span class="s-no">05</span><span class="s-eyebrow" data-ar="قيادة الميدان · المنظومة في جيب القائد" data-en="Field command · the system in the responder's pocket">قيادة الميدان · المنظومة في جيب القائد</span></div>
+    <div class="s-body" style="grid-template-columns:minmax(0,1.02fr) minmax(0,1fr)">
+      <div class="tx">
+        <h1 class="title rv" style="--d:.1s" data-ar="الغرفة كلها، <b>في جيب الميدان</b>." data-en="The whole room, <b>in the field's pocket</b>.">الغرفة كلها، <b>في جيب الميدان</b>.</h1>
+        <p class="lead rv" data-step="1" style="--d:.2s" data-ar="عند الطوارئ، تتحوّل المنظومة إلى تجربة ميدانية متخصصة على الموبايل: الفرق تدخل فوراً من أي هاتف ذكي، كتطبيق احترافي حقيقي — بلا حاجة لجهاز كمبيوتر ولا حضورٍ في المركز." data-en="In an emergency, the platform becomes a dedicated field experience on mobile: teams get straight in from any smartphone, like a real pro app — no laptop, no desk, no trip to the room.">عند الطوارئ، تتحوّل المنظومة إلى تجربة ميدانية متخصصة على الموبايل: الفرق تدخل فوراً من أي هاتف ذكي، كتطبيق احترافي حقيقي — بلا حاجة لجهاز كمبيوتر ولا حضورٍ في المركز.</p>
+        <div class="led-row rv" data-step="1" style="--d:.3s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.4"/><path d="M11 18h2"/></svg></span><div><div class="led-t" data-ar="مصمّمة للميدان أولاً" data-en="Designed field-first">مصمّمة للميدان أولاً</div><div class="led-d" data-ar="واجهة مخصصة للشاشات الصغيرة — ليست موقعاً يتقلّص: أزرار كبيرة وترتيب مشتقّ من واقع العمل." data-en="A purpose-built small-screen interface — not a shrinking site: large targets, sequenced for real ops.">واجهة مخصصة للشاشات الصغيرة — ليست موقعاً يتقلّص: أزرار كبيرة وترتيب مشتقّ من واقع العمل.</div></div></div>
+        <div class="led-row v2 rv" data-step="1" style="--d:.4s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M4 14a10 10 0 0 1 16 0"/><path d="M8 17.5a6 6 0 0 1 8 0"/><circle cx="12" cy="20" r=".8"/></svg></span><div><div class="led-t" data-ar="متصل لحظياً بمركز العمليات" data-en="Live-linked to the command center">متصل لحظياً بمركز العمليات</div><div class="led-d" data-ar="تحديثات لحظية وتزامن مستمر: ما يحدث في الميدان تراه الغرفة — والعكس." data-en="Realtime updates, continuous sync: what happens in the field is seen in the room — and back.">تحديثات لحظية وتزامن مستمر: ما يحدث في الميدان تراه الغرفة — والعكس.</div></div></div>
+        <div class="led-row v3 rv" data-step="1" style="--d:.5s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M8 8a5.6 5.6 0 0 1 8 0"/><path d="M5.5 5.5a9 9 0 0 1 13 0"/></svg></span><div><div class="led-t" data-ar="قراءة واتخاذ قرار تحت الضغط" data-en="Read & decide under pressure">قراءة واتخاذ قرار تحت الضغط</div><div class="led-d" data-ar="خط واضح، أهداف لمس كبيرة، والقرار الحاسم يظهر أمامك في ثوانٍ." data-en="Crisp type, large touch targets — the decisive move in front of you in seconds.">خط واضح، أهداف لمس كبيرة، والقرار الحاسم يظهر أمامك في ثوانٍ.</div></div></div>
+        <div class="rv" data-step="3">
+          <div class="flows-cap"><span class="live-dot"></span><span data-ar="كل سير عمل الغرفة مستمر على الموبايل — بنفس الأدوار والصلاحيات." data-en="Every room workflow keeps running on the phone — same roles, same permissions.">كل سير عمل الغرفة مستمر على الموبايل — بنفس الأدوار والصلاحيات.</span></div>
+          <div class="flw-row">
+            <span class="flw fa"><span class="frx"></span><span data-ar="المهام الميدانية" data-en="Field missions">المهام الميدانية</span></span>
+            <span class="flw fg"><span class="frx"></span><span data-ar="القوة البشرية" data-en="Field roster">القوة البشرية</span></span>
+            <span class="flw fy"><span class="frx"></span><span data-ar="التحديثات الحية" data-en="Live updates">التحديثات الحية</span></span>
+            <span class="flw fa"><span class="frx"></span><span data-ar="الإشعارات" data-en="Notifications">الإشعارات</span></span>
+            <span class="flw fg"><span class="frx"></span><span data-ar="الاتصال والتزامن" data-en="Comm &amp; sync">الاتصال والتزامن</span></span>
+            <span class="flw fi"><span class="frx"></span><span data-ar="الرصد والتتبع" data-en="Monitoring &amp; tracking">الرصد والتتبع</span></span>
+            <span class="flw fp"><span class="frx"></span><span data-ar="إجراءات العمليات" data-en="Operational actions">إجراءات العمليات</span></span>
+          </div>
+          <div class="demo-note">
+            <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>
+            <span data-ar="الواجهة هنا تجسيد صادق لمنظومة EOC الفعلية — تعمل من الهاتف بالطريقة نفسها التي تعمل بها من الشاشة الكبيرة." data-en="This mockup is a faithful rendering of the real EOC interface — it runs on the phone exactly as it runs on the big screen.">الواجهة هنا تجسيد صادق لمنظومة EOC الفعلية — تعمل من الهاتف بالطريقة نفسها التي تعمل بها من الشاشة الكبيرة.</span>
+          </div>
+        </div>
+      </div>
+      <div class="mob-stage rv" data-step="2" style="--d:.25s">
+        <div class="mob-aura">
+          <div class="ar-base"></div>
+          <div class="ar-ring o1"></div>
+          <div class="ar-ring o2"></div>
+          <div class="ar-ring o3"></div>
+          <div class="ar-grid"></div>
+          <div class="ar-sweep"></div>
+        </div>
+        <div class="mob-hub">
+          <span class="eoc-mini"></span>
+          <span class="hub-t" data-ar="المركز · متصل لحظياً" data-en="CENTER · LIVE">المركز · متصل لحظياً</span>
+          <span class="live-tag"><span class="live-dot"></span><span data-ar="متصل" data-en="ONLINE">متصل</span></span>
+        </div>
+        <div class="mob-flow">
+          <svg viewBox="0 0 460 460" preserveAspectRatio="none">
+            <path class="fl-base" d="M205 50 C 140 90 118 170 126 250"/>
+            <path class="fl-base" d="M255 50 C 320 90 342 170 334 250"/>
+            <path class="fl-sync" d="M205 50 C 140 90 118 170 126 250"/>
+            <path class="fl-sync r2" d="M255 50 C 320 90 342 170 334 250"/>
+          </svg>
+          <span class="pl pl1"><i class="pl-dot"></i></span>
+          <span class="pl pl2"><i class="pl-dot"></i></span>
+        </div>
+        <div class="mob-chip c1"><span class="dot-l"></span><span data-ar="6 مهام نشطة الآن" data-en="6 missions active now">6 مهام نشطة الآن</span></div>
+        <div class="mob-chip c2"><span class="dot-l"></span><span data-ar="تتبّع الموقع مفعّل" data-en="live location on">تتبّع الموقع مفعّل</span></div>
+        <div class="ph-holder">
+          <div class="phone">
+            <span class="isle"></span>
+            <div class="phone-scr">
+              <div class="ph-status">
+                <span class="num dirc" data-ar="14:32" data-en="14:32">14:32</span>
+                <span class="ph-st-ic">
+                  <svg viewBox="0 0 24 24"><path d="M6 18.5V14"/><path d="M10 18.5V11"/><path d="M14 18.5V8"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M2.5 9a13 13 0 0 1 19 0"/><path d="M6 12.6a8.5 8.5 0 0 1 12 0"/><circle cx="12" cy="17" r="1.2"/></svg>
+                  <svg viewBox="0 0 24 24"><rect x="1.5" y="7" width="16" height="10" rx="2"/><path d="M21 10v4"/><rect x="3.5" y="9" width="7" height="6" rx="1"/></svg>
+                </span>
+              </div>
+              <div class="ph-head">
+                <span class="eoc-mini"></span>
+                <span class="ph-title" data-ar="مركز عمليات الطوارئ" data-en="Emergency Operations Center">مركز عمليات الطوارئ</span>
+                <span class="ph-live"><span class="live-dot"></span><span data-ar="متصل" data-en="LIVE">متصل</span></span>
+              </div>
+              <div class="ph-ticker">
+                <span class="ph-tk-label"><span class="live-dot"></span><span data-ar="مباشر" data-en="LIVE">مباشر</span></span>
+                <div class="ph-tk">
+                  <div class="ph-tk-track">
+                    <span class="ph-tk-item" data-ar="أحمد السيد اعتمد مهمة جديدة M-2184 · 14:31" data-en="Ahmed S. approved new mission M-2184 · 14:31">أحمد السيد اعتمد مهمة جديدة M-2184 · 14:31</span>
+                    <span class="ph-tk-item" data-ar="د. يارا حدّثت حالة الميدان إلى مكتملة · 14:29" data-en="Dr. Yara set field status · complete · 14:29">د. يارا حدّثت حالة الميدان إلى مكتملة · 14:29</span>
+                    <span class="ph-tk-item" data-ar="أحمد السيد اعتمد مهمة جديدة M-2184 · 14:31" data-en="Ahmed S. approved new mission M-2184 · 14:31">أحمد السيد اعتمد مهمة جديدة M-2184 · 14:31</span>
+                    <span class="ph-tk-item" data-ar="د. يارا حدّثت حالة الميدان إلى مكتملة · 14:29" data-en="Dr. Yara set field status · complete · 14:29">د. يارا حدّثت حالة الميدان إلى مكتملة · 14:29</span>
+                  </div>
+                </div>
+              </div>
+              <div class="ph-card">
+                <div class="pc-top">
+                  <span class="ph-code num dirc" data-ar="M-2184" data-en="M-2184">M-2184</span>
+                  <span class="ph-badge bact" data-ar="نشطة" data-en="ACTIVE">نشطة</span>
+                </div>
+                <div class="ph-tt" data-ar="إخلاء سكني — عين شمس" data-en="Evacuation — Ain Shams">إخلاء سكني — عين شمس</div>
+                <div class="ph-badges">
+                  <span class="ph-badge bfield" data-ar="استجابة ميدانية" data-en="FIELD RESPONSE">استجابة ميدانية</span>
+                  <span class="ph-badge bfield" data-ar="نقاط تحرّك: 3" data-en="3 move points">نقاط تحرّك: 3</span>
+                </div>
+                <div class="ph-meta">
+                  <span data-ar="القوة 6/8" data-en="Force 6/8">القوة 6/8</span>
+                  <span data-ar="إسعاف 2" data-en="Ambulance 2">إسعاف 2</span>
+                  <span data-ar="آخر تحديث 14:31" data-en="Updated 14:31">آخر تحديث 14:31</span>
+                </div>
+              </div>
+              <div class="ph-card">
+                <div class="ph-tt" data-ar="فريق المهمة" data-en="Mission roster" style="font-size:9.5px;margin-top:2px">فريق المهمة</div>
+                <span class="ph-pers" style="display:flex"><span class="pdot" style="background:var(--accent)"></span><span class="pname">أحمد السيد</span><span class="pst" data-ar="في مهمة · تتبّع GPS" data-en="deployed · GPS">في مهمة · تتبّع GPS</span></span>
+                <span class="ph-pers" style="display:flex"><span class="pdot" style="background:var(--ok)"></span><span class="pname">مريم عبد الله</span><span class="pst" data-ar="جاهزة للانطلاق" data-en="ready">جاهزة للانطلاق</span></span>
+                <span class="ph-pers" style="display:flex"><span class="pdot" style="background:var(--data)"></span><span class="pname">يوسف فرج</span><span class="pst" data-ar="أنهى نوبته" data-en="off shift">أنهى نوبته</span></span>
+              </div>
+              <div class="ph-nav">
+                <span class="n on"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg><span data-ar="المهام" data-en="Missions">المهام</span></span>
+                <span class="n"><svg class="ic" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span data-ar="القوة" data-en="Force">القوة</span></span>
+                <span class="n"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z"/></svg><span data-ar="الرصد" data-en="Radar">الرصد</span></span>
+                <span class="n"><span class="bdg"></span><svg class="ic" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span data-ar="الإشعارات" data-en="Alerts">الإشعارات</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S7 MISSION ================= -->
+<section class="s" id="s07">
+  <div class="in">
+    <div class="s-head rv"><span class="s-no">06</span><span class="s-eyebrow" data-ar="نواة الاستجابة · دورة حياة المهمة" data-en="The core of response · a mission's lifecycle">نواة الاستجابة · دورة حياة المهمة</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,1.1fr) minmax(0,.85fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-ar="مهمة واحدة، <b>مسارها كاملٌ أمامك</b>." data-en="One mission, its path <b>fully traced</b>.">مهمة واحدة، <b>مسارها كاملٌ أمامك</b>.</h1>
@@ -726,10 +939,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S7 WORKFLOW ================= -->
-<section class="s" id="s07">
+<!-- ================= S8 WORKFLOW ================= -->
+<section class="s" id="s08">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">06</span><span class="s-eyebrow" data-ar="سلطة موزّعة · انتقال كل دور مدوّن" data-en="Distributed authority · every hand-off recorded">سلطة موزّعة · انتقال كل دور مدوّن</span></div>
+    <div class="s-head rv"><span class="s-no">07</span><span class="s-eyebrow" data-ar="سلطة موزّعة · انتقال كل دور مدوّن" data-en="Distributed authority · every hand-off recorded">سلطة موزّعة · انتقال كل دور مدوّن</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,.9fr) minmax(0,1.15fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-ar="من المسودة إلى الأرشيف، <b>لا انتقال بلا سبب</b>." data-en="From draft to archive, <b>every move</b> documented.">من المسودة إلى الأرشيف، <b>لا انتقال بلا سبب</b>.</h1>
