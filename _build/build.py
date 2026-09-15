@@ -30,7 +30,7 @@ html = html.replace('__LOGO_EOC__', eoc).replace('__LOGO_ERC__', erc).replace('_
 
 token_open = html.count('data:image')
 # quick integrity check: balanced script/style + section count
-assert html.count('<section class="s"') == 19, 'slide count wrong: %d' % html.count('<section class="s"')
+assert html.count('<section class="s"') == 20, 'slide count wrong: %d' % html.count('<section class="s"')
 out = r"C:\Users\mo7am\OneDrive\Work\Eoc System Show\eoc-command-deck.html"
 with open(out, 'w', encoding='utf-8') as f:
     f.write(html)

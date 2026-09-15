@@ -537,7 +537,17 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 /* ============ S15 mono detail ============ */
 .mono-mini{font-family:var(--mono);font-size:10px;color:var(--faint);background:var(--surface-3);border-radius:6px;padding:3px 8px;letter-spacing:.2px;max-width:100%;overflow:hidden;text-overflow:ellipsis}
 
-/* ============ S16 architecture ============ */
+/* ============ S16 supervisors handover ============ */
+.hv-head{display:grid;grid-template-columns:.55fr .85fr .85fr 1.2fr;gap:8px;padding:11px 16px;background:var(--surface-3);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.3px;border-bottom:1px solid var(--border)}
+.hv-row{display:grid;grid-template-columns:.55fr .85fr .85fr 1.2fr;gap:8px;padding:11px 16px;border-top:1px solid var(--border);align-items:center;font-size:12.5px;color:var(--ink-2);transition:background .2s}
+.hv-row:hover{background:var(--accent-soft)}
+.hv-shift{display:inline-flex;align-items:center;gap:7px;font-weight:600;white-space:nowrap}
+.hv-shift .dot-l{width:7px;height:7px}
+.hv-name{font-weight:600}
+.hv-carry{font-size:11.5px;color:var(--muted);line-height:1.6}
+.hv-carry b{color:var(--ink-2);font-weight:600}
+
+/* ============ S17 architecture ============ */
 .arch{display:flex;flex-direction:column}
 .layer{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow-1)}
 .ly-tt{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:700;margin-bottom:12px}
@@ -549,7 +559,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .arch-flow::before{content:"";position:absolute;inset-inline:24px;top:50%;height:1px;background:var(--border-strong)}
 .arch-flow::after{content:"";position:absolute;top:50%;inset-inline-end:24px;width:7px;height:7px;border-inline-end:1px solid var(--muted-2);border-bottom:1px solid var(--muted-2);transform:translateY(-50%) rotate(-45deg)}
 
-/* ============ S17 future ============ */
+/* ============ S18 future ============ */
 .fut{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .fut-c{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px;box-shadow:var(--shadow-1);text-align:center}
 .fut-ico{width:44px;height:44px;border-radius:13px;background:var(--surface-3);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
