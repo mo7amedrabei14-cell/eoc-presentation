@@ -537,6 +537,19 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 /* ============ S15 mono detail ============ */
 .mono-mini{font-family:var(--mono);font-size:10px;color:var(--faint);background:var(--surface-3);border-radius:6px;padding:3px 8px;letter-spacing:.2px;max-width:100%;overflow:hidden;text-overflow:ellipsis}
 
+/* ============ S7 weather ============ */
+.wx-grid{display:grid;grid-template-columns:1fr .9fr .9fr;gap:8px}
+.wx-head{display:grid;grid-template-columns:1fr .9fr .9fr;gap:8px;padding:11px 16px;background:var(--surface-3);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.3px;border-bottom:1px solid var(--border)}
+.wx-row{display:grid;grid-template-columns:1fr .9fr .9fr;gap:8px;padding:11px 16px;border-top:1px solid var(--border);align-items:center;font-size:12.5px;color:var(--ink-2);transition:background .2s}
+.wx-row:hover{background:var(--accent-soft)}
+.wx-m{font-weight:600;display:inline-flex;align-items:baseline;gap:6px}
+.wx-uni{font-size:9.5px;color:var(--faint);font-weight:500;letter-spacing:.2px}
+.wx-min{color:var(--info);font-family:var(--mono);font-size:12px}
+.wx-sub{display:block;font-size:10px;color:var(--faint);font-weight:400;margin-top:2px}
+.wx-max{color:var(--ok);font-family:var(--mono);font-size:12px}
+.wx-daily{display:flex;align-items:center;gap:8px;margin:12px 16px 14px;padding:9px 12px;border-radius:10px;background:var(--ok-soft);color:var(--ok);font-size:11px;font-weight:600}
+.wx-daily .dot-l{width:6px;height:6px;background:var(--ok)}
+
 /* ============ S16 supervisors handover ============ */
 .hv-head{display:grid;grid-template-columns:.55fr .85fr .85fr 1.2fr;gap:8px;padding:11px 16px;background:var(--surface-3);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.3px;border-bottom:1px solid var(--border)}
 .hv-row{display:grid;grid-template-columns:.55fr .85fr .85fr 1.2fr;gap:8px;padding:11px 16px;border-top:1px solid var(--border);align-items:center;font-size:12.5px;color:var(--ink-2);transition:background .2s}
@@ -930,10 +943,56 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S7 MISSION ================= -->
+<!-- ================= S7 WEATHER ================= -->
 <section class="s" id="s07">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">06</span><span class="s-eyebrow" data-ar="نواة الاستجابة · دورة حياة المهمة" data-en="The core of response · a mission's lifecycle">نواة الاستجابة · دورة حياة المهمة</span></div>
+    <div class="s-head rv"><span class="s-no">06</span><span class="s-eyebrow" data-ar="توقعات الورديات · كل محافظة تُقرأ وحدها" data-en="Shift weather · every governorate read on its own">توقعات الورديات · كل محافظة تُقرأ وحدها</span></div>
+    <div class="s-body" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr)">
+      <div class="tx">
+        <h1 class="title rv" style="--d:.1s" data-ar="ثلاث ورديات، ستة مقاييس، <b>كل محافظة تُقرأ وحدها</b>." data-en="Three shifts, six metrics, <b>every governorate read on its own</b>.">ثلاث ورديات، ستة مقاييس، <b>كل محافظة تُقرأ وحدها</b>.</h1>
+        <p class="lead rv" data-step="1" style="--d:.2s" data-ar="لكل يوم وكل وردية تُدوَّن توقعات ستة مقاييس لكل محافظة — من الصغرى إلى العظمى — فتتجمع تلقائياً في قراءة يومية واحدة جاهزة للعرض والتصدير." data-en="For each day and each shift, six forecast metrics are recorded per governorate — from min to max — then auto-aggregated into a single daily read, ready to view and export.">لكل يوم وكل وردية تُدوَّن توقعات ستة مقاييس لكل محافظة — من الصغرى إلى العظمى — فتتجمع تلقائياً في قراءة يومية واحدة جاهزة للعرض والتصدير.</p>
+        <div class="pill-row rv" data-step="1" style="--d:.3s">
+          <span class="pill gac"><span class="dot-l"></span><span data-ar="وردية الصباح · 08:00 ص - 04:00 م" data-en="Morning shift · 08:00 AM - 04:00 PM">وردية الصباح · 08:00 ص - 04:00 م</span></span>
+          <span class="pill gai"><span class="dot-l"></span><span data-ar="وردية المساء · 04:00 م - 12:00 ص" data-en="Evening shift · 04:00 PM - 12:00 AM">وردية المساء · 04:00 م - 12:00 ص</span></span>
+          <span class="pill ginfo"><span class="dot-l"></span><span data-ar="وردية الليل · 12:00 ص - 08:00 ص" data-en="Night shift · 12:00 AM - 08:00 AM">وردية الليل · 12:00 ص - 08:00 ص</span></span>
+        </div>
+        <div class="led-row rv" data-step="2" style="--d:.3s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M3 4h18v12H3z"/><path d="M8 20h8M12 16v4"/><path d="M8 8h8M8 12h5"/></svg></span><div><div class="led-t" data-ar="قراءة يومية مجمّعة تلقائياً" data-en="Auto-aggregated daily read">قراءة يومية مجمّعة تلقائياً</div><div class="led-d" data-ar="من الورديات الثلاث لكل محافظة — تُبرز المحافظة صاحبة عظمى كل مقياس وصغراه، عرضٌ بلا تعديل." data-en="From the three shifts per governorate — surfaces each metric's max and min governorate, read-only.">من الورديات الثلاث لكل محافظة — تُبرز المحافظة صاحبة عظمى كل مقياس وصغراه، عرضٌ بلا تعديل.</div></div></div>
+        <div class="led-row v2 rv" data-step="2" style="--d:.4s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 22a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/><path d="M9 12l2 2 4-4"/></svg></span><div><div class="led-t" data-ar="إدخال داخلي لأدوار الأوبريشن فما فوق" data-en="Internal entry for Operation roles and above">إدخال داخلي لأدوار الأوبريشن فما فوق</div><div class="led-d" data-ar="النطاق يتبع صلاحيات الدور ومحافظة/فرع المستخدم، وكل حفظٍ يُسجَّل في سجل النظام." data-en="Scope follows role permissions and the user's governorate/branch; every save is written to the audit log.">النطاق يتبع صلاحيات الدور ومحافظة/فرع المستخدم، وكل حفظٍ يُسجَّل في سجل النظام.</div></div></div>
+        <div class="pill-row rv" data-step="3" style="--d:.45s">
+          <span class="pill gac"><span class="dot-l"></span><span data-ar="تصدير Excel — الطقس اليومي" data-en="Excel export — daily weather">تصدير Excel — الطقس اليومي</span></span>
+          <span class="pill gdata"><span class="dot-l"></span><span data-ar="مسح الكل بتأكيد مشفّر" data-en="clear-all with code confirmation">مسح الكل بتأكيد مشفّر</span></span>
+          <span class="pill gok"><span class="dot-l"></span><span data-ar="جامع أثر · entity weather" data-en="audit trail · entity weather">جامع أثر · entity weather</span></span>
+        </div>
+      </div>
+      <div>
+        <div class="panel rv" data-step="2" style="--d:.3s">
+          <div class="panel-h"><span class="panel-tt"><span class="live-dot ac"></span><span data-ar="الطقس اليومي · لقطة الورديات" data-en="Daily weather · the shift snapshot">الطقس اليومي · لقطة الورديات</span></span><span class="live-tag"><span class="live-dot"></span><span class="blink" data-ar="تلقائي" data-en="AUTO">تلقائي</span></span></div>
+          <div style="padding:14px 16px 10px">
+            <div class="wx-grid">
+              <div class="wx-head"><span data-ar="المقياس" data-en="Metric">المقياس</span><span data-ar="الصغرى" data-en="Min">الصغرى</span><span data-ar="العظمى" data-en="Max">العظمى</span></div>
+              <div class="wx-row"><span class="wx-m"><span data-ar="درجة الحرارة" data-en="Temperature">درجة الحرارة</span><span class="wx-uni">°C</span></span><span class="wx-min">14</span><span class="wx-max">32</span></div>
+              <div class="wx-row"><span class="wx-m"><span data-ar="سرعة الرياح" data-en="Wind speed">سرعة الرياح</span><span class="wx-uni">كم/س</span></span><span class="wx-min">8</span><span class="wx-max">34</span></div>
+              <div class="wx-row"><span class="wx-m"><span data-ar="الأمطار" data-en="Rain">الأمطار</span><span class="wx-uni">مم</span></span><span class="wx-min">0</span><span class="wx-max">6</span></div>
+              <div class="wx-row"><span class="wx-m"><span data-ar="الرطوبة" data-en="Humidity">الرطوبة</span><span class="wx-uni">%</span></span><span class="wx-min">28</span><span class="wx-max">82</span></div>
+              <div class="wx-row"><span class="wx-m"><span data-ar="الغيوم" data-en="Clouds">الغيوم</span><span class="wx-uni">%</span></span><span class="wx-min">12</span><span class="wx-max">64</span></div>
+              <div class="wx-row"><span class="wx-m"><span data-ar="جودة الهواء/الغبار" data-en="Air quality / dust">جودة الهواء/الغبار</span></span><span class="wx-min">42</span><span class="wx-max">118</span></div>
+            </div>
+            <div class="wx-daily"><span class="dot-l"></span><span data-ar="عظمى كل مقياس وصغراه عبر المحافظات — تُقرأ في أي وقت دون انتظار" data-en="each metric's max and min across governorates — readable anytime, no waiting">عظمى كل مقياس وصغراه عبر المحافظات — تُقرأ في أي وقت دون انتظار</span></div>
+          </div>
+        </div>
+        <div class="demo-note rv" data-step="3" style="--d:.5s">
+          <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>
+          <span data-ar="قيم توضيحية للعرض — تعكس حقول وحدة الطقس الفعلية (تاريخ · وردية · محافظة · 6 مقاييس)." data-en="Illustrative values — mirror the real weather unit fields (date · shift · governorate · 6 metrics).">قيم توضيحية للعرض — تعكس حقول وحدة الطقس الفعلية (تاريخ · وردية · محافظة · 6 مقاييس).</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S8 MISSION ================= -->
+<section class="s" id="s08">
+  <div class="in">
+    <div class="s-head rv"><span class="s-no">07</span><span class="s-eyebrow" data-ar="نواة الاستجابة · دورة حياة المهمة" data-en="The core of response · a mission's lifecycle">نواة الاستجابة · دورة حياة المهمة</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,1.1fr) minmax(0,.85fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-ar="مهمة واحدة، <b>مسارها كاملٌ أمامك</b>." data-en="One mission, its path <b>fully traced</b>.">مهمة واحدة، <b>مسارها كاملٌ أمامك</b>.</h1>
@@ -942,6 +1001,8 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
           <span class="pill gac"><span class="dot-l"></span><span data-ar="معرّف فريد: #MSN-250905-143045" data-en="unique ID: #MSN-250905-143045">معرّف فريد: #MSN-250905-143045</span></span>
           <span class="pill gdata"><span class="dot-l"></span><span data-ar="منع الازدواج بمفتاح تكليف" data-en="no double commitment — idempotency key">منع الازدواج بمفتاح تكليف</span></span>
           <span class="pill gok"><span class="dot-l"></span><span data-ar="سجلّ تغيير كامل" data-en="full change history">سجلّ تغيير كامل</span></span>
+          <span class="pill gai"><span class="dot-l"></span><span data-ar="محرّك موحّد · مسار تدريجي (بلا خط حتى متعدد الأيام)" data-en="unified engine · progressive route (none → multi-day)">محرّك موحّد · مسار تدريجي (بلا خط حتى متعدد الأيام)</span></span>
+          <span class="pill ginfo"><span class="dot-l"></span><span data-ar="بثّ لحظي لفِرق الميدان (realtime_events)" data-en="realtime feed to field teams (realtime_events)">بثّ لحظي لفِرق الميدان (realtime_events)</span></span>
         </div>
         <div class="lifecycle rv" data-step="2" style="--d:.35s">
           <div class="lc-tt"><svg class="ico" style="width:16px;height:16px;color:var(--accent)" viewBox="0 0 24 24"><path d="M3 4h18M3 4v13a1 1 0 0 0 1 1h7"/><path d="M14 18 20 12h-9M14 18q0 2 6 2"/></svg><span data-ar="مسار الحياة" data-en="The lifecycle">مسار الحياة</span></div>
@@ -984,10 +1045,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S8 WORKFLOW ================= -->
-<section class="s" id="s08">
+<!-- ================= S9 WORKFLOW ================= -->
+<section class="s" id="s09">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">07</span><span class="s-eyebrow" data-ar="سلطة موزّعة · انتقال كل دور مدوّن" data-en="Distributed authority · every hand-off recorded">سلطة موزّعة · انتقال كل دور مدوّن</span></div>
+    <div class="s-head rv"><span class="s-no">08</span><span class="s-eyebrow" data-ar="سلطة موزّعة · انتقال كل دور مدوّن" data-en="Distributed authority · every hand-off recorded">سلطة موزّعة · انتقال كل دور مدوّن</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,.9fr) minmax(0,1.15fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-ar="من المسودة إلى الأرشيف، <b>لا انتقال بلا سبب</b>." data-en="From draft to archive, <b>every move</b> documented.">من المسودة إلى الأرشيف، <b>لا انتقال بلا سبب</b>.</h1>
@@ -1017,10 +1078,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
       </div>
     </div>
   </div>
-</section><!-- ================= S9 VOLUNTEERS ================= -->
-<section class="s" id="s09">
+</section><!-- ================= S10 VOLUNTEERS ================= -->
+<section class="s" id="s10">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">08</span><span class="s-eyebrow" data-en="Field Presence · Who is deployed, who is ready" data-ar="الحضور الميداني · من في الميدان، ومن جاهز">الحضور الميداني · من في الميدان، ومن جاهز</span></div>
+    <div class="s-head rv"><span class="s-no">09</span><span class="s-eyebrow" data-en="Field Presence · Who is deployed, who is ready" data-ar="الحضور الميداني · من في الميدان، ومن جاهز">الحضور الميداني · من في الميدان، ومن جاهز</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-en="We know <b>who's deployed</b>, and <b>who's ready</b>." data-ar="نعرف <b>مَن في الميدان</b>، ومَن جاهز <b>للانطلاق</b>.">نعرف <b>مَن في الميدان</b>، ومَن جاهز <b>للانطلاق</b>.</h1>
@@ -1050,10 +1111,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S10 AI RADAR ================= -->
-<section class="s" id="s10">
+<!-- ================= S11 AI RADAR ================= -->
+<section class="s" id="s11">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">09</span><span class="s-eyebrow" data-en="AI Radar · An unblinking eye across every source" data-ar="الرادار الذكي · عين لا تهدأ فوق المصادر">الرادار الذكي · عين لا تهدأ فوق المصادر</span></div>
+    <div class="s-head rv"><span class="s-no">10</span><span class="s-eyebrow" data-en="AI Radar · An unblinking eye across every source" data-ar="الرادار الذكي · عين لا تهدأ فوق المصادر">الرادار الذكي · عين لا تهدأ فوق المصادر</span></div>
     <div class="s-body">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-en="It reads the news, <b>and sees the threat</b>." data-ar="يقرأ الأخبار، <b>فيفهم ما الذي يهدّد</b>.">يقرأ الأخبار، <b>فيفهم ما الذي يهدّد</b>.</h1>
@@ -1091,10 +1152,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S11 LOCAL + GLOBAL MONITORING ================= -->
-<section class="s" id="s11">
+<!-- ================= S12 LOCAL + GLOBAL MONITORING ================= -->
+<section class="s" id="s12">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">10</span><span class="s-eyebrow" data-en="Local &amp; Global Monitoring · Four windows on the world" data-ar="رصد محلي وعالمي · أربع نوافذ على العالم">رصد محلي وعالمي · أربع نوافذ على العالم</span></div>
+    <div class="s-head rv"><span class="s-no">11</span><span class="s-eyebrow" data-en="Local &amp; Global Monitoring · Four windows on the world" data-ar="رصد محلي وعالمي · أربع نوافذ على العالم">رصد محلي وعالمي · أربع نوافذ على العالم</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-en="A tremor anywhere, <b>never slips by</b>." data-ar="اهتزازٌ في أي مكانٍ، <b>لا يغيب عن الغرفة</b>.">اهتزازٌ في أي مكانٍ، <b>لا يغيب عن الغرفة</b>.</h1>
@@ -1138,10 +1199,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S12 MAP ================= -->
-<section class="s" id="s12">
+<!-- ================= S13 MAP ================= -->
+<section class="s" id="s13">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">11</span><span class="s-eyebrow" data-en="Living Geography · Branch network on a single map" data-ar="الجغرافيا الحية · شبكة الأفرع على خريطة واحدة">الجغرافيا الحية · شبكة الأفرع على خريطة واحدة</span></div>
+    <div class="s-head rv"><span class="s-no">12</span><span class="s-eyebrow" data-en="Living Geography · Branch network on a single map" data-ar="الجغرافيا الحية · شبكة الأفرع على خريطة واحدة">الجغرافيا الحية · شبكة الأفرع على خريطة واحدة</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-en="A map <b>that moves</b> with the pulse of the field." data-ar="خريطة <b>تتحرك</b> مع نبض الميدان.">خريطة <b>تتحرك</b> مع نبض الميدان.</h1>
@@ -1197,10 +1258,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S13 INVENTORY ================= -->
-<section class="s" id="s13">
+<!-- ================= S14 INVENTORY ================= -->
+<section class="s" id="s14">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">12</span><span class="s-eyebrow" data-en="Logistical Readiness · Capability declared in numbers" data-ar="الجاهزية اللوجستية · مقدرة معلنة بالعدد">الجاهزية اللوجستية · مقدرة معلنة بالعدد</span></div>
+    <div class="s-head rv"><span class="s-no">13</span><span class="s-eyebrow" data-en="Logistical Readiness · Capability declared in numbers" data-ar="الجاهزية اللوجستية · مقدرة معلنة بالعدد">الجاهزية اللوجستية · مقدرة معلنة بالعدد</span></div>
     <div class="s-body">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-en="Readiness declared <b>in numbers</b>, not in drawers." data-ar="جاهزية معلنة <b>بالرقم</b>، لا أرقامٌ في الأدراج.">جاهزية معلنة <b>بالرقم</b>، لا أرقامٌ في الأدراج.</h1>
@@ -1232,10 +1293,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S14 REALTIME ENGINE ================= -->
-<section class="s" id="s14">
+<!-- ================= S15 REALTIME ENGINE ================= -->
+<section class="s" id="s15">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">13</span><span class="s-eyebrow" data-en="Realtime Engine · Updates without waiting" data-ar="محرّك الزمن الحقيقي · تحديثٌ بلا انتظار">محرّك الزمن الحقيقي · تحديثٌ بلا انتظار</span></div>
+    <div class="s-head rv"><span class="s-no">14</span><span class="s-eyebrow" data-en="Realtime Engine · Updates without waiting" data-ar="محرّك الزمن الحقيقي · تحديثٌ بلا انتظار">محرّك الزمن الحقيقي · تحديثٌ بلا انتظار</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-en="Updates that <b>flow</b>, not reloads." data-ar="تحديثٌ <b>متواصل</b>، لا إعادةِ تحميل.">تحديثٌ <b>متواصل</b>، لا إعادةِ تحميل.</h1>
@@ -1266,10 +1327,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S15 RBAC ================= -->
-<section class="s" id="s15">
+<!-- ================= S16 RBAC ================= -->
+<section class="s" id="s16">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">14</span><span class="s-eyebrow" data-en="Digital Perimeter · Permissions declared and enforced" data-ar="السياج الرقمي · صلاحيات معلنة ومهندَمة">السياج الرقمي · صلاحيات معلنة ومهندَمة</span></div>
+    <div class="s-head rv"><span class="s-no">15</span><span class="s-eyebrow" data-en="Digital Perimeter · Permissions declared and enforced" data-ar="السياج الرقمي · صلاحيات معلنة ومهندَمة">السياج الرقمي · صلاحيات معلنة ومهندَمة</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-en="Every key knows <b>its owner</b>, and <b>its limits</b>." data-ar="كل مفتاح يعرف <b>صاحبه</b>، و<b>حدوده</b>.">كل مفتاح يعرف <b>صاحبه</b>، و<b>حدوده</b>.</h1>
@@ -1302,10 +1363,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S16 SUPERVISORS HANDOVER ================= -->
-<section class="s" id="s16">
+<!-- ================= S17 SUPERVISORS HANDOVER ================= -->
+<section class="s" id="s17">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">15</span><span class="s-eyebrow" data-en="Supervisors Handover · 24/7 operational continuity" data-ar="تسليم وتسلم المشرفين · استمرارية تشغيل دون انقطاع">تسليم وتسلم المشرفين · استمرارية تشغيل دون انقطاع</span></div>
+    <div class="s-head rv"><span class="s-no">16</span><span class="s-eyebrow" data-en="Supervisors Handover · 24/7 operational continuity" data-ar="تسليم وتسلم المشرفين · استمرارية تشغيل دون انقطاع">تسليم وتسلم المشرفين · استمرارية تشغيل دون انقطاع</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-en="No shift starts from <b>zero</b> — it resumes <b>where the last one stopped</b>." data-ar="لا تبدأ ورديةٌ من <b>الصفر</b>… بل من <b>حيث توقّف</b> زميلك.">لا تبدأ ورديةٌ من <b>الصفر</b>… بل من <b>حيث توقّف</b> زميلك.</h1>
@@ -1355,10 +1416,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     </div>
   </div>
 </section>
-<!-- ================= S17 AUDIT LOG ================= -->
-<section class="s" id="s17">
+<!-- ================= S18 AUDIT LOG ================= -->
+<section class="s" id="s18">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">16</span><span class="s-eyebrow" data-en="Documented Trace · An immutable log" data-ar="الأثر الموثّق · سجلٌّ لا يُمسح">الأثر الموثّق · سجلٌّ لا يُمسح</span></div>
+    <div class="s-head rv"><span class="s-no">17</span><span class="s-eyebrow" data-en="Documented Trace · An immutable log" data-ar="الأثر الموثّق · سجلٌّ لا يُمسح">الأثر الموثّق · سجلٌّ لا يُمسح</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-en="Every click <b>is recorded</b>. Who did what, and when." data-ar="كل نقرة <b>تُحفَظ</b>. مَن فعل ماذا، ومتى.">كل نقرة <b>تُحفَظ</b>. مَن فعل ماذا، ومتى.</h1>
@@ -1399,10 +1460,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S18 ARCHITECTURE ================= -->
-<section class="s" id="s18">
+<!-- ================= S19 ARCHITECTURE ================= -->
+<section class="s" id="s19">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">17</span><span class="s-eyebrow" data-en="The Engine · Three layers that never break" data-ar="المحرّك · ثلاث طبقات لا تنكسر">المحرّك · ثلاث طبقات لا تنكسر</span></div>
+    <div class="s-head rv"><span class="s-no">18</span><span class="s-eyebrow" data-en="The Engine · Three layers that never break" data-ar="المحرّك · ثلاث طبقات لا تنكسر">المحرّك · ثلاث طبقات لا تنكسر</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-en="Technical pillars, <b>built to upgrade</b>." data-ar="أعمدة تقنية، <b>وبنيان جاهز للترقية</b>.">أعمدة تقنية، <b>وبنيان جاهز للترقية</b>.</h1>
@@ -1436,10 +1497,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S19 FUTURE ================= -->
-<section class="s" id="s19">
+<!-- ================= S20 FUTURE ================= -->
+<section class="s" id="s20">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">18</span><span class="s-eyebrow" data-en="Open Horizon · Infrastructure ready for what comes next" data-ar="المدى المفتوح · بنية أُعدّت لما هو قادم">المدى المفتوح · بنية أُعدّت لما هو قادم</span></div>
+    <div class="s-head rv"><span class="s-no">19</span><span class="s-eyebrow" data-en="Open Horizon · Infrastructure ready for what comes next" data-ar="المدى المفتوح · بنية أُعدّت لما هو قادم">المدى المفتوح · بنية أُعدّت لما هو قادم</span></div>
     <div class="s-body">
       <div class="tx" style="grid-column:1/-1;text-align:center">
         <h1 class="title rv" style="--d:.1s" data-en="An infrastructure <b>built for what comes next</b>." data-ar="بنيةٌ أُعدّت <b>لما هو قادم</b>.">بنيةٌ أُعدّت <b>لما هو قادم</b>.</h1>
@@ -1467,8 +1528,8 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S20 CLOSING ================= -->
-<section class="s" id="s20">
+<!-- ================= S21 CLOSING ================= -->
+<section class="s" id="s21">
   <div class="in" style="width:min(1120px,94vw)">
     <div class="cover" style="padding-top:8px">
       <div class="cover-eyebrow rv" style="--d:.1s" data-ar="مركز عمليات الطوارئ · آمن · مباشر" data-en="EOC · SECURE · LIVE">EOC · SECURE · LIVE</div>
@@ -1564,21 +1625,22 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
       'الصفحة 01 · التحدي',
       'الصفحة 02 · الحل',
       'الصفحة 03 · الوحدات',
-      'الصفحة 04 · لوحة التقييد',
-      'الصفحة 05 · المهام',
-      'الصفحة 06 · سير العمل',
-      'الصفحة 07 · المتطوعون',
-      'الصفحة 08 · الرادار الذكي',
-      'الصفحة 09 · الكوارث',
-      'الصفحة 10 · الخريطة',
-      'الصفحة 11 · المخزون',
-      'الصفحة 12 · المحرّك اللحظي',
-      'الصفحة 13 · الأمان',
-      'الصفحة 14 · التدقيق',
-      'الصفحة 15 · تسليم وتسلم المشرفين',
-      'الصفحة 16 · الأثر الموثّق',
-      'الصفحة 17 · المحرّك',
-      'الصفحة 18 · المدى المفتوح',
+      'الصفحة 04 · لوحة القيادة',
+      'الصفحة 05 · استمرارية العمليات',
+      'الصفحة 06 · الطقس',
+      'الصفحة 07 · المهام',
+      'الصفحة 08 · سير العمل',
+      'الصفحة 09 · الحضور الميداني',
+      'الصفحة 10 · الرادار الذكي',
+      'الصفحة 11 · الكوارث',
+      'الصفحة 12 · الخريطة',
+      'الصفحة 13 · المخزون',
+      'الصفحة 14 · المحرّك اللحظي',
+      'الصفحة 15 · الأمان',
+      'الصفحة 16 · تسليم وتسلم المشرفين',
+      'الصفحة 17 · الأثر الموثّق',
+      'الصفحة 18 · المحرّك',
+      'الصفحة 19 · المدى المفتوح',
       'الخاتمة'
     ],
     en: [
@@ -1587,20 +1649,21 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
       'Page 02 · The Solution',
       'Page 03 · The Units',
       'Page 04 · Command Center',
-      'Page 05 · Missions',
-      'Page 06 · Workflow',
-      'Page 07 · Volunteers',
-      'Page 08 · AI Radar',
-      'Page 09 · Disasters',
-      'Page 10 · The Map',
-      'Page 11 · Inventory',
-      'Page 12 · Realtime Engine',
-      'Page 13 · Security',
-      'Page 14 · Audit Trail',
-      'Page 15 · Supervisors Handover',
-      'Page 16 · Documented Trace',
-      'Page 17 · The Engine',
-      'Page 18 · Open Horizon',
+      'Page 05 · Operational Continuity',
+      'Page 06 · Weather',
+      'Page 07 · Missions',
+      'Page 08 · Workflow',
+      'Page 09 · Field Presence',
+      'Page 10 · AI Radar',
+      'Page 11 · Disasters',
+      'Page 12 · The Map',
+      'Page 13 · Inventory',
+      'Page 14 · Realtime Engine',
+      'Page 15 · Security',
+      'Page 16 · Supervisors Handover',
+      'Page 17 · Documented Trace',
+      'Page 18 · The Engine',
+      'Page 19 · Open Horizon',
       'Closing'
     ]
   };
