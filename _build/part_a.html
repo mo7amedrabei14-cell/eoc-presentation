@@ -288,7 +288,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .feed-item .fx{color:var(--ink-2);font-weight:500}
 .dops{display:flex;flex-direction:column;gap:10px}
 .ops-chip{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 15px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);font-size:12.5px;color:var(--muted)}
-.ops-chip b{color:var(--ink-asist)}.ops-chip .bval{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.ops-chip b{color:var(--ink-2)}.ops-chip .bval{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--ink-2)}
 
 /* ============ S6 mobile field command ============ */
 .flows-cap{margin-top:20px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--ink-2)}
@@ -299,7 +299,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .flw.fa .frx{background:var(--accent)} .flw.fg .frx{background:var(--ok)} .flw.fy .frx{background:var(--data)}
 .flw.fi .frx{background:var(--info)} .flw.fp .frx{background:var(--ai)}
 .mob-stage{position:relative;display:grid;place-items:center;padding:26px 0 4px;min-height:492px}
-.mob-aura{position:absolute;top:50%;left:50%;width:min(380px,100%);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none}
+.mob-aura{position:absolute;top:50%;left:50%;width:min(380px,100%);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;overflow:hidden;pointer-events:none}
 .mob-aura .ar-base{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(199,0,0,.13);background:radial-gradient(circle,rgba(199,0,0,.05) 0,transparent 58%)}
 .mob-aura .ar-ring{position:absolute;border-radius:50%;border:1px solid rgba(199,0,0,.16)}
 .mob-aura .ar-ring.o1{inset:10%}.mob-aura .ar-ring.o2{inset:24%}.mob-aura .ar-ring.o3{inset:38%;border-color:rgba(199,0,0,.1)}
@@ -550,6 +550,64 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .wx-daily{display:flex;align-items:center;gap:8px;margin:12px 16px 14px;padding:9px 12px;border-radius:10px;background:var(--ok-soft);color:var(--ok);font-size:11px;font-weight:600}
 .wx-daily .dot-l{width:6px;height:6px;background:var(--ok)}
 
+/* ============ S8 weather intelligence (page 07) ============ */
+.wi-head{display:grid;grid-template-columns:.7fr 1.35fr 1fr;gap:8px;padding:11px 16px;background:var(--surface-3);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.3px;border-bottom:1px solid var(--border)}
+.wi-row{display:grid;grid-template-columns:.7fr 1.35fr 1fr;gap:8px;padding:10px 16px;border-top:1px solid var(--border);align-items:center;font-size:12.5px;color:var(--ink-2);transition:background .2s}
+.wi-row:hover{background:var(--accent-soft)}
+.wi-g{font-weight:600;display:inline-flex;align-items:center;gap:7px}
+.wi-g .dot-l{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.wi-read{font-size:11.5px;color:var(--muted);line-height:1.7}
+.wi-read b{font-family:var(--mono);font-size:12px;color:var(--ink-2);font-weight:600}
+.wi-anom{display:inline-block;font-size:10px;font-weight:600;border-radius:999px;padding:2px 8px;margin-inline-start:4px;border:1px solid var(--border);white-space:nowrap}
+.wi-anom.hi{color:var(--data);background:var(--data-soft);border-color:rgba(217,164,65,.28)}
+.wi-anom.ex{color:var(--accent);background:var(--accent-soft);border-color:rgba(199,0,0,.3)}
+.wi-anom.n{color:var(--ok);background:var(--ok-soft);border-color:rgba(22,168,107,.25)}
+.wi-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
+.wi-tag .dot-l{width:6px;height:6px;border-radius:50%;background:currentColor}
+.wi-tag.none{color:var(--ok);background:var(--ok-soft);border-color:rgba(22,168,107,.25)}
+.wi-tag.heat{color:var(--accent);background:var(--accent-soft);border-color:rgba(199,0,0,.3)}
+.wi-tag.rain{color:var(--info);background:var(--info-soft);border-color:rgba(90,162,255,.28)}
+.wi-tag.wind{color:var(--warn);background:var(--warn-soft);border-color:rgba(217,154,27,.28)}
+.wi-foot{display:flex;align-items:center;gap:8px;margin:12px 16px 14px;padding:9px 12px;border-radius:10px;background:var(--ai-soft);color:var(--ai);font-size:11px;font-weight:600}
+.wi-foot .dot-l{width:6px;height:6px;border-radius:50%;background:var(--ai);flex:none}
+/* decision chain: signal → forecast → analysis → risk → impact → decision */
+.chain-cap{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;color:var(--muted);margin-bottom:10px}
+.chain-cap .live-dot{width:7px;height:7px}
+.chain{display:flex;align-items:stretch}
+.chain-n{flex:1;min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:10px 9px;text-align:center;transition:border-color .2s,transform .2s var(--ease-out)}
+.chain-n:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+.chain-n b{display:block;font-family:var(--mono);font-size:9.5px;font-weight:600;color:var(--faint);letter-spacing:.6px;margin-bottom:5px}
+.chain-n span{display:block;font-size:11.5px;font-weight:600;color:var(--ink-2);line-height:1.5}
+.chain-n.ai b{color:var(--ai)}
+.chain-n.warn b{color:var(--warn)}
+.chain-n.hot{border-color:rgba(199,0,0,.3);background:linear-gradient(180deg,var(--accent-soft),var(--surface) 72%)}
+.chain-n.hot b{color:var(--accent)}
+.chain-n.hot span{color:var(--ink)}
+.chain-sep{flex:none;display:flex;align-items:center;padding:0 5px;color:var(--muted-2);font-family:var(--mono);font-size:12px}
+.chain-sep::before{content:"→"}
+:root[dir="rtl"] .chain-sep::before{content:"←"}
+/* this slide carries a full-width diagram: tighten its own vertical rhythm on desktop only,
+   so the mobile and short-viewport scroll rules below keep the standard top clearance */
+@media (min-width:961px) and (min-height:761px){
+  #s08 .in{margin-block:44px}
+  #s08 .s-body{row-gap:clamp(14px,2vw,26px)}
+}
+@media (max-width:960px){
+  .chain{flex-wrap:wrap;gap:7px}
+  .chain-n{flex:1 1 30%}
+  .chain-sep{display:none}
+}
+@media (max-width:640px){
+  .wi-head{display:none}
+  .wi-row{grid-template-columns:1fr;gap:6px;padding:12px 14px}
+  .chain-n{flex:1 1 46%}
+  /* long metric labels (e.g. جودة الهواء/الغبار) must be allowed to break, otherwise the 3-column
+     weather table keeps a wide min-content and gets clipped on phones */
+  .wx-m{flex-wrap:wrap;min-width:0}
+  .wx-m>span:first-child{overflow-wrap:anywhere}
+  .wx-row,.wx-head{padding-inline:12px}
+}
+
 /* ============ S16 supervisors handover ============ */
 .hv-head{display:grid;grid-template-columns:.55fr .85fr .85fr 1.2fr;gap:8px;padding:11px 16px;background:var(--surface-3);font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.3px;border-bottom:1px solid var(--border)}
 .hv-row{display:grid;grid-template-columns:.55fr .85fr .85fr 1.2fr;gap:8px;padding:11px 16px;border-top:1px solid var(--border);align-items:center;font-size:12.5px;color:var(--ink-2);transition:background .2s}
@@ -585,17 +643,20 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .no-motion .radar-sweep,.no-motion .rp,.no-motion .radar-rings,.no-motion .live-dot::after,.no-motion .blink,.no-motion .mp-pulse,.no-motion .nt:first-child{animation:none!important}
 @media (max-width:960px){
   .s-body{grid-template-columns:1fr!important;gap:22px}
-  .s{overflow-y:auto!important;overflow-x:hidden}
-  .in{margin-block:70px 40px}
+  /* flex-start + auto block margins: a slide that fits stays centred, while a taller-than-screen
+     slide starts at the top and can be scrolled from its first line (centred content hides it) */
+  .s{overflow-y:auto!important;overflow-x:hidden;align-items:flex-start}
+  .in{margin-block:auto;padding-block:70px 40px}
+  #topbar{background:linear-gradient(180deg,var(--bg) 62%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
   .cover .logos img{height:56px}
   .dash-kpis{grid-template-columns:repeat(2,1fr)}
   .mod-grid,.fut{grid-template-columns:1fr 1fr}
   #rail{display:none}
 }
 @media (max-height:760px){
-  .s{overflow-y:auto!important}
+  .s{overflow-y:auto!important;align-items:flex-start}
   h1.title{font-size:clamp(24px,3vw,34px)}
-  .in{margin-block:60px 40px}
+  .in{margin-block:auto;padding-block:60px 40px}
   .cover h1{font-size:clamp(28px,4vw,44px)}
 }
 </style>
@@ -989,10 +1050,67 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S8 MISSION ================= -->
+<!-- ================= S8 WEATHER INTELLIGENCE ================= -->
 <section class="s" id="s08">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">07</span><span class="s-eyebrow" data-ar="نواة الاستجابة · دورة حياة المهمة" data-en="The core of response · a mission's lifecycle">نواة الاستجابة · دورة حياة المهمة</span></div>
+    <div class="s-head rv"><span class="s-no">07</span><span class="s-eyebrow" data-ar="استخبارات الطقس اليومية · الرقم يصبح قراراً" data-en="Daily weather intelligence · the number becomes a decision">استخبارات الطقس اليومية · الرقم يصبح قراراً</span></div>
+    <div class="s-body" style="grid-template-columns:minmax(0,1fr) minmax(0,1.02fr)">
+      <div class="tx">
+        <h1 class="title rv" style="--d:.1s" data-ar="التوقعات تصف <b>ما سيحدث</b>؛ والاستخبارات تصف <b>ما يترتب عليه</b>." data-en="Forecast: <b>what will happen</b>. Intelligence: <b>what it means</b>.">التوقعات تصف <b>ما سيحدث</b>؛ والاستخبارات تصف <b>ما يترتب عليه</b>.</h1>
+        <p class="lead rv" data-step="1" style="--d:.2s" data-ar="الرقم نفسه يُقرأ مرتين: كما هو، وأمام خط مرجعي لثلاثين عاماً — فيُصنَّف شذوذاً محسوباً ويُختبر على عتبات معلنة، ثم يُترجم توصيات مراقبة لغرفة العمليات." data-en="Read twice: as it stands, and against a thirty-year baseline — classified into an anomaly, then turned into guidance for the room.">الرقم نفسه يُقرأ مرتين: كما هو، وأمام خط مرجعي لثلاثين عاماً — فيُصنَّف شذوذاً محسوباً ويُختبر على عتبات معلنة، ثم يُترجم توصيات مراقبة لغرفة العمليات.</p>
+        <div class="pill-row rv" data-step="1" style="--d:.3s">
+          <span class="pill ginfo"><span class="dot-l"></span><span data-ar="التوقعات: Open-Meteo Forecast" data-en="Forecast: Open-Meteo Forecast">التوقعات: Open-Meteo Forecast</span></span>
+          <span class="pill gai"><span class="dot-l"></span><span data-ar="الخط المرجعي: ERA5 · 1996 – 2026" data-en="Baseline: ERA5 · 1996 – 2026">الخط المرجعي: ERA5 · 1996 – 2026</span></span>
+        </div>
+        <div class="led-row rv" data-step="2" style="--d:.3s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20V7"/><path d="M2 20h20"/></svg></span><div><div class="led-t" data-ar="لا رقم بلا أصل" data-en="No number without a source">لا رقم بلا أصل</div><div class="led-d" data-ar="شذوذ على فواصل P10/P25/P75/P90 · تكرار من مشاهدات صالحة فعلاً · نافذة ±3 أيام بحد أدنى 20 مشاهدة." data-en="Anomalies on P10/P25/P75/P90 breaks · frequency from genuinely valid observations · ±3-day window, minimum 20 observations.">شذوذ على فواصل P10/P25/P75/P90 · تكرار من مشاهدات صالحة فعلاً · نافذة ±3 أيام بحد أدنى 20 مشاهدة.</div></div></div>
+        <div class="led-row v2 rv" data-step="2" style="--d:.4s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="4"/></svg></span><div><div class="led-t" data-ar="عتبات مخاطر معلنة قابلة للضبط" data-en="Declared, configurable hazard thresholds">عتبات مخاطر معلنة قابلة للضبط</div><div class="led-d" data-ar="حرارة ≥ 40° · صقيع ≤ 5° · أمطار ≥ 10 مم · رياح ≥ 40 كم/س (هبات ≥ 60) — قيم فنية، لا إنذارات رسمية." data-en="Heat ≥ 40° · cold ≤ 5° · rain ≥ 10 mm · wind ≥ 40 km/h (gusts ≥ 60) — technical values, not official warnings.">حرارة ≥ 40° · صقيع ≤ 5° · أمطار ≥ 10 مم · رياح ≥ 40 كم/س (هبات ≥ 60) — قيم فنية، لا إنذارات رسمية.</div></div></div>
+        <div class="pill-row rv" data-step="3" style="--d:.5s">
+          <span class="pill gac"><span class="dot-l"></span><span data-ar="تقرير Excel · 4 أوراق" data-en="Excel report · 4 sheets">تقرير Excel · 4 أوراق</span></span>
+          <span class="pill gdata"><span class="dot-l"></span><span data-ar="التشغيل — المالك" data-en="Run — owner only">التشغيل — المالك</span></span>
+          <span class="pill gok"><span class="dot-l"></span><span data-ar="سجل التشغيلات" data-en="Runs log">سجل التشغيلات</span></span>
+        </div>
+      </div>
+      <div>
+        <div class="panel rv" data-step="2" style="--d:.3s">
+          <div class="panel-h"><span class="panel-tt"><span class="live-dot ac"></span><span data-ar="تقييم المواقع · مخرجات التشغيل اليومي" data-en="Site assessments · today's run output">تقييم المواقع · مخرجات التشغيل اليومي</span></span><span class="live-tag"><span class="live-dot"></span><span class="blink" data-ar="تلقائي" data-en="AUTO">تلقائي</span></span></div>
+          <div style="padding:14px 16px 0">
+            <div class="wi-head"><span data-ar="الموقع" data-en="Site">الموقع</span><span data-ar="القراءة مقابل السجل" data-en="Reading vs. baseline">القراءة مقابل السجل</span><span data-ar="المؤشر المرصود" data-en="Observed signal">المؤشر المرصود</span></div>
+            <div class="wi-row"><span class="wi-g"><span class="dot-l"></span><span data-ar="القاهرة" data-en="Cairo">القاهرة</span></span><span class="wi-read"><b>39.2°</b> <span data-ar="حرارة عظمى" data-en="max temp">حرارة عظمى</span><span class="wi-anom hi" data-ar="أعلى من الطبيعي" data-en="above normal">أعلى من الطبيعي</span></span><span class="wi-tag none"><span class="dot-l"></span><span data-ar="بلا مؤشر" data-en="no signal">بلا مؤشر</span></span></div>
+            <div class="wi-row"><span class="wi-g"><span class="dot-l"></span><span data-ar="أسوان" data-en="Aswan">أسوان</span></span><span class="wi-read"><b>44.3°</b> <span data-ar="حرارة عظمى" data-en="max temp">حرارة عظمى</span><span class="wi-anom ex" data-ar="أعلى من النطاق" data-en="beyond range">أعلى من النطاق</span></span><span class="wi-tag heat"><span class="dot-l"></span><span data-ar="موجة حرارة ≥ 40°" data-en="heat ≥ 40°">موجة حرارة ≥ 40°</span></span></div>
+            <div class="wi-row"><span class="wi-g"><span class="dot-l"></span><span data-ar="الإسكندرية" data-en="Alexandria">الإسكندرية</span></span><span class="wi-read"><b>12.4 مم</b> <span data-ar="هطول" data-en="precipitation">هطول</span><span class="wi-anom n" data-ar="ضمن الطبيعي" data-en="within normal">ضمن الطبيعي</span></span><span class="wi-tag rain"><span class="dot-l"></span><span data-ar="أمطار غزيرة ≥ 10 مم" data-en="heavy rain ≥ 10 mm">أمطار غزيرة ≥ 10 مم</span></span></div>
+            <div class="wi-row"><span class="wi-g"><span class="dot-l"></span><span data-ar="البحر الأحمر" data-en="Red Sea">البحر الأحمر</span></span><span class="wi-read"><b>46 كم/س</b> <span data-ar="رياح قصوى" data-en="max wind">رياح قصوى</span><span class="wi-anom hi" data-ar="أعلى من الطبيعي" data-en="above normal">أعلى من الطبيعي</span></span><span class="wi-tag wind"><span class="dot-l"></span><span data-ar="رياح قوية ≥ 40 كم/س" data-en="strong wind ≥ 40 km/h">رياح قوية ≥ 40 كم/س</span></span></div>
+          </div>
+          <div class="wi-foot"><span class="dot-l"></span><span data-ar="التقييم التشغيلي مكتمل لكل المواقع · 27 موقعاً — مخرجات استرشادية لغرفة العمليات" data-en="Operational assessment complete for all sites · 27 locations — advisory output for the room">التقييم التشغيلي مكتمل لكل المواقع · 27 موقعاً — مخرجات استرشادية لغرفة العمليات</span></div>
+        </div>
+        <div class="demo-note rv" data-step="3" style="--d:.55s">
+          <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>
+          <span data-ar="قيم توضيحية للعرض — تعكس حقول المخرجات الفعلية: تشغيل · لقطة توقع · إحصاءات الخط المرجعي · تكرارات العتبات · تقييم ذكاء اصطناعي." data-en="Illustrative values — mirror the real output fields: run · forecast snapshot · baseline statistics · threshold frequencies · AI assessment.">قيم توضيحية للعرض — تعكس حقول المخرجات الفعلية: تشغيل · لقطة توقع · إحصاءات الخط المرجعي · تكرارات العتبات · تقييم ذكاء اصطناعي.</span>
+        </div>
+      </div>
+      <div class="rv" data-step="3" style="--d:.6s;grid-column:1/-1">
+        <div class="chain-cap"><span class="live-dot ac"></span><span data-ar="مسار الاستخبارات: من الإشارة إلى القرار" data-en="The intelligence path: from signal to decision">مسار الاستخبارات: من الإشارة إلى القرار</span></div>
+        <div class="chain">
+          <div class="chain-n"><b>01</b><span data-ar="البيانات الخام" data-en="Raw data">البيانات الخام</span></div>
+          <span class="chain-sep"></span>
+          <div class="chain-n"><b>02</b><span data-ar="التوقعات" data-en="Forecast">التوقعات</span></div>
+          <span class="chain-sep"></span>
+          <div class="chain-n ai"><b>03</b><span data-ar="التحليل الآلي" data-en="Automated analysis">التحليل الآلي</span></div>
+          <span class="chain-sep"></span>
+          <div class="chain-n warn"><b>04</b><span data-ar="تقييم المخاطر" data-en="Risk assessment">تقييم المخاطر</span></div>
+          <span class="chain-sep"></span>
+          <div class="chain-n"><b>05</b><span data-ar="الأثر التشغيلي" data-en="Operational impact">الأثر التشغيلي</span></div>
+          <span class="chain-sep"></span>
+          <div class="chain-n hot"><b>06</b><span data-ar="قرار الغرفة" data-en="Room decision">قرار الغرفة</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= S9 MISSION ================= -->
+<section class="s" id="s09">
+  <div class="in">
+    <div class="s-head rv"><span class="s-no">08</span><span class="s-eyebrow" data-ar="نواة الاستجابة · دورة حياة المهمة" data-en="The core of response · a mission's lifecycle">نواة الاستجابة · دورة حياة المهمة</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,1.1fr) minmax(0,.85fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-ar="مهمة واحدة، <b>مسارها كاملٌ أمامك</b>." data-en="One mission, its path <b>fully traced</b>.">مهمة واحدة، <b>مسارها كاملٌ أمامك</b>.</h1>
@@ -1045,10 +1163,10 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
-<!-- ================= S9 WORKFLOW ================= -->
-<section class="s" id="s09">
+<!-- ================= S10 WORKFLOW ================= -->
+<section class="s" id="s10">
   <div class="in">
-    <div class="s-head rv"><span class="s-no">08</span><span class="s-eyebrow" data-ar="سلطة موزّعة · انتقال كل دور مدوّن" data-en="Distributed authority · every hand-off recorded">سلطة موزّعة · انتقال كل دور مدوّن</span></div>
+    <div class="s-head rv"><span class="s-no">09</span><span class="s-eyebrow" data-ar="سلطة موزّعة · انتقال كل دور مدوّن" data-en="Distributed authority · every hand-off recorded">سلطة موزّعة · انتقال كل دور مدوّن</span></div>
     <div class="s-body" style="grid-template-columns:minmax(0,.9fr) minmax(0,1.15fr)">
       <div class="tx">
         <h1 class="title rv" style="--d:.1s" data-ar="من المسودة إلى الأرشيف، <b>لا انتقال بلا سبب</b>." data-en="From draft to archive, <b>every move</b> documented.">من المسودة إلى الأرشيف، <b>لا انتقال بلا سبب</b>.</h1>
