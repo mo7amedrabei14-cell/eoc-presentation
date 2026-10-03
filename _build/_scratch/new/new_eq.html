@@ -1,0 +1,70 @@
+<section class="s" id="s09">
+  <div class="in">
+    <div class="s-head rv"><span class="s-no">07</span><span class="s-eyebrow" data-ar="استخبارات الزلازل · مصدران يعملان معاً" data-en="Earthquake intelligence · two feeds running together">استخبارات الزلازل · مصدران يعملان معاً</span></div>
+    <div class="s-body" style="grid-template-columns:minmax(0,1fr) minmax(0,1.02fr)">
+      <div class="tx">
+        <h1 class="title rv" style="--d:.1s" data-ar="زلزال واحد <b>يُكتشف من مصدرين</b>، ويُحسب خطورته مرة واحدة." data-en="One quake, <b>detected by two feeds</b>, scored exactly once.">زلزال واحد <b>يُكتشف من مصدرين</b>، ويُحسب خطورته مرة واحدة.</h1>
+        <p class="lead rv" style="--d:.2s" data-ar="EMSC يدفع الحدث لحظة وقوعه عبر قناة مفتوحة، وUSGS يُستطلاع كل 30 ثانية — فيلتقيان في نواة استيعاب واحدة تدمج المتشابه، وتحسب الخطورة من الشدة والقرب والشذوذ التاريخي، قبل أن يصل أيٌّ منهما إلى الغرفة." data-en="EMSC pushes the event the moment it happens over an open channel, and USGS is polled every 30 seconds — they meet in a single ingestion core that merges duplicates, scores risk from magnitude, proximity, and historical anomaly, before either reaches the room.">EMSC يدفع الحدث لحظة وقوعه عبر قناة مفتوحة، وUSGS يُستطلاع كل 30 ثانية — فيلتقيان في نواة استيعاب واحدة تدمج المتشابه، وتحسب الخطورة من الشدة والقرب والشذوذ التاريخي، قبل أن يصل أيٌّ منهما إلى الغرفة.</p>
+        <div class="pill-row rv" style="--d:.3s">
+          <span class="pill gac"><span class="dot-l"></span><span data-ar="EMSC · WebSocket فوري" data-en="EMSC · live WebSocket">EMSC · WebSocket فوري</span></span>
+          <span class="pill ginfo"><span class="dot-l"></span><span data-ar="USGS · استطلاع كل 30 ثانية" data-en="USGS · polled every 30s">USGS · استطلاع كل 30 ثانية</span></span>
+          <span class="pill gok"><span class="dot-l"></span><span data-ar="نواة استيعاب واحدة" data-en="one ingestion core">نواة استيعاب واحدة</span></span>
+        </div>
+        <div class="led-row rv" style="--d:.35s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span><div><div class="led-t" data-ar="دمج هندسي بين المصدرين" data-en="Geometric cross-source merge">دمج هندسي بين المصدرين</div><div class="led-d" data-ar="يُعتبر الحدثان واحداً عند تقاربهما: ±5 دقائق، 150 كم، وفارق شدّة 0.8 — فلا يظهر الزلزال الواحد مرتين." data-en="Two events are one when they converge: ±5 minutes, 150 km, and 0.8 magnitude — so one quake never appears twice.">يُعتبر الحدثان واحداً عند تقاربهما: ±5 دقائق، 150 كم، وفارق شدّة 0.8 — فلا يظهر الزلزال الواحد مرتين.</div></div></div>
+        <div class="led-row v2 rv" style="--d:.4s"><span class="ln"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg></span><div><div class="led-t" data-ar="الكتالوج التاريخي يقف إلى جانب الحدث" data-en="The historical catalog stands beside the event">الكتالوج التاريخي يقف إلى جانب الحدث</div><div class="led-d" data-ar="30 عاماً من سجلات العالم كله (شدة ≥ 4.5 ضمن 500 كم) تُقارَن بالحدث الحاضر في نافذة ±15 يوماً — فيعرف الشذوذ من الرقم وحده." data-en="Thirty years of world records (M ≥ 4.5 within 500 km) compared against the present event over a ±15-day window — so the anomaly is known from the number alone.">30 عاماً من سجلات العالم كله (شدة ≥ 4.5 ضمن 500 كم) تُقارَن بالحدث الحاضر في نافذة ±15 يوماً — فيعرف الشذوذ من الرقم وحده.</div></div></div>
+      </div>
+      <div>
+        <div class="eq-sources rv" style="--d:.3s">
+          <div class="eq-src emsc">
+            <div class="eq-nm">EMSC</div>
+            <div class="eq-how" data-ar="قناة WebSocket مفتوحة تصدّ الحدث لحظة وقوعه. أسرع من الاستطلاع، ويصل إلى الغرفة قبل أي دورة." data-en="An open WebSocket channel emits the event the moment it happens. Faster than polling — it lands in the room before any cycle.">قناة WebSocket مفتوحة تصدّ الحدث لحظة وقوعه. أسرع من الاستطلاع، ويصل إلى الغرفة قبل أي دورة.</div>
+            <div class="eq-tick"><span class="live-dot ac"></span><span data-ar="دفع لحظي · بلا استطلاع" data-en="live push · no polling">دفع لحظي · بلا استطلاع</span></div>
+          </div>
+          <div class="eq-src">
+            <div class="eq-nm">USGS</div>
+            <div class="eq-how" data-ar="استطلاع دوري كل 30 ثانية من شبكة USGS الرسمية. يغطّي ما لا يغطّيه البث، ويصلح أساساً للتحقق والمقارنة." data-en="A poll every 30 seconds from the official USGS network. Covers what the push misses, and grounds verification and comparison.">استطلاع دوري كل 30 ثانية من شبكة USGS الرسمية. يغطّي ما لا يغطّيه البث، ويصلح أساساً للتحقق والمقارنة.</div>
+            <div class="eq-tick"><span class="live-dot"></span><span data-ar="استطلاع · كل 30 ثانية" data-en="polled · every 30s">استطلاع · كل 30 ثانية</span></div>
+          </div>
+        </div>
+        <div class="panel rv" style="--d:.4s;margin-top:12px">
+          <div class="panel-h"><span class="panel-tt"><span class="live-dot ac"></span><span data-ar="المصدران ← الخطورة (0-100)" data-en="Both feeds → risk (0-100)">المصدران ← الخطورة (0-100)</span></span><span class="live-tag"><span class="live-dot"></span><span class="blink" data-ar="تلقائي" data-en="AUTO">تلقائي</span></span></div>
+          <div style="padding:14px 16px 12px">
+            <div class="eq-formula">
+              <div class="eq-fx mag"><b>38%</b><span data-ar="شدّة الزلزال" data-en="magnitude">شدّة الزلزال</span></div>
+              <div class="eq-fx prox"><b>30%</b><span data-ar="القرب من مصر" data-en="proximity to Egypt">القرب من مصر</span></div>
+              <div class="eq-fx hist"><b>32%</b><span data-ar="الشذوذ التاريخي" data-en="historical anomaly">الشذوذ التاريخي</span></div>
+            </div>
+            <div style="margin-top:13px;display:flex;flex-direction:column;gap:9px">
+              <div class="eq-rk"><span style="font-size:11.5px;color:var(--muted);flex:none;width:58px" data-ar="مثال 84" data-en="sample 84">مثال 84</span><span class="eq-bar"><span class="eq-fill" style="width:84%"></span></span><b>84</b><span class="pill gwarn" style="border:0;padding:3px 9px"><span class="dot-l"></span><span data-ar="حرجة" data-en="critical">حرجة</span></span></div>
+              <div class="eq-rk"><span style="font-size:11.5px;color:var(--muted);flex:none;width:58px" data-ar="مثال 57" data-en="sample 57">مثال 57</span><span class="eq-bar"><span class="eq-fill mid" style="width:57%"></span></span><b>57</b><span class="pill gwarn" style="border:0;padding:3px 9px"><span class="dot-l"></span><span data-ar="عالية" data-en="high">عالية</span></span></div>
+              <div class="eq-rk"><span style="font-size:11.5px;color:var(--muted);flex:none;width:58px" data-ar="مثال 31" data-en="sample 31">مثال 31</span><span class="eq-bar"><span class="eq-fill mid" style="width:31%"></span></span><b>31</b><span class="pill ginfo" style="border:0;padding:3px 9px"><span class="dot-l"></span><span data-ar="متوسطة" data-en="medium">متوسطة</span></span></div>
+              <div class="eq-rk"><span style="font-size:11.5px;color:var(--muted);flex:none;width:58px" data-ar="مثال 18" data-en="sample 18">مثال 18</span><span class="eq-bar"><span class="eq-fill low" style="width:18%"></span></span><b>18</b><span class="pill gok" style="border:0;padding:3px 9px"><span class="dot-l"></span><span data-ar="منخفضة" data-en="low">منخفضة</span></span></div>
+            </div>
+            <div class="eq-dedupe" style="margin-top:13px">
+              <svg class="ico" style="width:15px;height:15px;color:var(--accent);flex:none" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/><path d="m17 15 3 3 3-3"/></svg>
+              <span data-ar="النواة الواحدة تمنع التكرار: مفتاح فريد لكل مصدر، وحدّ استبعاد 180 دقيقة، ومرآة للكتالوج، وبثّ لحظي، وسجل نظام." data-en="The single core blocks duplicates: a unique key per source, a 180-minute cutoff, a catalog mirror, a live broadcast, and an audit record.">النواة الواحدة تمنع التكرار: مفتاح فريد لكل مصدر، وحدّ استبعاد 180 دقيقة، ومرآة للكتالوج، وبثّ لحظي، وسجل نظام.</span>
+            </div>
+          </div>
+        </div>
+        <div class="demo-note rv" style="--d:.5s">
+          <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/></svg>
+          <span data-ar="قيم توضيحية — تعكس وحدات الاستخبارات الفعلية: زلازل مرصودة (حسب الفلتر) · أعلى خطورة (38% شدة · 30% قرب · 32% تاريخ) · أقوى حدث اليوم · آخر زلزال مرصود." data-en="Illustrative values — mirror the real intelligence units: quakes observed (by filter) · highest risk (38% magnitude · 30% proximity · 32% history) · strongest of the day · latest quake observed.">قيم توضيحية — تعكس وحدات الاستخبارات الفعلية: زلازل مرصودة (حسب الفلتر) · أعلى خطورة (38% شدة · 30% قرب · 32% تاريخ) · أقوى حدث اليوم · آخر زلزال مرصود.</span>
+        </div>
+      </div>
+      <div class="rv" style="--d:.6s;grid-column:1/-1">
+        <div class="chain-cap"><span class="live-dot ac"></span><span data-ar="مسار الحدث: من المصدر إلى قرار الغرفة" data-en="The event path: from source to the room's call">مسار الحدث: من المصدر إلى قرار الغرفة</span></div>
+        <div class="chain">
+          <div class="chain-n"><b>01</b><span data-ar="EMSC / USGS" data-en="EMSC / USGS">EMSC / USGS</span></div>
+          <span class="chain-sep"></span>
+          <div class="chain-n ai"><b>02</b><span data-ar="نواة استيعاب واحدة" data-en="one ingestion core">نواة استيعاب واحدة</span></div>
+          <span class="chain-sep"></span>
+          <div class="chain-n"><b>03</b><span data-ar="دمج + حساب الخطورة" data-en="merge + risk score">دمج + حساب الخطورة</span></div>
+          <span class="chain-sep"></span>
+          <div class="chain-n warn"><b>04</b><span data-ar="تجاوز العتبة" data-en="threshold crossed">تجاوز العتبة</span></div>
+          <span class="chain-sep"></span>
+          <div class="chain-n hot"><b>05</b><span data-ar="إشعار + قرار الغرفة" data-en="notify + the room's call">إشعار + قرار الغرفة</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

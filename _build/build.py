@@ -41,7 +41,10 @@ assert '__FAVICON__' in html, 'favicon placeholder missing'
 html = html.replace('__LOGO_EOC__', eoc).replace('__LOGO_ERC__', erc).replace('__FAVICON__', eoc)
 
 # quick integrity check: balanced script/style + section count
-assert html.count('<section class="s"') == 22, 'slide count wrong: %d' % html.count('<section class="s"')
+# note: two section dividers use class="s divider", so match without the closing quote
+n_sections = html.count('<section class="s')
+assert n_sections == 27, 'slide count wrong: %d' % n_sections
+assert html.count('<section class="s divider"') == 2, 'expected 2 section dividers'
 
 out = os.path.join(ROOT, "eoc-command-deck.html")
 with open(out, 'w', encoding='utf-8') as f:
@@ -52,4 +55,4 @@ deploy_out = os.path.join(ROOT, "deploy", "index.html")
 shutil.copyfile(out, deploy_out)
 
 print('OK  slides=%d  logos_embedded=%d  total_bytes=%d  -> %s + %s' % (
-    html.count('<section class="s"'), n1 + n2, len(html.encode('utf-8')), out, deploy_out))
+    n_sections, n1 + n2, len(html.encode('utf-8')), out, deploy_out))
