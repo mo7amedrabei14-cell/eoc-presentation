@@ -717,6 +717,39 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 .home-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 @media (max-width:960px){ .home-kpis{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:560px){ .home-kpis,.eq-sources{grid-template-columns:1fr} .gov-head,.gov-row{grid-template-columns:1.1fr .6fr .6fr} .gov-head span:nth-child(n+4),.gov-row span:nth-child(n+4){display:none} .eq-formula{flex-wrap:wrap} .eq-fx{flex:1 1 30%} .eq-fx+.eq-fx{border-inline-start:1px solid var(--border)} }
+
+/* 100% browser zoom: preserve readable type and allow tall content to scroll naturally. */
+.s{align-items:flex-start;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border-strong) transparent}
+.s::-webkit-scrollbar{width:6px}
+.s::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:999px}
+.in{margin-block:auto;padding-block:76px 38px}
+@media (min-width:1200px) and (min-height:800px){.in{width:min(1360px,92vw)}}
+@media (max-height:760px){.in{padding-block:62px 28px}}
+@media (max-width:960px){.in{padding-block:72px 34px}}
+
+/* Full-frame real-system screenshot slides; no manual example button is added. */
+.live-example-slide{align-items:center;overflow:hidden;color:var(--ink);background:radial-gradient(ellipse at 10% 18%,rgba(199,0,0,.11),transparent 36%),radial-gradient(ellipse at 88% 80%,rgba(112,70,190,.10),transparent 32%),var(--bg)}
+.live-example-shell{width:min(1500px,92vw);height:100%;margin-inline:auto;padding:clamp(76px,8vh,94px) 0 clamp(20px,2.6vh,30px);box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:clamp(14px,1.8vh,22px)}
+.live-example-heading{display:flex;flex-direction:column;align-items:flex-start;gap:7px;flex:none;min-width:0}
+.live-example-kicker{display:inline-flex;align-items:center;gap:10px;color:var(--accent);font-size:clamp(13px,.95vw,17px);font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.live-example-kicker::before{content:"";width:25px;height:3px;border-radius:99px;background:var(--accent);box-shadow:0 0 18px var(--accent-glow)}
+.live-example-heading h2{margin:0;color:var(--ink);font-size:clamp(26px,2.25vw,40px);line-height:1.2;letter-spacing:-.025em;font-weight:800;text-wrap:balance}
+.live-example-heading p{margin:0;max-width:84ch;color:var(--muted);font-size:clamp(14px,1.05vw,18px);line-height:1.65}
+.live-example-capture{position:relative;isolation:isolate;align-self:center;width:min(92vw,1500px,calc((100vh - 245px)*16/9));aspect-ratio:16/9;max-height:calc(100vh - 245px);flex:0 1 auto;min-height:210px;overflow:hidden;display:grid;place-items:center;border:1px solid var(--border-strong);border-radius:clamp(14px,1.3vw,23px);background:linear-gradient(145deg,var(--surface),var(--bg));box-shadow:0 24px 80px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08)}
+.live-example-image{position:absolute;inset:0;z-index:0;width:100%;height:100%;display:block;object-fit:contain;background:#080a0e}
+.live-example-capture.has-image .live-example-placeholder{display:none}
+.live-example-image-title{position:absolute;top:clamp(12px,1.3vw,20px);inset-inline-start:clamp(12px,1.3vw,20px);z-index:4;padding:9px 14px;border:1px solid rgba(255,255,255,.22);border-radius:999px;color:#fff;background:rgba(12,15,23,.88);backdrop-filter:blur(14px);font-size:clamp(12px,.86vw,15px);font-weight:800;letter-spacing:.015em;box-shadow:0 8px 26px rgba(0,0,0,.22)}
+.live-example-placeholder{position:absolute;inset:0;z-index:2;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(10px,1.3vh,16px);padding:clamp(20px,4vw,56px);text-align:center;background:radial-gradient(ellipse at 50% 35%,rgba(199,0,0,.12),transparent 42%),linear-gradient(145deg,var(--surface),var(--bg))}
+.live-example-placeholder-status{display:inline-flex;align-items:center;gap:9px;color:var(--muted);font-size:clamp(11px,.8vw,14px);font-weight:800;letter-spacing:.10em;text-transform:uppercase}
+.live-example-status-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(199,0,0,.12),0 0 18px rgba(199,0,0,.4)}
+.live-example-placeholder strong{max-width:26ch;color:var(--ink);font-size:clamp(20px,1.8vw,30px);line-height:1.25;font-weight:800}
+.live-example-placeholder-copy{max-width:58ch;color:var(--muted);font-size:clamp(14px,1.05vw,18px);line-height:1.7}
+.live-example-path{max-width:100%;padding:9px 13px;overflow-wrap:anywhere;word-break:break-word;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--accent);font:500 clamp(11px,.72vw,13px)/1.45 var(--mono)}
+.live-example-placeholder small{max-width:70ch;color:var(--faint);font-size:clamp(12px,.84vw,14px);line-height:1.55}
+@media (max-height:760px){.live-example-shell{padding-block:64px 18px;gap:12px}.live-example-heading{gap:5px}.live-example-heading h2{font-size:clamp(24px,2vw,32px)}.live-example-capture{width:min(92vw,calc((100vh - 215px)*16/9));max-height:calc(100vh - 215px);min-height:180px}}
+@media (max-width:960px){.live-example-slide{overflow-y:auto}.live-example-shell{width:92vw;height:auto;min-height:100%;padding-block:78px 24px;gap:15px}.live-example-heading h2{font-size:clamp(24px,4vw,34px)}.live-example-capture{width:100%;max-width:100%;height:auto;max-height:none;aspect-ratio:16/9;min-height:0;flex:none}.live-example-placeholder{gap:10px;padding:18px}}
+@media (max-width:560px){.live-example-shell{padding-block:72px 20px}.live-example-heading p{font-size:14px}.live-example-placeholder-status{font-size:10px}.live-example-placeholder strong{font-size:18px}.live-example-placeholder-copy{font-size:12px}.live-example-path{font-size:10px;padding:6px 8px}.live-example-placeholder small{font-size:11px}.live-example-image-title{top:9px;inset-inline-start:9px;padding:6px 10px;font-size:11px}}
+
 </style>
 </head>
 <body>
@@ -967,6 +1000,30 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-powerbi" data-duration="18000"
+ data-nav-ar="مثال حي · لوحة المؤشرات الرئيسية" data-nav-en="Live example · Power BI dashboard" aria-label="مثال حي · لوحة المؤشرات الرئيسية">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="لوحة المؤشرات الرئيسية" data-en="Main dashboard">لوحة المؤشرات الرئيسية</h2>
+   <p data-ar="لقطة من صفحة لوحة المؤشرات الحالية، كما تظهر في نسخة النظام الأخيرة." data-en="A current capture of the dashboard screen from the latest system version.">لقطة من صفحة لوحة المؤشرات الحالية، كما تظهر في نسخة النظام الأخيرة.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/01-powerbi-dashboard.png" alt="لقطة فعلية من لوحة المؤشرات الرئيسية" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/01-powerbi-dashboard.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
+
 <!-- ================= S07 AI RADAR ================= -->
 <!-- ================= S12 AI RADAR ================= -->
 <section class="s" id="s07">
@@ -1008,6 +1065,30 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     </div>
   </div>
 </section>
+
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-ai-monitoring" data-duration="18000"
+ data-nav-ar="مثال حي · رصد الذكاء الاصطناعي" data-nav-en="Live example · AI monitoring" aria-label="مثال حي · رصد الذكاء الاصطناعي">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="رصد الذكاء الاصطناعي" data-en="AI monitoring">رصد الذكاء الاصطناعي</h2>
+   <p data-ar="صوّر نتائج الرصد الحالية، مع إظهار المصادر والوقت وحالة الرصد إن كانت ظاهرة." data-en="Capture current monitoring results, showing sources, timestamps and monitoring status when visible.">صوّر نتائج الرصد الحالية، مع إظهار المصادر والوقت وحالة الرصد إن كانت ظاهرة.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/02-ai-monitoring.png" alt="لقطة فعلية من شاشة رصد الذكاء الاصطناعي" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/02-ai-monitoring.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
 
 <!-- ================= S08 WEATHER INTELLIGENCE ================= -->
 <!-- ================= S8 WEATHER INTELLIGENCE ================= -->
@@ -1066,6 +1147,30 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     </div>
   </div>
 </section>
+
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-weather-intelligence" data-duration="18000"
+ data-nav-ar="مثال حي · استخبارات الطقس" data-nav-en="Live example · Weather intelligence" aria-label="مثال حي · استخبارات الطقس">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="استخبارات الطقس اليومية" data-en="Daily weather intelligence">استخبارات الطقس اليومية</h2>
+   <p data-ar="الشاشة الفعلية لاستخبارات الطقس، بمؤشرات اليوم والتوصيات الحالية." data-en="The actual weather-intelligence screen with current daily indicators and recommendations.">الشاشة الفعلية لاستخبارات الطقس، بمؤشرات اليوم والتوصيات الحالية.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/03-daily-weather-intelligence.png" alt="لقطة فعلية من استخبارات الطقس اليومية" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/03-daily-weather-intelligence.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
 
 <!-- ================= S09 EARTHQUAKE INTELLIGENCE ================= -->
 <section class="s" id="s09">
@@ -1138,6 +1243,30 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     </div>
   </div>
 </section>
+
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-earthquake-intelligence" data-duration="18000"
+ data-nav-ar="مثال حي · استخبارات الزلازل" data-nav-en="Live example · Earthquake intelligence" aria-label="مثال حي · استخبارات الزلازل">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="استخبارات الزلازل" data-en="Earthquake intelligence">استخبارات الزلازل</h2>
+   <p data-ar="لقطة منفصلة لوحدة استخبارات الزلازل، وليست لقطة مركز رصد الزلازل." data-en="A separate capture of earthquake intelligence, distinct from the earthquake monitoring center.">لقطة منفصلة لوحدة استخبارات الزلازل، وليست لقطة مركز رصد الزلازل.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/04-earthquake-intelligence.png" alt="لقطة فعلية من استخبارات الزلازل" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/04-earthquake-intelligence.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
 
 <!-- ================= S10 DIVIDER - OPERATIONAL UNITS ================= -->
 <section class="s divider" id="s10">
@@ -1215,6 +1344,30 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-operations-overview" data-duration="18000"
+ data-nav-ar="مثال حي · مؤشرات المركز اليومية" data-nav-en="Live example · Operations overview" aria-label="مثال حي · مؤشرات المركز اليومية">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="مؤشرات المركز اليومية" data-en="Operations overview">مؤشرات المركز اليومية</h2>
+   <p data-ar="الصورة التشغيلية الحالية في صفحة مؤشرات المركز اليومية." data-en="The current operating picture on the Operations Overview screen.">الصورة التشغيلية الحالية في صفحة مؤشرات المركز اليومية.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/05-operations-overview.png" alt="لقطة فعلية من مؤشرات المركز اليومية" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/05-operations-overview.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
+
 <!-- ================= S12 WEATHER FORECAST ================= -->
 <!-- ================= S7 WEATHER ================= -->
 <section class="s" id="s12">
@@ -1262,6 +1415,30 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-weather-forecasts" data-duration="18000"
+ data-nav-ar="مثال حي · توقعات الطقس" data-nav-en="Live example · Weather forecasts" aria-label="مثال حي · توقعات الطقس">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="توقعات الطقس" data-en="Weather forecasts">توقعات الطقس</h2>
+   <p data-ar="لقطة من صفحة توقعات الطقس الحالية وتفاصيل المحافظات أو الورديات الظاهرة." data-en="A current weather forecast capture showing the available governorate or shift details.">لقطة من صفحة توقعات الطقس الحالية وتفاصيل المحافظات أو الورديات الظاهرة.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/06-weather-forecasts.png" alt="لقطة فعلية من صفحة توقعات الطقس" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/06-weather-forecasts.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
+
 <!-- ================= S13 GOVERNORATE CONTACTS ================= -->
 <section class="s" id="s13">
   <div class="in">
@@ -1301,6 +1478,30 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     </div>
   </div>
 </section>
+
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-governorate-contacts" data-duration="18000"
+ data-nav-ar="مثال حي · التواصل مع الفروع" data-nav-en="Live example · Governorate contacts" aria-label="مثال حي · التواصل مع الفروع">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="سجل التواصل مع الفروع" data-en="Governorate contacts log">سجل التواصل مع الفروع</h2>
+   <p data-ar="لقطة حديثة من سجل التواصل، مع إخفاء أي بيانات شخصية غير لازمة." data-en="A current contacts-log capture with unnecessary personal information masked.">لقطة حديثة من سجل التواصل، مع إخفاء أي بيانات شخصية غير لازمة.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/07-governorate-contacts.png" alt="لقطة فعلية من سجل التواصل مع الفروع" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/07-governorate-contacts.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
 
 <!-- ================= S14 MISSION LOG ================= -->
 <!-- ================= S9 MISSION ================= -->
@@ -1395,6 +1596,30 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-field-missions" data-duration="18000"
+ data-nav-ar="مثال حي · المهام الميدانية" data-nav-en="Live example · Field missions" aria-label="مثال حي · المهام الميدانية">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="سجل المهام الميدانية وسير العمل" data-en="Field missions and workflow">سجل المهام الميدانية وسير العمل</h2>
+   <p data-ar="لقطة من صفحة المهام الحالية تظهر حالة مهمة ومسارها، باستخدام بيانات مناسبة للعرض." data-en="A current missions capture showing a mission state and workflow using presentation-safe data.">لقطة من صفحة المهام الحالية تظهر حالة مهمة ومسارها، باستخدام بيانات مناسبة للعرض.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/08-field-missions.png" alt="لقطة فعلية من سجل المهام الميدانية" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/08-field-missions.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
+
 <!-- ================= S16 HUMAN RESOURCES ================= -->
 <!-- ================= S11 VOLUNTEERS ================= -->
 <section class="s" id="s16">
@@ -1428,6 +1653,30 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     </div>
   </div>
 </section>
+
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-human-resources" data-duration="18000"
+ data-nav-ar="مثال حي · القوة البشرية" data-nav-en="Live example · Human resources" aria-label="مثال حي · القوة البشرية">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="سجل القوة البشرية" data-en="Human resources">سجل القوة البشرية</h2>
+   <p data-ar="لقطة من صفحة القوة البشرية الحالية؛ أخفِ الأسماء وأرقام العضوية وأي بيانات شخصية." data-en="A current Human Resources capture; mask names, membership numbers and personal data.">لقطة من صفحة القوة البشرية الحالية؛ أخفِ الأسماء وأرقام العضوية وأي بيانات شخصية.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/09-human-resources.png" alt="لقطة فعلية من سجل القوة البشرية" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/09-human-resources.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
 
 <!-- ================= S17 LOCAL + GLOBAL MONITORING ================= -->
 <!-- ================= S13 LOCAL + GLOBAL MONITORING ================= -->
@@ -1476,6 +1725,78 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     </div>
   </div>
 </section>
+
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-local-news" data-duration="18000"
+ data-nav-ar="مثال حي · الأخبار المحلية" data-nav-en="Live example · Local news" aria-label="مثال حي · الأخبار المحلية">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="سجل الأخبار المحلية" data-en="Local news register">سجل الأخبار المحلية</h2>
+   <p data-ar="الصفحة المحلية الحالية مع النتائج المرصودة وتوقيتاتها ومصادرها عند ظهورها." data-en="The current Local News page with monitored results, timestamps and sources where available.">الصفحة المحلية الحالية مع النتائج المرصودة وتوقيتاتها ومصادرها عند ظهورها.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/10-local-news.png" alt="لقطة فعلية من سجل الأخبار المحلية" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/10-local-news.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-global-disasters" data-duration="18000"
+ data-nav-ar="مثال حي · الكوارث العالمية" data-nav-en="Live example · Global disasters" aria-label="مثال حي · الكوارث العالمية">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="رصد الكوارث العالمية" data-en="Global disaster monitoring">رصد الكوارث العالمية</h2>
+   <p data-ar="لقطة مستقلة لصفحة الكوارث العالمية الحالية، دون تكرار لقطة الأخبار المحلية." data-en="A separate capture of the current Global Disasters page, not a duplicate of Local News.">لقطة مستقلة لصفحة الكوارث العالمية الحالية، دون تكرار لقطة الأخبار المحلية.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/11-global-disasters.png" alt="لقطة فعلية من رصد الكوارث العالمية" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/11-global-disasters.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-earthquake-center" data-duration="18000"
+ data-nav-ar="مثال حي · مركز رصد الزلازل" data-nav-en="Live example · Earthquake center" aria-label="مثال حي · مركز رصد الزلازل">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="مركز رصد الزلازل" data-en="Earthquake monitoring center">مركز رصد الزلازل</h2>
+   <p data-ar="صفحة رصد الزلازل الحالية مع عوامل التصفية والنتائج الظاهرة." data-en="The current Earthquake Center screen with filters and visible results.">صفحة رصد الزلازل الحالية مع عوامل التصفية والنتائج الظاهرة.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/12-earthquake-center.png" alt="لقطة فعلية من مركز رصد الزلازل" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/12-earthquake-center.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
+
+
 
 <!-- ================= S18 MAP ================= -->
 <!-- ================= S14 MAP ================= -->
@@ -1573,6 +1894,30 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-branches-inventory" data-duration="18000"
+ data-nav-ar="مثال حي · الفروع والمخزون" data-nav-en="Live example · Branches and inventory" aria-label="مثال حي · الفروع والمخزون">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="الفروع والمخزون الاستراتيجي" data-en="Branches and strategic inventory">الفروع والمخزون الاستراتيجي</h2>
+   <p data-ar="حاول إظهار فرع محدد على الخريطة مع بيانات مخزونه في نفس اللقطة." data-en="Where possible, show a selected branch on the map alongside its inventory details in one capture.">حاول إظهار فرع محدد على الخريطة مع بيانات مخزونه في نفس اللقطة.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/13-branches-strategic-inventory.png" alt="لقطة فعلية من الفروع والمخزون الاستراتيجي" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/13-branches-strategic-inventory.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
+
 <!-- ================= S20 SUPERVISORS HANDOVER ================= -->
 <!-- ================= S18 SUPERVISORS HANDOVER ================= -->
 <section class="s" id="s20">
@@ -1628,6 +1973,30 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </div>
 </section>
 
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-supervisors-handover" data-duration="18000"
+ data-nav-ar="مثال حي · تسليم وتسلم المشرفين" data-nav-en="Live example · Supervisors handover" aria-label="مثال حي · تسليم وتسلم المشرفين">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="تسليم وتسلم المشرفين" data-en="Supervisors handover">تسليم وتسلم المشرفين</h2>
+   <p data-ar="لقطة من سجل التسليم والتسلّم الحالي تعرض عناصر المتابعة دون بيانات حساسة." data-en="A current supervisor handover-log capture showing follow-up items without sensitive data.">لقطة من سجل التسليم والتسلّم الحالي تعرض عناصر المتابعة دون بيانات حساسة.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/14-supervisors-handover.png" alt="لقطة فعلية من تسليم وتسلم المشرفين" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/14-supervisors-handover.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
+
 <!-- ================= S21 AUDIT LOG ================= -->
 <!-- ================= S19 AUDIT LOG ================= -->
 <section class="s" id="s21">
@@ -1672,6 +2041,30 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     </div>
   </div>
 </section>
+
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-system-audit" data-duration="18000"
+ data-nav-ar="مثال حي · سجل النظام" data-nav-en="Live example · System audit" aria-label="مثال حي · سجل النظام">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="سجل النظام" data-en="System audit log">سجل النظام</h2>
+   <p data-ar="لقطة من سجل النظام توضح أثر العمليات وتوقيتها، مع إخفاء أي معلومات حساسة." data-en="A current system-log capture showing operation traces and timestamps with sensitive details masked.">لقطة من سجل النظام توضح أثر العمليات وتوقيتها، مع إخفاء أي معلومات حساسة.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/15-system-audit-log.png" alt="لقطة فعلية من سجل النظام" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/15-system-audit-log.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
 
 <!-- ================= S22 MOBILE FIELD ================= -->
 <!-- ================= S6 MOBILE FIELD ================= -->
@@ -1803,6 +2196,30 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     </div>
   </div>
 </section>
+
+<!-- Current-system screenshot placeholder; real capture is supplied separately. -->
+<section class="s live-example-slide" id="live-example-mobile-interface" data-duration="18000"
+ data-nav-ar="عرض الموبايل · الواجهة المتجاوبة" data-nav-en="Mobile view · Responsive interface" aria-label="عرض الموبايل · الواجهة المتجاوبة">
+ <div class="live-example-shell">
+  <header class="live-example-heading">
+   <div class="live-example-kicker" data-ar="مثال حي من المشروع" data-en="LIVE EXAMPLE FROM THE PROJECT">مثال حي من المشروع</div>
+   <h2 data-ar="واجهة النظام على الهاتف" data-en="EOC system on mobile">واجهة النظام على الهاتف</h2>
+   <p data-ar="لقطة حقيقية من الهاتف أو من عرض المتصفح بعرض الهاتف؛ لا تستخدم لقطة سطح مكتب مصغّرة." data-en="A real phone screenshot or phone-width browser view; do not use a shrunken desktop capture.">لقطة حقيقية من الهاتف أو من عرض المتصفح بعرض الهاتف؛ لا تستخدم لقطة سطح مكتب مصغّرة.</p>
+  </header>
+  <div class="live-example-capture">
+   <img class="live-example-image" src="assets/live-examples/16-mobile-interface.png" alt="لقطة فعلية من واجهة نظام EOC على الهاتف" loading="eager" decoding="async">
+   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
+   <div class="live-example-placeholder">
+    <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
+    <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
+    <span class="live-example-placeholder-copy" data-ar="أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا." data-en="Add the screenshot at the path below; it will appear here automatically.">أضف الصورة بالاسم والمسار الموضحين أدناه؛ ستظهر تلقائيًا هنا.</span>
+    <code class="live-example-path">assets/live-examples/16-mobile-interface.png</code>
+    <small data-ar="PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%." data-en="PNG or JPG · 16:9 preferred · capture the latest real interface at 100% browser zoom.">PNG أو JPG · يفضّل 16:9 · لقطة فعلية من آخر نسخة عند زوم 100%.</small>
+   </div>
+  </div>
+ </div>
+</section>
+
 
 <!-- ================= S23 REALTIME ENGINE ================= -->
 <!-- ================= S16 REALTIME ENGINE ================= -->
@@ -1998,7 +2415,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     document.getElementById('nextBtn').setAttribute('aria-label', c.next);
 
     /* eyebrows */
-    document.getElementById('activeEyebrow').textContent = (eyebrows[l] || eyebrows.ar)[idx] || '';
+    document.getElementById('activeEyebrow').textContent = currentEyebrow(l);
   }
 
   /* ── slides engine ─────────────────────────────────── */
@@ -2085,6 +2502,15 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     ]
   };
 
+  function currentEyebrow(language){
+   var slide = slides[idx];
+   if(!slide) return '';
+   var explicit = slide.getAttribute('data-nav-' + language);
+   if(explicit) return explicit;
+   var match = /^s(\d+)$/.exec(slide.id || '');
+   return match ? ((eyebrows[language] || eyebrows.ar)[Number(match[1]) - 1] || '') : '';
+ }
+
   /* ── navigation ────────────────────────────────────── */
   function stopAuto(){
     if(!playing) return;
@@ -2104,17 +2530,18 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     armTimer();
   }
   function armTimer(){
-    progFill.style.transition = 'none'; progFill.style.width = '0';
-    requestAnimationFrame(function(){
-      progFill.style.transition = 'width ' + autoDur + 'ms linear';
-      progFill.style.width = '100%';
-    });
-    timer = setTimeout(function(){
-      if(idx < total - 1) go(idx + 1, false); else go(0, false);
-      if(playing) armTimer();
-    }, autoDur);
-  }
-
+   var duration = Number(slides[idx].getAttribute('data-duration')) || autoDur;
+   progFill.style.transition = 'none';
+   progFill.style.width = '0';
+   requestAnimationFrame(function(){
+     progFill.style.transition = 'width ' + duration + 'ms linear';
+     progFill.style.width = '100%';
+   });
+   timer = setTimeout(function(){
+     if(idx < total - 1) go(idx + 1, false); else go(0, false);
+     if(playing) armTimer();
+   }, duration);
+ }
   function go(n, manual){
     n = Math.max(0, Math.min(total-1, n));
     if(n === idx && slides[idx].classList.contains('on')){}
@@ -2123,7 +2550,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     slides.forEach(function(s,i){ s.classList.toggle('on', i===idx); });
     dots.forEach(function(d,i){ d.classList.toggle('on', i===idx); });
     document.getElementById('cNow').textContent = String(idx+1).padStart(2,'0');
-    activeEyebrow.textContent = (eyebrows[lang] || eyebrows.ar)[idx] || '';
+    activeEyebrow.textContent = currentEyebrow(lang);
     if(manual && playing) stopAuto();
   }
 
@@ -2209,6 +2636,15 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   if(reduced.matches){
     document.documentElement.classList.add('no-motion');
   }
+
+  /* Display a screenshot only after the real image has loaded. */
+  document.querySelectorAll('.live-example-image').forEach(function(image){
+    var frame = image.parentElement;
+    function markLoaded(){ frame.classList.add('has-image'); }
+    image.addEventListener('load', markLoaded);
+    image.addEventListener('error', function(){ frame.classList.remove('has-image'); });
+    if(image.complete && image.naturalWidth > 0) markLoaded();
+  });
 
   /* init language */
   applyLang(lang);
