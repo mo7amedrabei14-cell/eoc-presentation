@@ -800,6 +800,29 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   }
 }
 
+
+/* Requested presentation polish: hide the bottom arrow controls and move the example label above the screenshot. */
+#arrows{display:none!important}
+.live-example-kicker{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:0 0 4px;
+  color:var(--ink)!important;
+  font-size:clamp(21px,2.15vw,34px)!important;
+  font-weight:900!important;
+  letter-spacing:0!important;
+  line-height:1.2!important;
+  text-transform:none!important;
+}
+.live-example-kicker::before{
+  width:32px!important;
+  height:4px!important;
+  flex:none;
+  box-shadow:0 0 18px var(--accent-glow);
+}
+.live-example-image-title{display:none!important}
+
 </style>
 </head>
 <body>
@@ -1061,7 +1084,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/01-powerbi-dashboard.png" alt="لقطة فعلية من لوحة المؤشرات الرئيسية" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -1127,7 +1149,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/02-ai-monitoring.png" alt="لقطة فعلية من شاشة رصد الذكاء الاصطناعي" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -1209,7 +1230,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/03-daily-weather-intelligence.png" alt="لقطة فعلية من استخبارات الطقس اليومية" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -1305,7 +1325,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/04-earthquake-intelligence.png" alt="لقطة فعلية من استخبارات الزلازل" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -1405,7 +1424,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/05-operations-overview.png" alt="لقطة فعلية من مؤشرات المركز اليومية" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -1476,7 +1494,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/06-weather-forecasts.png" alt="لقطة فعلية من صفحة توقعات الطقس" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -1540,7 +1557,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/07-governorate-contacts.png" alt="لقطة فعلية من سجل التواصل مع الفروع" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -1657,7 +1673,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/08-field-missions.png" alt="لقطة فعلية من سجل المهام الميدانية" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -1715,7 +1730,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/09-human-resources.png" alt="لقطة فعلية من سجل القوة البشرية" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -1787,7 +1801,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/10-local-news.png" alt="لقطة فعلية من سجل الأخبار المحلية" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -1810,7 +1823,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/11-global-disasters.png" alt="لقطة فعلية من رصد الكوارث العالمية" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -1833,7 +1845,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/12-earthquake-center.png" alt="لقطة فعلية من مركز رصد الزلازل" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -1955,7 +1966,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/13-branches-strategic-inventory.png" alt="لقطة فعلية من الفروع والمخزون الاستراتيجي" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -2034,7 +2044,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/14-supervisors-handover.png" alt="لقطة فعلية من تسليم وتسلم المشرفين" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -2103,7 +2112,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/15-system-audit-log.png" alt="لقطة فعلية من سجل النظام" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
@@ -2258,7 +2266,6 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   </header>
   <div class="live-example-capture">
    <img class="live-example-image" src="assets/live-examples/16-mobile-interface.png" alt="لقطة فعلية من واجهة نظام EOC على الهاتف" loading="eager" decoding="async">
-   <div class="live-example-image-title" data-ar="مثال حي من المشروع" data-en="Live example from the project">مثال حي من المشروع</div>
    <div class="live-example-placeholder">
     <span class="live-example-placeholder-status"><span class="live-example-status-dot"></span><span data-ar="موضع لقطة الشاشة الفعلية" data-en="ACTUAL SCREENSHOT SLOT">موضع لقطة الشاشة الفعلية</span></span>
     <strong data-ar="لقطة حديثة من النظام مطلوبة" data-en="A current system screenshot is required">لقطة حديثة من النظام مطلوبة</strong>
