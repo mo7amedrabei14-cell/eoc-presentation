@@ -1,17 +1,28 @@
-# Current EOC system screenshots for the presentation
+# Current EOC system screenshots used by the presentation
 
-Put the seven **real screenshots captured from the current running EOC system** in this directory. The example slides are sequenced already and display a screenshot automatically when its file exists. Do not use invented values or screenshots from an old presentation.
+Add **16 screenshots from the current running EOC system** here. The HTML has a separate sequential example slide for each of the 15 current application pages plus one mobile view. Slides advance automatically and wait 18 seconds for each example. They will show a labelled placeholder until the corresponding real screenshot exists; no older illustrative screenshot is presented as live.
 
-Capture recommendations: open the current system at **100% browser zoom**, maximize the browser, and save the actual interface as PNG (16:9 preferred; 1920×1080 or 1600×900). Avoid the browser tabs/address bar where possible. Use test/demo records, or blur names, phone numbers, beneficiary data, tokens, secrets, and other sensitive operational information.
+Capture at **100% browser zoom**, with Chrome maximized. Save PNG (recommended) or JPG. For desktop pages, use a clear 16:9 crop at 1920×1080 or 1600×900 if practical. The mobile image must be an actual mobile-width interface/phone capture, not a scaled desktop screenshot. Use safe demo records or mask names, phone numbers, beneficiary information, credentials, tokens and sensitive operational data.
 
-| File name | Capture from the current system |
-|---|---|
-| `01-operations-overview.png` | **مؤشرات المركز اليومية** (Operations Overview), the main operations dashboard. |
-| `02-ai-social-monitoring.png` | **رصد الذكاء الاصطناعي**, with the current social-monitoring results/section visible if available. |
-| `03-earthquake-monitoring.png` | **مركز رصد الزلازل**, with current filters and results visible. |
-| `04-field-missions-workflow.png` | **سجل المهام الميدانية**, with one sample mission and its current status/workflow visible. |
-| `05-branches-strategic-inventory.png` | **الفروع والمخزون الاستراتيجي**, ideally a selected map branch with its stock detail in the same capture. |
-| `06-system-audit-log.png` | **سجل النظام**, with recent entries visible and personal/sensitive details masked. |
-| `07-mobile-operations.png` | A current phone-width view of Operations Overview or Field Missions, not a shrunk desktop screenshot. |
+| # | Exact file name | Actual application page to capture |
+|---:|---|---|
+| 01 | `01-powerbi-dashboard.png` | **لوحة المؤشرات الرئيسية** — Power BI dashboard |
+| 02 | `02-ai-monitoring.png` | **رصد الذكاء الاصطناعي** — current monitoring results and sources |
+| 03 | `03-daily-weather-intelligence.png` | **استخبارات الطقس** / daily weather intelligence |
+| 04 | `04-earthquake-intelligence.png` | **استخبارات الزلازل** — separate from the Earthquake Center |
+| 05 | `05-operations-overview.png` | **مؤشرات المركز اليومية** — operations overview |
+| 06 | `06-weather-forecasts.png` | **توقعات الطقس** |
+| 07 | `07-governorate-contacts.png` | **سجل التواصل مع الفروع** |
+| 08 | `08-field-missions.png` | **سجل المهام الميدانية** — show status/workflow of a sample mission |
+| 09 | `09-human-resources.png` | **سجل القوة البشرية** |
+| 10 | `10-local-news.png` | **سجل الأخبار المحلية** |
+| 11 | `11-global-disasters.png` | **رصد الكوارث العالمية** |
+| 12 | `12-earthquake-center.png` | **مركز رصد الزلازل** |
+| 13 | `13-branches-strategic-inventory.png` | **الفروع والمخزون الاستراتيجي** — ideally branch map plus selected stock details |
+| 14 | `14-supervisors-handover.png` | **تسليم وتسلم مشرفين** |
+| 15 | `15-system-audit-log.png` | **سجل النظام** |
+| 16 | `16-mobile-interface.png` | **عرض النظام على الهاتف** — actual responsive/mobile view |
 
-The root `eoc-command-deck.html` uses image paths beginning `deploy/assets/live-examples/`; deployed `deploy/index.html` uses `assets/live-examples/`. Both resolve to the same files in this directory; add each screenshot once. If an image is missing, a clearly labelled capture slot stays visible instead of presenting an old/illustrative screen as if it were live.
+Keep the filenames exactly as written. The source deck `eoc-command-deck.html` refers to `deploy/assets/live-examples/<filename>`, and the published `deploy/index.html` refers to `assets/live-examples/<filename>`; that is why both HTML copies use the same folder in the repository. Do not add these files to the `eoc-system` repository. Only add them to `eoc-presentation/deploy/assets/live-examples/`.
+
+Pages 10–12 appear consecutively after the existing presentation slide that introduces the monitoring sources together; these are **three different actual pages**, not duplicate screenshots. Other pages each have their own example slide after the nearest slide that explains them. The deck's other conceptual/architecture/closing slides have no extra screenshot examples.
