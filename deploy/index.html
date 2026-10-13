@@ -750,6 +750,52 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 @media (max-width:960px){.live-example-slide{overflow-y:auto}.live-example-shell{width:92vw;height:auto;min-height:100%;padding-block:78px 24px;gap:15px}.live-example-heading h2{font-size:clamp(24px,4vw,34px)}.live-example-capture{width:100%;max-width:100%;height:auto;max-height:none;aspect-ratio:16/9;min-height:0;flex:none}.live-example-placeholder{gap:10px;padding:18px}}
 @media (max-width:560px){.live-example-shell{padding-block:72px 20px}.live-example-heading p{font-size:14px}.live-example-placeholder-status{font-size:10px}.live-example-placeholder strong{font-size:18px}.live-example-placeholder-copy{font-size:12px}.live-example-path{font-size:10px;padding:6px 8px}.live-example-placeholder small{font-size:11px}.live-example-image-title{top:9px;inset-inline-start:9px;padding:6px 10px;font-size:11px}}
 
+
+/* Responsive slide viewport fix: preserve bottom content at any browser zoom. */
+:root{
+  --deck-scroll-top:calc(68px + env(safe-area-inset-top, 0px));
+  --deck-scroll-bottom:calc(92px + env(safe-area-inset-bottom, 0px));
+}
+/* Keep the presentation frame viewport-sized, but let long slide content scroll inside it. */
+.s:not(.live-example-slide){
+  height:100%;
+  min-height:0;
+  min-width:0;
+  align-items:flex-start;
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior-y:contain;
+  scroll-padding-block:var(--deck-scroll-top) var(--deck-scroll-bottom);
+}
+.s:not(.live-example-slide) > .in{
+  max-width:100%;
+  margin-block:auto;
+  padding-block:var(--deck-scroll-top) var(--deck-scroll-bottom);
+}
+/* S08 had a desktop-only fixed margin that could defeat the normal overflow spacing. */
+#s08 .in{
+  margin-block:auto;
+  padding-block:var(--deck-scroll-top) calc(var(--deck-scroll-bottom) + 8px);
+}
+@media (max-height:760px){
+  :root{
+    --deck-scroll-top:calc(60px + env(safe-area-inset-top, 0px));
+    --deck-scroll-bottom:calc(82px + env(safe-area-inset-bottom, 0px));
+  }
+}
+@media (max-width:960px){
+  :root{
+    --deck-scroll-top:calc(70px + env(safe-area-inset-top, 0px));
+    --deck-scroll-bottom:calc(82px + env(safe-area-inset-bottom, 0px));
+  }
+}
+@media (max-height:760px) and (max-width:960px){
+  :root{
+    --deck-scroll-top:calc(62px + env(safe-area-inset-top, 0px));
+    --deck-scroll-bottom:calc(78px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 </style>
 </head>
 <body>
