@@ -31,6 +31,8 @@ jobs:
           # The root deck is the source of truth. Rewrite image paths for the
           # static site served from ./deploy, while preserving the full presentation.
           sed 's#deploy/assets/#assets/#g' eoc-command-deck.html > deploy/index.html
+          # Publish the same deck at the explicit URL already used by the portfolio iframe.
+          sed 's#deploy/assets/#assets/#g' eoc-command-deck.html > deploy/eoc-command-deck.html
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6

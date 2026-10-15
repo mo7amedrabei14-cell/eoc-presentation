@@ -823,6 +823,57 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 }
 .live-example-image-title{display:none!important}
 
+
+/* Dedicated presentation controls: keep every control inside reserved chrome space. */
+#arrows{
+  display:flex!important;position:fixed;left:50%;right:auto;inset-inline-start:auto;
+  bottom:10px;transform:translateX(-50%);z-index:80;align-items:center;justify-content:center;
+  gap:5px;padding:5px;border:1px solid var(--border);border-radius:999px;
+  background:color-mix(in srgb,var(--surface) 90%,transparent);
+  box-shadow:0 10px 32px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(18px) saturate(1.25);-webkit-backdrop-filter:blur(18px) saturate(1.25);
+}
+:root[dir="rtl"] #arrows{transform:translateX(-50%)}
+#arrows .nav-arr{width:38px;height:36px;border-radius:999px;border-color:transparent;background:transparent;color:var(--muted)}
+#arrows .nav-arr:hover{color:var(--ink);background:var(--surface-3);border-color:var(--border)}
+#arrows .nav-arr:focus-visible{outline-offset:1px}
+#fullscreenBtn{margin-inline:2px}
+#fullscreenBtn .ico{width:17px;height:17px}
+
+/* Live screenshots leave a real footer gap for the control dock. */
+#deck .live-example-shell{padding-block:clamp(76px,8vh,92px) 76px!important}
+#deck .live-example-capture{
+  width:min(92vw,1500px,calc((100vh - 305px)*16/9))!important;
+  max-height:calc(100vh - 305px)!important;
+}
+@media (max-height:760px){
+  #deck .live-example-shell{padding-block:60px 62px!important;gap:10px!important}
+  #deck .live-example-capture{
+    width:min(92vw,calc((100vh - 270px)*16/9))!important;
+    max-height:calc(100vh - 270px)!important;min-height:150px;
+  }
+}
+@media (max-width:960px){
+  #deck .live-example-shell{padding-block:72px 66px!important}
+  #deck .live-example-capture{width:100%!important;max-height:calc(100vh - 330px)!important;height:auto;aspect-ratio:16/9}
+}
+@media (max-width:640px){
+  #topbar{height:50px;padding-inline:10px}
+  .tb-eyebrow{gap:0}
+  #activeEyebrow{display:none}
+  .tb-controls{gap:4px}
+  .pill-btn{width:34px;min-width:34px;height:34px;justify-content:center;gap:0;padding:0}
+  .pill-btn span{display:none}
+  .counter{min-width:42px;font-size:10px}
+  #watermark{display:none}
+  #arrows{bottom:max(8px,env(safe-area-inset-bottom));gap:3px;padding:4px}
+  #arrows .nav-arr{width:35px;height:34px}
+  #deck .live-example-shell{padding-block:64px 62px!important;gap:10px!important}
+  #deck .live-example-heading h2{font-size:clamp(20px,5vw,30px)}
+  #deck .live-example-capture{width:100%!important;max-height:calc(100vh - 310px)!important;min-height:120px}
+}
+@media (prefers-reduced-motion:reduce){#arrows .nav-arr{transition:none}}
+
 </style>
 </head>
 <body>
@@ -848,6 +899,9 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 <aside id="rail" aria-label="التنقل بين الشرائح"></aside>
 <nav id="arrows">
   <button class="nav-arr" id="prevBtn" aria-label="السابق"><svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  <button class="nav-arr fullscreen-arr" id="fullscreenBtn" aria-label="ملء الشاشة" title="ملء الشاشة">
+    <svg class="ico" id="fullscreenIco" viewBox="0 0 24 24"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
+  </button>
   <button class="nav-arr" id="nextBtn" aria-label="التالي"><svg class="ico" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
 </nav>
 <div id="watermark"><svg class="ico" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 2v10l7 7"/></svg>EOC · SECURE · LIVE</div>
@@ -2461,7 +2515,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 
     /* chrome labels */
     var chrome = {
-      ar: { playLabel: 'تشغيل تلقائي', pauseLabel: 'إيقافات', themeLight: 'نهاري', themeDark: 'ليلي', prev: 'السابق', next: 'التالي' },
+      ar: { playLabel: 'تشغيل تلقائي', pauseLabel: 'إيقاف تلقائي', themeLight: 'نهاري', themeDark: 'ليلي', prev: 'السابق', next: 'التالي' },
       en: { playLabel: 'Autoplay', pauseLabel: 'Stop', themeLight: 'Light', themeDark: 'Dark', prev: 'Back', next: 'Next' }
     };
     var c = chrome[l];
@@ -2470,6 +2524,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
       document.documentElement.getAttribute('data-theme') === 'light' ? c.themeDark : c.themeLight;
     document.getElementById('prevBtn').setAttribute('aria-label', c.prev);
     document.getElementById('nextBtn').setAttribute('aria-label', c.next);
+    syncFullscreenButton();
 
     /* eyebrows */
     document.getElementById('activeEyebrow').textContent = currentEyebrow(l);
@@ -2487,6 +2542,8 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   var playBtn  = document.getElementById('playBtn'),  playIco  = document.getElementById('playIco'),  playLabel  = document.getElementById('playLabel');
   var themeIco = document.getElementById('themeIco');
   var langBtn  = document.getElementById('langBtn');
+  var fullscreenBtn = document.getElementById('fullscreenBtn');
+  var fullscreenIco = document.getElementById('fullscreenIco');
 
   /* Automatically fit the current slide to the available viewport without changing browser zoom.
      The scale is applied only to the slide content when its natural size would overflow. */
@@ -2514,6 +2571,39 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   function refitCurrentSlide(){
     window.requestAnimationFrame(function(){ fitSlideToViewport(slides[idx]); });
   }
+
+  function syncFullscreenButton(){
+    if(!fullscreenBtn || !fullscreenIco) return;
+    var active = !!document.fullscreenElement;
+    var label = lang === 'ar'
+      ? (active ? 'الخروج من ملء الشاشة' : 'ملء الشاشة')
+      : (active ? 'Exit fullscreen' : 'Fullscreen');
+    fullscreenBtn.setAttribute('aria-label', label);
+    fullscreenBtn.setAttribute('title', label);
+    fullscreenIco.innerHTML = active
+      ? '<path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5"/>'
+      : '<path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/>';
+  }
+
+  function toggleFullscreen(){
+    try{
+      var action;
+      if(document.fullscreenElement){
+        if(document.exitFullscreen) action = document.exitFullscreen();
+      }else if(document.documentElement.requestFullscreen){
+        action = document.documentElement.requestFullscreen();
+      }
+      if(action && typeof action.catch === 'function') action.catch(function(){ syncFullscreenButton(); });
+    }catch(_error){
+      syncFullscreenButton();
+    }
+  }
+
+  fullscreenBtn.addEventListener('click', toggleFullscreen);
+  document.addEventListener('fullscreenchange', function(){
+    syncFullscreenButton();
+    refitCurrentSlide();
+  });
 
 
 
@@ -2611,7 +2701,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   function startAuto(){
     if(playing) stopAuto();
     playing = true;
-    playLabel.textContent = (lang==='ar') ? 'إيقافات' : 'Stop';
+    playLabel.textContent = (lang==='ar') ? 'إيقاف تلقائي' : 'Stop';
     playIco.innerHTML = '<path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/>';
     armTimer();
   }
@@ -2661,6 +2751,7 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     else if(k === 'Home'){ e.preventDefault(); go(0,true); }
     else if(k === 'End'){ e.preventDefault(); go(total-1,true); }
     else if(k === 'p' || k === 'P'){ playing ? stopAuto() : startAuto(); }
+    else if(k === 'f' || k === 'F'){ e.preventDefault(); toggleFullscreen(); }
   });
 
   /* wheel with debounce */
