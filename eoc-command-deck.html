@@ -2754,26 +2754,58 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
     else if(k === 'f' || k === 'F'){ e.preventDefault(); toggleFullscreen(); }
   });
 
-  /* wheel with debounce */
+  /* Mobile/tablet navigation is button-only.
+     This prevents pinch-zoom and image pan gestures from changing slides. */
   var wheelWait = false;
+  var touchY = null;
+  var multiTouchInProgress = false;
+  function allowGestureNavigation(){
+    return !window.matchMedia('(max-width: 960px)').matches;
+  }
+
   document.addEventListener('wheel', function(e){
+    /* Mobile uses the on-screen controls; Ctrl+wheel is commonly browser zoom. */
+    if(!allowGestureNavigation() || e.ctrlKey) return;
     if(wheelWait) return;
     var d = e.deltaY;
     if(Math.abs(d) < 18) return;
-    if(!atScrollEdge(d > 0 ? 1 : -1)) return;   /* let the current slide scroll first */
+    if(!atScrollEdge(d > 0 ? 1 : -1)) return;
     wheelWait = true;
     if(d > 0) next(); else prev();
     setTimeout(function(){ wheelWait = false; }, 850);
   }, {passive:true});
 
-  /* touch */
-  var ty = null;
-  document.addEventListener('touchstart', function(e){ ty = e.touches[0].clientY; }, {passive:true});
+  document.addEventListener('touchstart', function(e){
+    if(!allowGestureNavigation()){
+      touchY = null;
+      return;
+    }
+    if(e.touches.length > 1){
+      touchY = null;
+      multiTouchInProgress = true;
+      return;
+    }
+    if(multiTouchInProgress) return;
+    touchY = e.touches[0].clientY;
+  }, {passive:true});
+
   document.addEventListener('touchend', function(e){
-    if(ty === null) return;
-    var dy = ty - e.changedTouches[0].clientY;
-    if(Math.abs(dy) > 60 && atScrollEdge(dy > 0 ? 1 : -1)){ dy>0 ? next() : prev(); }
-    ty = null;
+    /* Never treat mobile touch gestures as slide navigation. */
+    if(!allowGestureNavigation()){
+      touchY = null;
+      if(e.touches.length === 0) multiTouchInProgress = false;
+      return;
+    }
+    /* Once a pinch has started, ignore the entire touch sequence. */
+    if(multiTouchInProgress){
+      touchY = null;
+      if(e.touches.length === 0) multiTouchInProgress = false;
+      return;
+    }
+    if(touchY === null) return;
+    var dy = touchY - e.changedTouches[0].clientY;
+    if(Math.abs(dy) > 60 && atScrollEdge(dy > 0 ? 1 : -1)){ dy > 0 ? next() : prev(); }
+    touchY = null;
   }, {passive:true});
 
   /* theme */
