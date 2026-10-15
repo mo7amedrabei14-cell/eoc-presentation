@@ -7,12 +7,21 @@ dist/
 build/
 *.dist
 
-# Environment variables
+# Environment variables and credentials
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
+.vercel
+recovery-codes.txt
+*recovery-codes*
+*recovery_codes*
+*recovery-codes*.txt
+*.pem
+*.key
+*.p12
+*.pfx
+*.dev_token.tmp
+_token.txt
 
 # IDE and editor files
 .vscode/
@@ -48,8 +57,6 @@ pids
 # Coverage directory used by tools like istanbul
 coverage/
 *.lcov
-
-# nyc test coverage
 .nyc_output
 
 # Dependency directories
@@ -60,8 +67,6 @@ jspm_packages/
 
 # Optional npm cache directory
 .npm
-
-# Optional eslint cache
 .eslintcache
 
 # Microbundle cache
@@ -75,28 +80,15 @@ jspm_packages/
 
 # Output of 'npm pack'
 *.tgz
-
-# Yarn Integrity file
 .yarn-integrity
 
-# parcel-bundler cache (https://parceljs.org/)
+# Build caches
 .cache
 .parcel-cache
-
-# Next.js build output
 .next
-
-# Nuxt.js build / generate output
 .nuxt
-
-# Gatsby files
-.cache/
-
-# Storybook build outputs
 .out
 .storybook-out
-
-# Temporary folders
 tmp/
 temp/
 
@@ -104,13 +96,12 @@ temp/
 *.db
 *.sqlite
 *.sqlite3
+*.backup
+*.dump
 
-# Webdev artifacts (checkpoint zips, migrations, etc.)
+# Webdev artifacts (checkpoint zips, migrations)
 .webdev/
 
-# Manus version file (auto-generated, not part of source)
+# Manus artifacts
 client/public/__manus__/version.json
 .project-config.json
-
-.vercel
-.env*
