@@ -18,11 +18,12 @@ The deck introduces the EOC's operational purpose and digital workflow, then con
 - Daily operations overview and weather forecasts
 - Governorate / branch contacts and field missions
 - Human resources and supervisor handover
+- Wireless device handover, including the declaration and device-condition / return report
 - Local news and global disaster monitoring
 - Branch readiness and strategic inventory
 - System audit log and mobile interface
 
-The example sequence contains **15 application-page examples plus one mobile-interface example**. The examples are image captures, not a live session connected to the operational application; they should be refreshed when the corresponding UI changes.
+The example sequence contains **16 application-page examples plus one mobile-interface example**. The examples are image captures, not a live session connected to the operational application; they should be refreshed when the corresponding UI changes.
 
 ## Open the presentation
 
@@ -49,7 +50,7 @@ Place example screenshots in:
 
 `deploy/assets/live-examples/`
 
-Use the **exact filenames and page mapping** documented in [the screenshot guide](deploy/assets/live-examples/README.md). The current sequence uses numbered files from `01-powerbi-dashboard.png` through `15-system-audit-log.png`, plus `16-mobile-interface.png`.
+Use the **exact filenames and page mapping** documented in [the screenshot guide](deploy/assets/live-examples/README.md). The current sequence uses numbered files from `01-powerbi-dashboard.png` through `16-system-audit-log.png`, plus `17-mobile-interface.png`.
 
 For consistent captures:
 
