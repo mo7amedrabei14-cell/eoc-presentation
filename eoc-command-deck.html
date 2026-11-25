@@ -2517,12 +2517,41 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
 (function(){
   "use strict";
 
+  /* ── storage adapter: persistent when allowed, in-memory when embedded storage is blocked ── */
+  var safeStorage = (function(){
+    var memory = Object.create(null);
+    var nativeStore = null;
+    try { nativeStore = window.localStorage; } catch(e) {}
+    return {
+      getItem: function(key){
+        try {
+          var value = nativeStore ? nativeStore.getItem(key) : null;
+          if(value !== null) return value;
+        } catch(e) {}
+        return Object.prototype.hasOwnProperty.call(memory, key) ? memory[key] : null;
+      },
+      setItem: function(key, value){
+        var next = String(value);
+        memory[key] = next;
+        try { if(nativeStore) nativeStore.setItem(key, next); } catch(e) {}
+      },
+      removeItem: function(key){
+        delete memory[key];
+        try { if(nativeStore) nativeStore.removeItem(key); } catch(e) {}
+      },
+      clear: function(){
+        memory = Object.create(null);
+        try { if(nativeStore) nativeStore.clear(); } catch(e) {}
+      }
+    };
+  })();
+
   /* ── bilingual engine ──────────────────────────────── */
-  var lang = localStorage.getItem('deck-lang') || 'ar';
+  var lang = safeStorage.getItem('deck-lang') || 'ar';
 
   function applyLang(l){
     lang = l;
-    localStorage.setItem('deck-lang', l);
+    safeStorage.setItem('deck-lang', l);
     document.documentElement.setAttribute('lang', l);
     document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
     document.getElementById('langLabel').textContent = l === 'ar' ? 'English' : 'العربية';
@@ -2831,12 +2860,12 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   }, {passive:true});
 
   /* theme */
-  var prefersLight = localStorage.getItem('deck-theme');
+  var prefersLight = safeStorage.getItem('deck-theme');
   if(prefersLight === 'light'){ document.documentElement.setAttribute('data-theme','light'); syncTheme(); }
   themeBtn.addEventListener('click', function(){
     var cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', cur);
-    localStorage.setItem('deck-theme', cur);
+    safeStorage.setItem('deck-theme', cur);
     syncTheme();
   });
   function syncTheme(){
@@ -2879,6 +2908,13 @@ p.lead{font-size:clamp(15px,1.5vw,17.5px);line-height:1.95;color:var(--muted);fo
   applyLang(lang);
 
   go(0,false);
+
+  // Let an embedding portfolio reveal this live document immediately after
+  // the deck engine is initialized, without waiting for all slide screenshots.
+  if(window.parent && window.parent !== window){
+    window.parent.postMessage({ type: 'eoc-presentation:dom-ready' }, '*');
+  }
+
   /* auto-start cover */
   setTimeout(function(){ if(!reduced.matches) startAuto(); }, 500);
 })();
